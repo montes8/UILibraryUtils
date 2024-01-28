@@ -93,4 +93,23 @@
     <color name="tay_toolbar_text">#E91E63</color>
     <color name="tay_toolbar_icon_start">#E91E63</color>
     <color name="tay_toolbar_icon_end">#E91E63</color>
+
+    <!-- resources UITaySnackBar -->
+
+    <color name="tay_snack_bar_bg_stroke">#E91E63</color>
+    <color name="tay_snack_bar_bg_solid">#E91E63</color>
+    <color name="tay_snack_bar_text">#FFFFFF</color>
+
+    <!-- resources UITayInfo -->
+
+    <color name="tay_info_bg_stroke">#F8BBD0</color>
+    <color name="tay_info_bar_bg_solid">#F8BBD0</color>
+    <color name="tay_info_bar_icon">#E91E63</color>
+    <color name="tay_info_text">#E91E63</color>
+
+
+    <color name="tay_info_bg_stroke_error">#FF80AB</color>
+    <color name="tay_info_bar_bg_solid_error">#FF80AB</color>
+    <color name="tay_info_bar_icon_error">#FF1744</color>
+    <color name="tay_info_text_error">#FF1744</color>
 </resources>

@@ -53,4 +53,19 @@
         </attr>
     </declare-styleable>
 
+
+    <declare-styleable name="UITaySnackBar">
+        <attr name="uiTaySBText" format="string" />
+        <attr name="uiTaySBDuration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="UiTayInfo">
+        <attr name="uiTayTextInformation" format="string" />
+        <attr name="uiTayIconInformation" format="reference" />
+        <attr name="uiTayStyleInfo" format="enum" >
+            <enum name="UI_TAY_INFO" value="0"/>
+            <enum name="UI_TAY_ERROR" value="1"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

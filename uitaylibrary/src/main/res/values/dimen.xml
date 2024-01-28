@@ -50,4 +50,16 @@
     <dimen name="dim_tay_toolbar_padding_start_end">40dp</dimen>
     <dimen name="dim_tay_toolbar_size_indication">4dp</dimen>
     <dimen name="dim_tay_toolbar_sp_text">18sp</dimen>
+
+    <!-- resources UITaySnackBar -->
+
+    <dimen name="dim_tay_snack_bar_radius">8dp</dimen>
+    <dimen name="dim_tay_snack_sp_text">12sp</dimen>
+
+
+    <!-- resources UiTayInfo -->
+
+
+    <dimen name="dim_tay_info_radius">16dp</dimen>
+    <dimen name="dim_tay_info_sp_text">12sp</dimen>
 </resources>
