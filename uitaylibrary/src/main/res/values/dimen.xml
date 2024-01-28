@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dim_tay_0">0dp</dimen>
+    <dimen name="dim_tay_4">4dp</dimen>
     <dimen name="dim_tay_8">8dp</dimen>
     <dimen name="dim_tay_12">12dp</dimen>
     <dimen name="dim_tay_16">16dp</dimen>
@@ -34,5 +35,13 @@
     <dimen name="dim_tay_edit_basic_sp_text">16sp</dimen>
     <dimen name="dim_tay_edit_title_basic_sp_text">14sp</dimen>
     <dimen name="dim_tay_edit_error_basic_sp_text">14sp</dimen>
+
+    <!-- resources UiTayIndicationGroup -->
+
+    <dimen name="dim_tay_indication_width_selected">16dp</dimen>
+    <dimen name="dim_tay_indication_height_selected">8dp</dimen>
+
+    <dimen name="dim_tay_indication_size_unselected">8dp</dimen>
+    <dimen name="dim_tay_indication_radius_selected">4dp</dimen>
 
 </resources>

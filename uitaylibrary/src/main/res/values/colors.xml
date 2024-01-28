@@ -72,4 +72,13 @@
     <color name="tay_edit_list_bg_selected">#F06292</color>
     <color name="tay_edit_list_bg_unselected">#FFFFFF</color>
 
+
+    <!-- resources UiTayIndicationGroup -->
+
+    <color name="tay_indication_stroke_selected">#E91E63</color>
+    <color name="tay_indication_solid_selected">#E91E63</color>
+
+    <color name="tay_indication_stroke_unselected">#B0BEC5</color>
+    <color name="tay_indication_solid_unselected">#B0BEC5</color>
+
 </resources>
