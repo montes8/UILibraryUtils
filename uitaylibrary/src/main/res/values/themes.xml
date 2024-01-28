@@ -38,4 +38,19 @@
         <item name="android:scrollbarThumbVertical">@drawable/ic_scroll_bar_list_ui_tay</item>
     </style>
 
+    <declare-styleable name="UiTayToolBar">
+        <attr name="uiTayTextTb" format="string" />
+        <attr name="uiTayIconStartTb" format="reference" />
+        <attr name="uiTayIconEndTb" format="reference" />
+        <attr name="uiTayTbIndicator" format="boolean" />
+        <attr name="uiTayTbProgress" format="integer" />
+        <attr name="uiTayTbMaxProgress" format="integer" />
+        <attr name="uiTayStyleTbIcon" format="enum" >
+            <enum name="UI_TAY_NONE" value="0"/>
+            <enum name="UI_TAY_ICON_START" value="1"/>
+            <enum name="UI_TAY_ICON_END" value="2"/>
+            <enum name="UI_TAY_ICON_TWO" value="3"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

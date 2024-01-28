@@ -81,4 +81,16 @@
     <color name="tay_indication_stroke_unselected">#B0BEC5</color>
     <color name="tay_indication_solid_unselected">#B0BEC5</color>
 
+    <!-- resources UiTayLineProgress -->
+
+    <color name="tay_indication_line_start">#E91E63</color>
+    <color name="tay_indication_line_end">#E91E63</color>
+    <color name="tay_indication_line_unselected">#FFFFFF</color>
+
+    <!-- resources UiTayToolBar -->
+
+    <color name="tay_toolbar_solid">#FFFFFF</color>
+    <color name="tay_toolbar_text">#E91E63</color>
+    <color name="tay_toolbar_icon_start">#E91E63</color>
+    <color name="tay_toolbar_icon_end">#E91E63</color>
 </resources>

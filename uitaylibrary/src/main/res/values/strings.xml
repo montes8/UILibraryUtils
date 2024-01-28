@@ -7,6 +7,7 @@
     <string name="tay_ui_text_message_copy">Texto copiado</string>
 
     <string name="tay_ui_text_hint_edit">Escribe dato aqui</string>
-    <string name="tay_ui_text_title_edit">Titulo</string>
+    <string name="tay_ui_text_title_edit">Title</string>
+    <string name="tay_ui_text_title_toolbar">ToolBar</string>
 
 </resources>

@@ -33,6 +33,10 @@ fun View.uiTayVisibility(value:Boolean){
    if (value)this.uiTayVisible() else this.uiTayGone()
 }
 
+fun View.uiTayInVisibility(value:Boolean){
+    if (value)this.uiTayVisible() else this.uiTayInvisible()
+}
+
 
 fun uiTayHandler(
     time: Long = 200,

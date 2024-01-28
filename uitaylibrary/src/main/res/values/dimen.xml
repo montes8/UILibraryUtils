@@ -40,8 +40,14 @@
 
     <dimen name="dim_tay_indication_width_selected">16dp</dimen>
     <dimen name="dim_tay_indication_height_selected">8dp</dimen>
-
     <dimen name="dim_tay_indication_size_unselected">8dp</dimen>
     <dimen name="dim_tay_indication_radius_selected">4dp</dimen>
 
+
+    <!-- resources UiTayToolBar -->
+
+    <dimen name="dim_tay_toolbar_padding_top_bottom">20dp</dimen>
+    <dimen name="dim_tay_toolbar_padding_start_end">40dp</dimen>
+    <dimen name="dim_tay_toolbar_size_indication">4dp</dimen>
+    <dimen name="dim_tay_toolbar_sp_text">18sp</dimen>
 </resources>
