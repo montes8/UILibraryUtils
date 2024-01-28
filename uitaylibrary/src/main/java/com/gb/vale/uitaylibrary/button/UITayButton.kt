@@ -49,14 +49,6 @@ class UITayButton @JvmOverloads constructor(
             }
         }
 
-    var neoBtnTextColor : Int? = null
-        set(value) {
-            field = value
-            value?.let {
-                this.button.setTextColor(it)
-            }
-        }
-
     var neoBtnText: String = UI_TAY_EMPTY
         set(value) {
             field = value
@@ -254,31 +246,31 @@ class UITayButton @JvmOverloads constructor(
 
     private fun setEnablePrimary(value: Boolean) {
         if (value) this.uiTayBgBorder() else this.uiTayBgBorder(R.color.ui_tay_btn_primary_disable)
-        setColorTextAndIcon(text = if (value) R.color.ui_tay_btn_primary_enable else
-            R.color.ui_tay_icon_primary_disable, icon = if (value) R.color.ui_tay_btn_primary_enable
-        else R.color.ui_tay_icon_primary_disable)
+        setColorTextAndIcon(text = if (value) R.color.ui_tay_btn_text_primary_color else
+            R.color.ui_tay_btn_text_primary_color, icon = if (value) R.color.ui_tay_btn_icon_primary_color
+        else R.color.ui_tay_btn_icon_primary_color)
     }
     private fun setSelectedPrimary() {
         this.uiTayBgBorder(R.color.ui_tay_btn_primary_enable_selected)
-        setColorTextBtn(R.color.white)
+        setColorTextBtn(R.color.ui_tay_btn_text_primary_color)
     }
 
     private fun setEnableSecondaryLight(value: Boolean) {
         if (value) this.uiTayBgBorderStroke() else this.uiTayBgBorderStroke(R.color.ui_tay_btn_secondary_enable_selected)
-        setColorTextAndIcon(text =  if (value) R.color.ui_tay_btn_primary_enable else
+        setColorTextAndIcon(text =  if (value) R.color.ui_tay_btn_text_secondary_color else
             R.color.ui_tay_btn_secondary_enable_selected, icon = if (value)
-                R.color.ui_tay_btn_primary_enable else R.color.ui_tay_btn_secondary_enable_selected)
+                R.color.ui_tay_btn_text_secondary_color else R.color.ui_tay_btn_secondary_enable_selected)
     }
 
     private fun setSelectedSecondary() {
-        this.uiTayBgBorderStroke(R.color.ui_tay_btn_primary_enable_selected, R.color.white)
+        this.uiTayBgBorderStroke(R.color.ui_tay_btn_primary_enable_selected, R.color.ui_tay_btn_text_secondary_color)
         setColorTextBtn(R.color.ui_tay_btn_secondary_enable_selected)
     }
 
 
     private fun setColorTextAndIcon(
-        text: Int = R.color.white,
-        icon: Int = R.color.white,
+        text: Int = R.color.ui_tay_btn_secondary_enable_selected,
+        icon: Int = R.color.ui_tay_btn_secondary_enable_selected,
     ) {
         if (colorDefaultIcon) iconStart.setColorFilter(
             ContextCompat.getColor(context, icon), android.graphics.PorterDuff.Mode.SRC_IN
@@ -289,7 +281,7 @@ class UITayButton @JvmOverloads constructor(
         setColorTextBtn(text)
     }
 
-    private fun setColorTextBtn( color: Int = R.color.white){
+    private fun setColorTextBtn( color: Int = R.color.ui_tay_btn_secondary_enable_selected){
         button.setTextColor(this.context.resources.getColor(color, null))
     }
 

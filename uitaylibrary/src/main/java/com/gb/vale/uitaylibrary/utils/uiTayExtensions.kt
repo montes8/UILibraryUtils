@@ -108,7 +108,7 @@ fun Context.uiTayDrawableCircleGradient(colorTop : Int = R.color.ui_tay_btn_prim
     return shape
 }
 
-fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.ui_tay_btn_primary_enable,colorSolid : Int = R.color.white,
+fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.ui_tay_btn_primary_enable,colorSolid : Int = R.color.ui_tay_white,
                            radius : Int = R.dimen.dim_tay_28, withStroke : Int = 2):Drawable{
     val shape = GradientDrawable()
     shape.setColor(ContextCompat.getColor(this,colorSolid))
@@ -118,7 +118,7 @@ fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.ui_tay_btn_primary_e
 }
 
 
-fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.ui_tay_btn_primary_enable,colorSolid : Int = R.color.white,
+fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.ui_tay_btn_primary_enable,colorSolid : Int = R.color.ui_tay_white,
                         radius : Int = R.dimen.dim_tay_28, withStroke : Int = 2){
     this.background = this.context.uiTayDrawableStroke(colorStroke,colorSolid,radius,withStroke)
 }
@@ -128,13 +128,13 @@ fun uiTayFullScreen(window : Window){
 }
 
 fun View.uiTayBgRadiusCustom(color : Int =
-                            R.color.white, radiusTop : Int = R.dimen.dim_tay_24,
+                            R.color.ui_tay_white, radiusTop : Int = R.dimen.dim_tay_24,
                         radiusButton : Int = R.dimen.dim_tay_0){
     this.background = this.context.uiTayDrawableRadius(color,radiusTop,radiusButton)
 }
 
 fun Context.uiTayDrawableRadius(color : Int =
-                               R.color.white, radiusTop : Int = R.dimen.dim_tay_24,
+                               R.color.ui_tay_white, radiusTop : Int = R.dimen.dim_tay_24,
                            radiusButton : Int = R.dimen.dim_tay_0): Drawable {
     val shape = GradientDrawable()
     shape.setColor(ContextCompat.getColor(this,color))
