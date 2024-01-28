@@ -63,12 +63,12 @@ fun Int.toPxUiTay(context: Context): Int {
 
 
 fun View.uiTayBgBorder(color : Int =
-                            R.color.ui_tay_btn_primary_enable, radius : Int = R.dimen.dim_tay_28){
+                            R.color.tay_color_general, radius : Int){
     this.background = this.context.uiTayDrawableRound(color,radius)
 }
 
 fun Context.uiTayDrawableRound(color : Int =
-                              R.color.ui_tay_btn_primary_enable, radius : Int = R.dimen.dim_tay_28):Drawable{
+                              R.color.tay_color_general, radius : Int):Drawable{
     val shape = GradientDrawable()
     shape.setColor(ContextCompat.getColor(this,color))
     shape.cornerRadius = this.resources.getDimension(radius)
@@ -76,17 +76,17 @@ fun Context.uiTayDrawableRound(color : Int =
 }
 
 fun View.uiTayBgBorderCircle(color : Int =
-                            R.color.ui_tay_btn_primary_enable, colorStroke : Int =
+                            R.color.tay_color_general, colorStroke : Int =
                             0,withStroke : Int = 2){
     this.background = this.context.uiTayDrawableCircle(color,colorStroke,withStroke)
 }
 
-fun View.uiTayBgCircleGradient(colorTop : Int = R.color.ui_tay_btn_primary_enable,
-                          colorBottom : Int = R.color.ui_tay_btn_primary_enable){
+fun View.uiTayBgCircleGradient(colorTop : Int = R.color.tay_color_general,
+                          colorBottom : Int = R.color.tay_color_general){
     this.background = this.context.uiTayDrawableCircleGradient(colorTop,colorBottom)
 }
 
-fun Context.uiTayDrawableCircle(color : Int = R.color.ui_tay_btn_primary_enable,colorStroke : Int =
+fun Context.uiTayDrawableCircle(color : Int = R.color.tay_color_general,colorStroke : Int =
     0,withStroke : Int = 2):Drawable{
     val shape = GradientDrawable()
     shape.shape = GradientDrawable.OVAL
@@ -96,8 +96,8 @@ fun Context.uiTayDrawableCircle(color : Int = R.color.ui_tay_btn_primary_enable,
     return shape
 }
 
-fun Context.uiTayDrawableCircleGradient(colorTop : Int = R.color.ui_tay_btn_primary_enable,
-                                   colorBottom : Int = R.color.ui_tay_btn_primary_enable):Drawable{
+fun Context.uiTayDrawableCircleGradient(colorTop : Int = R.color.tay_color_general,
+                                   colorBottom : Int = R.color.tay_color_general):Drawable{
     val shape = GradientDrawable()
     shape.shape = GradientDrawable.OVAL
     shape.colors = intArrayOf(
@@ -108,8 +108,8 @@ fun Context.uiTayDrawableCircleGradient(colorTop : Int = R.color.ui_tay_btn_prim
     return shape
 }
 
-fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.ui_tay_btn_primary_enable,colorSolid : Int = R.color.ui_tay_white,
-                           radius : Int = R.dimen.dim_tay_28, withStroke : Int = 2):Drawable{
+fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.tay_color_general,colorSolid : Int = R.color.ui_tay_white,
+                           radius : Int, withStroke : Int = 2):Drawable{
     val shape = GradientDrawable()
     shape.setColor(ContextCompat.getColor(this,colorSolid))
     shape.setStroke(withStroke,ContextCompat.getColor(this,colorStroke))
@@ -118,8 +118,8 @@ fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.ui_tay_btn_primary_e
 }
 
 
-fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.ui_tay_btn_primary_enable,colorSolid : Int = R.color.ui_tay_white,
-                        radius : Int = R.dimen.dim_tay_28, withStroke : Int = 2){
+fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.tay_color_general,colorSolid : Int = R.color.ui_tay_white,
+                        radius : Int, withStroke : Int = 2){
     this.background = this.context.uiTayDrawableStroke(colorStroke,colorSolid,radius,withStroke)
 }
 
@@ -128,14 +128,14 @@ fun uiTayFullScreen(window : Window){
 }
 
 fun View.uiTayBgRadiusCustom(color : Int =
-                            R.color.ui_tay_white, radiusTop : Int = R.dimen.dim_tay_24,
-                        radiusButton : Int = R.dimen.dim_tay_0){
+                            R.color.ui_tay_white, radiusTop : Int,
+                        radiusButton : Int){
     this.background = this.context.uiTayDrawableRadius(color,radiusTop,radiusButton)
 }
 
 fun Context.uiTayDrawableRadius(color : Int =
-                               R.color.ui_tay_white, radiusTop : Int = R.dimen.dim_tay_24,
-                           radiusButton : Int = R.dimen.dim_tay_0): Drawable {
+                               R.color.ui_tay_white, radiusTop : Int,
+                           radiusButton : Int): Drawable {
     val shape = GradientDrawable()
     shape.setColor(ContextCompat.getColor(this,color))
     shape.cornerRadii = floatArrayOf(
@@ -151,7 +151,7 @@ fun Context.uiTayShowToast(value : String){
     Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.uiTaycopy(text : String,message:String = getString(R.string.text_message_copy)){
+fun Context.uiTaycopy(text : String,message:String = getString(R.string.tay_ui_text_message_copy)){
     val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip = ClipData.newPlainText("label", text)
     clipboard.setPrimaryClip(clip)

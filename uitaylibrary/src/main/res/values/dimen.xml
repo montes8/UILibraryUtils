@@ -2,14 +2,37 @@
 <resources>
     <dimen name="dim_tay_0">0dp</dimen>
     <dimen name="dim_tay_8">8dp</dimen>
+    <dimen name="dim_tay_12">12dp</dimen>
     <dimen name="dim_tay_16">16dp</dimen>
-    <dimen name="dim_tay_24">24dp</dimen>
+    <dimen name="dim_tay_20">20dp</dimen>
+    <dimen name="dim_tay_2">24dp</dimen>
     <dimen name="dim_tay_28">28dp</dimen>
-    <dimen name="dim_tay_48">48dp</dimen>
+    <dimen name="dim_tay_52">52dp</dimen>
 
 
+    <dimen name="dim_tay_sp_text">16sp</dimen>
 
 
-    <dimen name="dim_tay_sp_16">16sp</dimen>
+    <!-- resources button-->
+
+    <dimen name="dim_tay_btn_height">48dp</dimen>
+    <dimen name="dim_tay_btn_icon">24dp</dimen>
+    <dimen name="dim_tay_btn_loading">24dp</dimen>
+    <dimen name="dim_tay_btn_bg_radius">28dp</dimen>
+
+    <dimen name="dim_tay_btn_sp_text">16sp</dimen>
+
+    <!-- resources edit basic-->
+
+    <dimen name="dim_tay_edit_basic_padding_top_button">12dp</dimen>
+    <dimen name="dim_tay_edit_basic_icon">24dp</dimen>
+    <dimen name="dim_tay_bg_edit_basic_radius">28dp</dimen>
+    <dimen name="dim_tay_bg_edit_basic_list_radius">20dp</dimen>
+    <dimen name="dim_tay_bg_edit_basic_list_max_height">220</dimen>
+
+
+    <dimen name="dim_tay_edit_basic_sp_text">16sp</dimen>
+    <dimen name="dim_tay_edit_title_basic_sp_text">14sp</dimen>
+    <dimen name="dim_tay_edit_error_basic_sp_text">14sp</dimen>
 
 </resources>

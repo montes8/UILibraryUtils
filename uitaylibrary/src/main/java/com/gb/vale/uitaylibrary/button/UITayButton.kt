@@ -36,27 +36,19 @@ class UITayButton @JvmOverloads constructor(
     private var iconEnd = ImageView(this.context)
     private var constraintSet = ConstraintSet()
     private var constraintSetH = ConstraintSet()
-    private var neoBtnStyleCurrent = UiTayStyleButton.UI_TAY_PRIMARY
+    private var tayBtnStyleCurrent = UiTayStyleButton.UI_TAY_PRIMARY
     private var horizontalContentLayout = ConstraintLayout(context)
     private var loading = ProgressBar(this.context)
     private var colorDefaultIcon = true
 
-    var neoBtnBackground : Drawable? = null
-        set(value) {
-            field = value
-            value?.let {
-                this.background = it
-            }
-        }
-
-    var neoBtnText: String = UI_TAY_EMPTY
+    var tayBtnText: String = UI_TAY_EMPTY
         set(value) {
             field = value
             button.text = value
 
         }
 
-    var neoBtnEnable: Boolean = true
+    var tayBtnEnable: Boolean = true
         set(value) {
             field = value
             button.isEnabled = value
@@ -64,13 +56,13 @@ class UITayButton @JvmOverloads constructor(
             configStyleInit(value)
         }
 
-    var neoBtnIconColorDefault: Boolean = true
+    var tayBtnIconColorDefault: Boolean = true
         set(value) {
             field = value
             colorDefaultIcon = value
         }
 
-    var neoBtnIconStart: Drawable? = null
+    var tayBtnIconStart: Drawable? = null
         set(value) {
             field = value
             value?.let {
@@ -80,7 +72,7 @@ class UITayButton @JvmOverloads constructor(
 
         }
 
-    var neoBtnIconEnd: Drawable? = null
+    var tayBtnIconEnd: Drawable? = null
         set(value) {
             field = value
             value?.let {
@@ -90,13 +82,13 @@ class UITayButton @JvmOverloads constructor(
         }
 
 
-    var neoBtnStyle: UiTayStyleButton = UiTayStyleButton.UI_TAY_PRIMARY
+    var tayBtnStyle: UiTayStyleButton = UiTayStyleButton.UI_TAY_PRIMARY
         set(value) {
             field = value
-            neoBtnStyleCurrent = value
+            tayBtnStyleCurrent = value
         }
 
-    var neoBtnLoading: Boolean = false
+    var tayBtnLoading: Boolean = false
         set(value) {
             field = value
             setLoading(value)
@@ -125,19 +117,19 @@ class UITayButton @JvmOverloads constructor(
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UITayButton)
         attributeSet.let {
-            neoBtnIconColorDefault = it.getBoolean(R.styleable.UITayButton_uiTayBtnIconColorDefault, true)
-            neoBtnText = it.getString(R.styleable.UITayButton_uiTayBtnText)
-                ?: this.context.resources.getString(R.string.btn_ui_neo_continue)
-            neoBtnIconStart = it.getDrawable(R.styleable.UITayButton_uiTayBtnIconStart)
-            neoBtnIconEnd = it.getDrawable(R.styleable.UITayButton_uiTayBtnIconEnd)
-            neoBtnStyle =
+            tayBtnIconColorDefault = it.getBoolean(R.styleable.UITayButton_uiTayBtnIconColorDefault, true)
+            tayBtnText = it.getString(R.styleable.UITayButton_uiTayBtnText)
+                ?: this.context.resources.getString(R.string.tay_ui_btn_continue)
+            tayBtnIconStart = it.getDrawable(R.styleable.UITayButton_uiTayBtnIconStart)
+            tayBtnIconEnd = it.getDrawable(R.styleable.UITayButton_uiTayBtnIconEnd)
+            tayBtnStyle =
                 UiTayStyleButton.values()[it.getInt(R.styleable.UITayButton_uiTayBtnStyle, 0)]
-            neoBtnEnable = it.getBoolean(R.styleable.UITayButton_uiTayBtnEnable, true)
+            tayBtnEnable = it.getBoolean(R.styleable.UITayButton_uiTayBtnEnable, true)
         }
         attributeSet.recycle()
     }
 
-    fun setOnClickNeoBtnListener(time: Long = 300, listener: NeoBtnClickListener) {
+    fun setOnClickTayBtnListener(time: Long = 300, listener: UiTayBtnClickListener) {
         this.setOnClickUiTayDelay(time) {
             configStyleSelected()
             uiTayHandler(time) {
@@ -209,31 +201,33 @@ class UITayButton @JvmOverloads constructor(
     private fun configProgress() {
         loading.id = View.generateViewId()
         val layoutLoading = LayoutParams(
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_24),
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_24)
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_btn_loading),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_btn_loading)
         )
         loading.isIndeterminate = true
         loading.indeterminateTintList =
-            ColorStateList.valueOf(this.context.resources.getColor(R.color.ui_tay_btn_loading_color, null))
+            ColorStateList.valueOf(this.context.resources.getColor(if (tayBtnStyleCurrent ==
+                UiTayStyleButton.UI_TAY_PRIMARY)R.color.tay_btn_loading_primary
+            else R.color.tay_btn_loading_secondary, null))
         loading.layoutParams = layoutLoading
         horizontalContentLayout.addView(loading)
     }
 
 
     private fun configStyleInit(value: Boolean) {
-        when (neoBtnStyleCurrent) {
+        when (tayBtnStyleCurrent) {
             UiTayStyleButton.UI_TAY_PRIMARY -> {
                 setEnablePrimary(value)
             }
             else -> {
-                setEnableSecondaryLight(value)
+                setEnableSecondary(value)
             }
 
         }
     }
 
     private fun configStyleSelected() {
-        when (neoBtnStyleCurrent) {
+        when (tayBtnStyleCurrent) {
             UiTayStyleButton.UI_TAY_PRIMARY -> {
                 setSelectedPrimary()
             }
@@ -245,32 +239,37 @@ class UITayButton @JvmOverloads constructor(
     }
 
     private fun setEnablePrimary(value: Boolean) {
-        if (value) this.uiTayBgBorder() else this.uiTayBgBorder(R.color.ui_tay_btn_primary_disable)
-        setColorTextAndIcon(text = if (value) R.color.ui_tay_btn_text_primary_color else
-            R.color.ui_tay_btn_text_primary_color, icon = if (value) R.color.ui_tay_btn_icon_primary_color
-        else R.color.ui_tay_btn_icon_primary_color)
+        if (value) this.uiTayBgBorder(R.color.tay_btn_bg_primary_enable,R.dimen.dim_tay_btn_bg_radius
+        ) else this.uiTayBgBorder(R.color.tay_btn_bg_primary_disable,R.dimen.dim_tay_btn_bg_radius)
+        setColorTextAndIcon(text = if (value) R.color.tay_btn_text_primary else
+            R.color.tay_btn_text_primary_disable, icon = if (value) R.color.tay_btn_icon_primary
+        else R.color.tay_btn_icon_primary_disable)
     }
     private fun setSelectedPrimary() {
-        this.uiTayBgBorder(R.color.ui_tay_btn_primary_enable_selected)
-        setColorTextBtn(R.color.ui_tay_btn_text_primary_color)
+        this.uiTayBgBorder(R.color.tay_btn_bg_primary_selected,R.dimen.dim_tay_btn_bg_radius)
+        setColorTextBtn(R.color.tay_btn_text_primary)
     }
 
-    private fun setEnableSecondaryLight(value: Boolean) {
-        if (value) this.uiTayBgBorderStroke() else this.uiTayBgBorderStroke(R.color.ui_tay_btn_secondary_enable_selected)
-        setColorTextAndIcon(text =  if (value) R.color.ui_tay_btn_text_secondary_color else
-            R.color.ui_tay_btn_secondary_enable_selected, icon = if (value)
-                R.color.ui_tay_btn_text_secondary_color else R.color.ui_tay_btn_secondary_enable_selected)
+    private fun setEnableSecondary(value: Boolean) {
+        if (value) this.uiTayBgBorderStroke(R.color.tay_btn_bg_secondary_corner_enable,
+            R.color.tay_btn_bg_secondary_solid_enable,R.dimen.dim_tay_btn_bg_radius)
+        else this.uiTayBgBorderStroke(R.color.tay_btn_bg_secondary_corner_disable,
+            R.color.tay_btn_bg_secondary_solid_disable,R.dimen.dim_tay_btn_bg_radius)
+        setColorTextAndIcon(text =  if (value) R.color.tay_btn_text_secondary else
+            R.color.tay_btn_text_secondary_disable, icon = if (value)
+                R.color.tay_btn_icon_secondary else R.color.tay_btn_icon_secondary_disable)
     }
 
     private fun setSelectedSecondary() {
-        this.uiTayBgBorderStroke(R.color.ui_tay_btn_primary_enable_selected, R.color.ui_tay_btn_text_secondary_color)
-        setColorTextBtn(R.color.ui_tay_btn_secondary_enable_selected)
+        this.uiTayBgBorderStroke(R.color.tay_btn_bg_secondary_corner_selected,
+            R.color.tay_btn_bg_secondary_solid_selected,R.dimen.dim_tay_btn_bg_radius)
+        setColorTextBtn(R.color.tay_btn_bg_secondary_corner_selected)
     }
 
 
     private fun setColorTextAndIcon(
-        text: Int = R.color.ui_tay_btn_secondary_enable_selected,
-        icon: Int = R.color.ui_tay_btn_secondary_enable_selected,
+        text: Int = R.color.tay_color_general,
+        icon: Int = R.color.tay_color_general,
     ) {
         if (colorDefaultIcon) iconStart.setColorFilter(
             ContextCompat.getColor(context, icon), android.graphics.PorterDuff.Mode.SRC_IN
@@ -281,19 +280,19 @@ class UITayButton @JvmOverloads constructor(
         setColorTextBtn(text)
     }
 
-    private fun setColorTextBtn( color: Int = R.color.ui_tay_btn_secondary_enable_selected){
+    private fun setColorTextBtn( color: Int = R.color.tay_color_general){
         button.setTextColor(this.context.resources.getColor(color, null))
     }
 
 
     private fun sizeHeight() =
-        this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_48)
+        this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_btn_height)
 
     private fun sizeText() =
-        this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_sp_16)
+        this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_btn_sp_text)
 
     private fun sizeMax() =
-        this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_24)
+        this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_btn_icon)
 
     private fun positionBtn() {
         constraintSet.connect(button.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
@@ -340,7 +339,7 @@ class UITayButton @JvmOverloads constructor(
     }
 }
 
-fun interface NeoBtnClickListener {
+fun interface UiTayBtnClickListener {
     fun onClick(view: View)
 }
 

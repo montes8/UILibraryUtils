@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <com.gb.vale.uitaylibrary.button.UITayButton
@@ -12,5 +13,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:uiTayBtnStyle="UI_TAY_PRIMARY"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="@dimen/dim_tay_48"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"/>
+
+    <com.gb.vale.uitaylibrary.label.UiTayEditBasic
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

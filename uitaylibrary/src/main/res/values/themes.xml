@@ -11,4 +11,31 @@
             <enum name="UI_TAY_SECONDARY" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="UiTayEditBasic">
+        <attr name="uiTayColorIconEndDefault" format="boolean" />
+        <attr name="uiTayLabelTitle" format="string" />
+        <attr name="uiTayLabelEdit" format="string" />
+        <attr name="uiTayLabelHint" format="string" />
+        <attr name="uiTayLabelContentDescription" format="string" />
+        <attr name="android:inputType" />
+        <attr name="android:imeOptions" />
+        <attr name="uiTayLabelEditMaxLength" format="integer" />
+        <attr name="uiTayLabelEnable" format="boolean" />
+        <attr name="uiTayLabelFocusable" format="boolean" />
+        <attr name="uiTayLabelIconEditEnd" format="reference" />
+        <attr name="uiTayLabelIconEditStart" format="reference" />
+        <attr name="uiTayErrorMessage" format="string" />
+        <attr name="uiTayVisibilityInfo" format="boolean" />
+        <attr name="uiTayTitleVisibility" format="boolean" />
+        <attr name="uiTayListBottom" format="boolean" />
+    </declare-styleable>
+
+    <style name="UITayStyleList" parent="android:Widget">
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarThumbVertical">@drawable/ic_scroll_bar_list_ui_tay</item>
+    </style>
+
 </resources>
