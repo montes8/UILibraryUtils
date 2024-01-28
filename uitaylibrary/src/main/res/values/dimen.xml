@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dim_tay_0">0dp</dimen>
+    <dimen name="dim_tay_8">8dp</dimen>
+    <dimen name="dim_tay_16">16dp</dimen>
+    <dimen name="dim_tay_24">24dp</dimen>
+    <dimen name="dim_tay_28">28dp</dimen>
+    <dimen name="dim_tay_48">48dp</dimen>
+
+
+
+
+    <dimen name="dim_tay_sp_16">16sp</dimen>
+
+</resources>

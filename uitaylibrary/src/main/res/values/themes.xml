@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="UITayButton">
+        <attr name="uiTayBtnText" format="string" />
+        <attr name="uiTayBtnEnable" format="boolean" />
+        <attr name="uiTayBtnIconColorDefault" format="boolean" />
+        <attr name="uiTayBtnIconStart" format="reference" />
+        <attr name="uiTayBtnIconEnd" format="reference" />
+        <attr name="uiTayBtnStyle" format="enum" >
+            <enum name="UI_TAY_PRIMARY" value="0"/>
+            <enum name="UI_TAY_SECONDARY" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

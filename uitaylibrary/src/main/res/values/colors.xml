@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="ui_tay_transparent">@android:color/transparent </color>
+
+
+    <color name="ui_tay_btn_loading_color">#FFFFFF</color>
+    <color name="ui_tay_btn_primary_enable">#E91E63</color>
+    <color name="ui_tay_btn_primary_enable_selected">#C2185B</color>
+    <color name="ui_tay_btn_primary_disable">#E0E0E0</color>
+    <color name="ui_tay_icon_primary_disable">#BDBDBD</color>
+    <color name="ui_tay_btn_secondary_enable_selected">#F06292</color>
+</resources>

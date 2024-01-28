@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TayLibrary"
 include(":app")
+include(":uitaylibrary")

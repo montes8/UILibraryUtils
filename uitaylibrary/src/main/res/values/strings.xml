@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TayLibrary</string>
+
+    <string name="btn_ui_neo_continue">Continuar</string>
+
+
+    <string name="text_message_copy">Texto copiado</string>
+
+</resources>
