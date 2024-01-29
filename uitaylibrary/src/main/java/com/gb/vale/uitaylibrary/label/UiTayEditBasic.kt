@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -23,8 +25,10 @@ import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.list.uiTayListSpinner
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
+import com.gb.vale.uitaylibrary.utils.uiTayBgBorder
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
+import com.google.android.material.textfield.TextInputLayout
 
 class UiTayEditBasic @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
@@ -47,6 +51,11 @@ class UiTayEditBasic @JvmOverloads constructor(
     private var listOption: List<String> = ArrayList()
     private var positionSelected = -1
     private var ctnList: LinearLayout? = null
+    private var uiTayBasicPass = false
+    private var uiTayChecked = false
+    private var uiTayIconPassActive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
+    private var uiTayIconPassInactive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
+
 
     var uiTayLabelTitle: String = UI_TAY_EMPTY
         set(value) {
@@ -172,6 +181,38 @@ class UiTayEditBasic @JvmOverloads constructor(
         }
         get() = textLabelMessage.text?.toString() ?: UI_TAY_EMPTY
 
+    var uiTayPasswordEnabled: Boolean = false
+        set(value) {
+            field = value
+            uiTayBasicPass = value
+        }
+
+
+    var uiTayIconPasswordActive: Drawable? =  ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
+        set(value) {
+                field = value
+            if (uiTayBasicPass){
+                visibilityIconEnd = value != null
+                value?.let {
+                    iconLabel.uiTayVisibility(true)
+                    setUIIconDrawable(
+                        it, iconLabel
+                    )
+                    uiTayIconPassActive = it
+                } ?: iconLabel.uiTayVisibility(false)
+            }
+        }
+
+    var uiTayIconPasswordInactive: Drawable? =  ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
+        set(value) {
+            field = value
+            if (uiTayBasicPass){
+                value?.let {
+                    uiTayIconPassInactive = it
+                }
+            }
+        }
+
     private fun setUIIconDrawable(icon: Drawable, view: ImageView) {
         view.setImageDrawable(icon)
     }
@@ -196,6 +237,22 @@ class UiTayEditBasic @JvmOverloads constructor(
                 if (!visibilityLabelInfo) styleActive()
             } else {
                 if (!visibilityLabelInfo) styleDefault()
+            }
+        }
+
+        iconLabel.setOnClickUiTayDelay {
+            if (uiTayBasicPass){
+                if (uiTayChecked){
+                    uiTayIconPassInactive?.let {icon-> setUIIconDrawable(icon,iconLabel)}
+                    editLabel.transformationMethod = HideReturnsTransformationMethod.getInstance()
+
+                }else{
+                    uiTayIconPassActive?.let {icon-> setUIIconDrawable(icon,iconLabel)}
+                    editLabel.transformationMethod = PasswordTransformationMethod.getInstance()
+
+                }
+               if(editLabel.text.toString().isNotEmpty()) setSelectionTay(editLabel.text.toString().length)
+                uiTayChecked = !uiTayChecked
             }
         }
     }
@@ -229,6 +286,9 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayVisibilityInfo =
                 it.getBoolean(R.styleable.UiTayEditBasic_uiTayVisibilityInfo, false)
             uiTayListBottom = it.getBoolean(R.styleable.UiTayEditBasic_uiTayListBottom, true)
+            uiTayPasswordEnabled = it.getBoolean(R.styleable.UiTayEditBasic_uiTayPasswordEnabled, false)
+            uiTayIconPasswordActive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayLabelIconEditStart)?:uiTayIconPassActive
+            uiTayIconPasswordInactive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordInactive)?:uiTayIconPassInactive
         }
         attributeSet.recycle()
     }
@@ -522,6 +582,17 @@ class UiTayEditBasic @JvmOverloads constructor(
         listOption = list
     }
 
+    fun setOnKeyCodeTayEditBasic(listener: TayEditBasicKeyCode) {
+        editLabel.setOnKeyListener { _, keyCode, _ ->
+            listener.onCodeClick(keyCode)
+            false
+        }
+    }
+
+}
+
+fun interface TayEditBasicKeyCode {
+    fun onCodeClick(code : Int)
 }
 
 fun interface TayEditBasicChangeListener {

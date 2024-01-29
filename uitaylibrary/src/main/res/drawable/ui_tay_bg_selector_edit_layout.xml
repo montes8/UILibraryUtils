@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/tay_edit_two_bg_solid_enable" android:state_enabled="true" />
+    <item android:color="@color/tay_edit_two_bg_solid_disable" android:state_enabled="false" />
+    <item android:color="@color/tay_edit_two_bg_solid_enable" />
+</selector>

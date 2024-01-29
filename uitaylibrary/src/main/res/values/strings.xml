@@ -8,6 +8,7 @@
 
     <string name="tay_ui_text_hint_edit">Escribe dato aqui</string>
     <string name="tay_ui_text_title_edit">Title</string>
+    <string name="tay_ui_text_hint_edit_two">Escribe dato aqui</string>
     <string name="tay_ui_text_title_toolbar">ToolBar</string>
     <string name="tay_ui_script">--------</string>
     <string name="tay_ui_authentication_error">Error de autenticación %1$s</string>

@@ -40,15 +40,15 @@ fun ConstraintLayout.uiTayListSpinner(
             R.dimen.dim_tay_bg_edit_basic_list_radius
         )
         paramLinear.setMargins(
-            0, if (positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_tay_12) else 0,
+            0, if (positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_margin_top_bottom) else 0,
             0,
-            if (!positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_tay_12) else 0,
+            if (!positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_margin_top_bottom) else 0,
         )
         linear.setPadding(
-            0,
-            this.resources.getDimensionPixelSize(R.dimen.dim_tay_16),
-            0,
-            this.resources.getDimensionPixelSize(R.dimen.dim_tay_16)
+            2,
+            this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_padding_top_bottom),
+            2,
+            this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_padding_top_bottom)
         )
         val paramRv = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         paramLinear.matchConstraintMaxHeight =

@@ -2,6 +2,7 @@
 <resources>
      <color name="black">#000000</color>
      <color name="ui_tay_white">#FFFFFF</color>
+    <color name="ui_tay_gray">#B0BEC5</color>
 
     <color name="tay_color_general">#E91E63</color>
     <color name="ui_tay_transparent">@android:color/transparent</color>
@@ -32,8 +33,6 @@
     <color name="tay_btn_loading_secondary">#E91E63</color>
 
     <!-- resources edit basic-->
-
-
     <color name="tay_edit_basic_bg_corner_enable">#EC407A</color>
     <color name="tay_edit_basic_bg_solid_enable">#FFFFFF</color>
     <color name="tay_edit_basic_text_title_enable">#EC407A</color>
@@ -52,13 +51,13 @@
     <color name="tay_edit_text_info_disable">#FF80AB</color>
 
 
-    <color name="tay_edit_basic_bg_corner_active">#E91E63</color>
+    <color name="tay_edit_basic_bg_corner_active">#C2185B</color>
     <color name="tay_edit_basic_bg_solid_active">#FFFFFF</color>
-    <color name="tay_edit_basic_text_title_active">#E91E63</color>
-    <color name="tay_edit_basic_text_active">#E91E63</color>
+    <color name="tay_edit_basic_text_title_active">#C2185B</color>
+    <color name="tay_edit_basic_text_active">#C2185B</color>
     <color name="tay_edit_hint_text_active">#F06292</color>
-    <color name="tay_edit_icon_active">#E91E63</color>
-    <color name="tay_edit_text_info_active">#FF1744</color>
+    <color name="tay_edit_icon_active">#C2185B</color>
+    <color name="tay_edit_text_info_active">#C2185B</color>
 
     <color name="tay_edit_error_info">#FF1744</color>
     <color name="tay_edit_error_info_solid">#FFFFFF</color>
@@ -71,6 +70,38 @@
     <color name="tay_edit_list_text_unselected">#212121</color>
     <color name="tay_edit_list_bg_selected">#F06292</color>
     <color name="tay_edit_list_bg_unselected">#FFFFFF</color>
+    <color name="tay_edit_eyes_active">#E91E63</color>
+    <color name="tay_edit_eyes_inactive">#E91E63</color>
+
+    <!-- resources UiTayEditLayout -->
+
+    <color name="tay_edit_two_eyes_enable">#E91E63</color>
+    <color name="tay_edit_two_eyes_active">#C2185B</color>
+    <color name="tay_edit_two_eyes_disable">#B0BEC5</color>
+    <color name="tay_edit_two_bg_corner_edit">#FFFFFF</color>
+
+    <color name="tay_edit_two_colorPrimary">#B0BEC5</color>
+    <color name="tay_edit_two_bg_corner_enable">#EC407A</color>
+    <color name="tay_edit_two_bg_solid_enable">#FFFFFF</color>
+    <color name="tay_edit_two_text_enable">#212121</color>
+    <color name="tay_edit_two_hint_text_enable">#9E9E9E</color>
+
+    <color name="tay_edit_two_hint_l_enable">#9E9E9E</color>
+
+
+    <color name="tay_edit_two_bg_corner_disable">#9E9E9E</color>
+    <color name="tay_edit_two_bg_solid_disable">#FFFFFF</color>
+    <color name="tay_edit_two_text_disable">#B0BEC5</color>
+    <color name="tay_edit_two_hint_text_disable">#B0BEC5</color>
+
+
+    <color name="tay_edit_two_bg_corner_active">#C2185B</color>
+    <color name="tay_edit_two_text_active">#E91E63</color>
+    <color name="tay_edit_two_hint_text_active">#F06292</color>
+    <color name="tay_edit_two_error_info">#FF1744</color>
+    <color name="tay_edit_two_hint_l_active">#EC407A</color>
+
+
 
 
     <!-- resources UiTayIndicationGroup -->

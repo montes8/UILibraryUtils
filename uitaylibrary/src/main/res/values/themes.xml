@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <declare-styleable name="UITayButton">
         <attr name="uiTayBtnText" format="string" />
@@ -29,7 +29,64 @@
         <attr name="uiTayVisibilityInfo" format="boolean" />
         <attr name="uiTayTitleVisibility" format="boolean" />
         <attr name="uiTayListBottom" format="boolean" />
+        <attr name="uiTayPasswordEnabled" format="boolean" />
+        <attr name="uiTayIconPasswordActive" format="reference" />
+        <attr name="uiTayIconPasswordInactive" format="reference" />
     </declare-styleable>
+
+
+        <declare-styleable name="UiTayEditLayout">
+            <attr name="uiTayLColorIconEndDefault" format="boolean" />
+            <attr name="uiTayLPasswordEnabled" format="boolean" />
+            <attr name="uiTayLContentDescription" format="string" />
+            <attr name="uiTayLIconPassword" format="reference" />
+            <attr name="uiTayLIconDrawableEnd" format="reference" />
+            <attr name="uiTayLIconDrawableStart" format="reference" />
+            <attr name="uiTayLEditMaxLength" format="integer" />
+            <attr name="uiTayLErrorEnabled" format="boolean" />
+            <attr name="uiTayLFocusable" format="boolean" />
+            <attr name="uiTayLEnabled" format="boolean" />
+            <attr name="uiTayLText" format="string" />
+            <attr name="uiTayLHint" format="string" />
+            <attr name="uiTayLListBottom" format="boolean" />
+            <attr name="android:inputType" />
+            <attr name="android:imeOptions" />
+        </declare-styleable>
+
+
+    <style name="UiTayStyleEditLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/ui_tay_selector_input_text</item>
+        <item name="boxStrokeWidth">0.5dp</item>
+        <item name="colorControlActivated">@color/tay_edit_two_bg_corner_active</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorIconTint">@color/tay_edit_two_error_info</item>
+        <item name="boxStrokeErrorColor">@color/tay_edit_two_error_info</item>
+        <item name="errorTextColor">@color/tay_edit_two_error_info</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="boxBackgroundColor">@drawable/ui_tay_bg_selector_edit_layout</item>
+        <item name="colorControlNormal">@color/ui_tay_white</item>
+        <item name="boxCornerRadiusTopStart">@dimen/dim_tay_edit_two_bg_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/dim_tay_edit_two_bg_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/dim_tay_edit_two_bg_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/dim_tay_edit_two_bg_radius</item>
+    </style>
+
+    <style name="ErrorText" parent="TextAppearance.Design.Error">
+        <item name="android:textColor">@color/tay_edit_two_error_info</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="HintText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="EditStyleGray" parent="Theme.AppCompat.Light">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/tay_edit_two_text_enable</item>
+        <item name="android:textColorHint">@color/tay_edit_two_hint_text_enable</item>
+    </style>
 
     <style name="UITayStyleList" parent="android:Widget">
         <item name="android:scrollbars">vertical</item>

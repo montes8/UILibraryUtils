@@ -12,7 +12,7 @@ import com.gb.vale.uitaylibrary.utils.validateNewFinger
 import java.util.concurrent.Executor
 
 class UiTayAuthenticationManager(
-    var activity: AppCompatActivity?,
+    private var activity: AppCompatActivity?,
     var listener: AuthenticationHandler? = null
 ) {
 

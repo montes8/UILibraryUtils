@@ -166,3 +166,6 @@ fun Context.uiTayOpenUrl(url : String){
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     this.startActivity(intent)
 }
+
+
+fun uiTayPixelsToSp(context: Context,px: Float) = px / context.resources.displayMetrics.scaledDensity
