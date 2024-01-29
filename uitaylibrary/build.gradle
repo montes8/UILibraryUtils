@@ -42,6 +42,18 @@ dependencies {
 
 afterEvaluate{
     publishing{
+
+       /* repositories {
+            maven {
+                name = "uitaylibrary"
+                url = uri("https://maven.pkg.github.com/montes8/TayLibrary")
+                credentials {
+                    username = "montes8"
+                    password = "TOKEN"
+                }
+            }
+        }*/
+
         publications{
             release(MavenPublication){
                 from components.release
