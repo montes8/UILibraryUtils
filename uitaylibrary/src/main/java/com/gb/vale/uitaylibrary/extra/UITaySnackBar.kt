@@ -111,7 +111,7 @@ class UITaySnackBar @JvmOverloads constructor(
         constraintSet.applyTo(this)
     }
 
-    fun showNeoSB(text : String = uiTayText) {
+    fun showUiTaySB(text : String = uiTayText) {
         this.uiTayVisible()
         textSBar.text = text
         uiTayHandler(uiTayDuration) { this.uiTayGone() }

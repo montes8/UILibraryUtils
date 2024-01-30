@@ -162,13 +162,13 @@ class UiTayToolBar @JvmOverloads constructor(
             )
         )
     }
-    fun setOnClickTayBackListener(time: Long = 700, listener: NeoBackListener) {
+    fun setOnClickTayBackListener(time: Long = 700, listener: UiTayBackListener) {
         imgTbStart.setOnClickUiTayDelay(time) {
             listener.onClick(this)
         }
     }
 
-    fun setOnClickTayMenuListener(time: Long = 700, listener: NeoMenuListener) {
+    fun setOnClickTayMenuListener(time: Long = 700, listener: UiTayMenuListener) {
         imgTbEnd.setOnClickUiTayDelay(time) {
             listener.onClick(this)
         }
@@ -237,17 +237,17 @@ class UiTayToolBar @JvmOverloads constructor(
             this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_size_indication)
         )
         progressStep.layoutParams = layoutP
-        updateNeoProgress()
+        updateUiTayProgress()
         this.addView(progressStep)
     }
 
-    fun setNeoProgress(position: Int, range: Int) {
+    fun setUiTayProgress(position: Int, range: Int) {
         currentProgress = position
         maxProgress = range
-        updateNeoProgress()
+        updateUiTayProgress()
     }
 
-    private fun updateNeoProgress() {
+    private fun updateUiTayProgress() {
         if (currentProgress != 0 && maxProgress != 0 && maxProgress >= currentProgress) {
             progressStep.initLine(maxProgress, currentProgress)
         }
@@ -375,11 +375,11 @@ class UiTayToolBar @JvmOverloads constructor(
     }
 }
 
-fun interface NeoBackListener {
+fun interface UiTayBackListener {
     fun onClick(view: View)
 }
 
-fun interface NeoMenuListener {
+fun interface UiTayMenuListener {
     fun onClick(view: View)
 }
 

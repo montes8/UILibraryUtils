@@ -25,22 +25,22 @@ class UiTayInfo @JvmOverloads constructor(
     private var iconInfo = ImageView(this.context)
     private var textInfo = TextView(this.context)
     private var constraintSet = ConstraintSet()
-    private var uiTayInfoStyleCurrent = UITayStyleNeoInfo.UI_TAY_INFO
+    private var uiTayInfoStyleCurrent = UITayStyleInfo.UI_TAY_INFO
 
-    var neoTextInformation: String = UI_TAY_EMPTY
+    var uiTayTextInformation: String = UI_TAY_EMPTY
         set(value) {
             field = value
             if (value.isNotEmpty()) textInfo.text = value
         }
 
-    var neoTextInfoSpp: SpannableString = SpannableString(UI_TAY_EMPTY)
+    var uiTayTextInfoSpp: SpannableString = SpannableString(UI_TAY_EMPTY)
         set(value) {
             field = value
             if (value.isNotEmpty()) textInfo.text = value
         }
 
 
-    var neoIconInformation: Drawable? =
+    var uiTayIconInformation: Drawable? =
         ContextCompat.getDrawable(this.context, R.drawable.ui_tay_ic_info)
         set(value) {
             field = value
@@ -49,7 +49,7 @@ class UiTayInfo @JvmOverloads constructor(
             }
         }
 
-    var neoStyleInfo: UITayStyleNeoInfo = UITayStyleNeoInfo.UI_TAY_INFO
+    var uiTayStyleInfo: UITayStyleInfo = UITayStyleInfo.UI_TAY_INFO
         set(value) {
             field = value
             uiTayInfoStyleCurrent = value
@@ -68,7 +68,7 @@ class UiTayInfo @JvmOverloads constructor(
             if (validDefault())R.color.tay_info_text else R.color.tay_info_text_error, null))
     }
 
-    private fun validDefault() = uiTayInfoStyleCurrent == UITayStyleNeoInfo.UI_TAY_INFO
+    private fun validDefault() = uiTayInfoStyleCurrent == UITayStyleInfo.UI_TAY_INFO
 
 
     init {
@@ -105,15 +105,15 @@ class UiTayInfo @JvmOverloads constructor(
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UiTayInfo)
         attributeSet.let {
-            neoTextInformation =
+            uiTayTextInformation =
                 it.getString(R.styleable.UiTayInfo_uiTayTextInformation)
                     ?: context.getString(R.string.tay_ui_script)
-            neoIconInformation =
+            uiTayIconInformation =
                 it.getDrawable(R.styleable.UiTayInfo_uiTayIconInformation)
                     ?: ContextCompat.getDrawable(this.context, R.drawable.ui_tay_ic_info)
 
-            neoStyleInfo =
-                UITayStyleNeoInfo.values()[it.getInt(R.styleable.UiTayInfo_uiTayStyleInfo, 0)]
+            uiTayStyleInfo =
+                UITayStyleInfo.values()[it.getInt(R.styleable.UiTayInfo_uiTayStyleInfo, 0)]
         }
         attributeSet.recycle()
     }
@@ -158,6 +158,6 @@ class UiTayInfo @JvmOverloads constructor(
     }
 }
 
-enum class UITayStyleNeoInfo(var code: Int) {
+enum class UITayStyleInfo(var code: Int) {
     UI_TAY_INFO(0), UI_TAY_ERROR(1)
 }
