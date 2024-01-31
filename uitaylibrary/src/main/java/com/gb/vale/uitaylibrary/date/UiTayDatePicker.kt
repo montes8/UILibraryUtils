@@ -1,6 +1,8 @@
 package com.gb.vale.uitaylibrary.date
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -17,18 +19,19 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.gb.vale.uitaylibrary.R
-import com.gb.vale.uitaylibrary.date.UiTayDatePickerDialog.Companion.FORMAT_DATE_UI_TAY_DEFAULT
-import com.gb.vale.uitaylibrary.date.UiTayDatePickerDialog.Companion.UI_TAY_TYPE_DP_FULL
+import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.FORMAT_DATE_UI_TAY_DEFAULT
+import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.UI_TAY_TYPE_DP_FULL
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayFormatString
 import kotlinx.parcelize.Parcelize
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
 
 typealias UITayClickDatePicker = (Pair<Date, String>) -> Unit
 
-class UiTayDatePickerDialog : DialogFragment() {
+class UiTayDatePickerSpinner : DialogFragment() {
 
 
     private var uiModelDP: UiTayModelDatePicker = UiTayModelDatePicker()
@@ -45,7 +48,7 @@ class UiTayDatePickerDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        uiModelDP = arguments?.getParcelable(UiTayDatePickerDialog::class.java.name)
+        uiModelDP = arguments?.getParcelable(UiTayDatePickerSpinner::class.java.name)
             ?: UiTayModelDatePicker()
     }
 
@@ -58,7 +61,7 @@ class UiTayDatePickerDialog : DialogFragment() {
         return uiTayContentGeneralDatePicker
     }
 
-    @SuppressLint("DiscouragedApi", "SimpleDateFormat")
+    @SuppressLint("DiscouragedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         selectedDate = uiModelDP.dateSelected.time
@@ -246,8 +249,8 @@ class UiTayDatePickerDialog : DialogFragment() {
         const val UI_TAY_TYPE_DP_MONTH_YEAR = 1
         const val FORMAT_DATE_UI_TAY_DEFAULT = "dd/MM/yyy"
 
-        fun newInstance(uiTayData: UiTayModelDatePicker = UiTayModelDatePicker()): UiTayDatePickerDialog =
-            UiTayDatePickerDialog().apply {
+        fun newInstance(uiTayData: UiTayModelDatePicker = UiTayModelDatePicker()): UiTayDatePickerSpinner =
+            UiTayDatePickerSpinner().apply {
                 arguments = Bundle().apply {
                     putParcelable(UiTayModelDatePicker::class.java.name, uiTayData)
                 }
@@ -265,3 +268,37 @@ data class UiTayModelDatePicker(
     val type: Int = UI_TAY_TYPE_DP_FULL,
     val format: String = FORMAT_DATE_UI_TAY_DEFAULT
 ) : Parcelable
+
+
+@SuppressLint("SimpleDateFormat")
+fun Context.uiTayDatePickerBasic(uiModelDP:UiTayModelDatePicker=UiTayModelDatePicker(),
+                                 actionDate: ((date: Pair<Date,String>) -> Unit)? = null){
+    val myCalendar: Calendar = Calendar.getInstance()
+    val datePickerListener =
+        DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
+            myCalendar.set(selectedYear, selectedMonth, selectedDay)
+            try {
+                val selected = Calendar.getInstance()
+                selected.set(Calendar.YEAR, selectedYear)
+                selected.set(Calendar.MONTH, selectedMonth)
+                selected.set(Calendar.DAY_OF_MONTH, selectedDay)
+                val sdf = SimpleDateFormat(uiModelDP.format)
+                val date: String = sdf.format(myCalendar.time)
+                actionDate?.invoke(Pair(selected.time,date))
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+
+    val date = DatePickerDialog(
+        this,R.style.UITayDatePickerBasic,
+        datePickerListener,
+        uiModelDP.dateSelected.get(Calendar.YEAR),
+        uiModelDP.dateSelected.get(Calendar.MONTH),
+        uiModelDP.dateSelected.get(Calendar.DAY_OF_MONTH)
+    )
+    uiModelDP.dateMin?.let { date.datePicker.minDate = it.timeInMillis }
+    uiModelDP.dateMax?.let { date.datePicker.maxDate = it.timeInMillis}
+    date.show()
+}

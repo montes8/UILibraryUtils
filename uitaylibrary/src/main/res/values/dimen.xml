@@ -83,4 +83,11 @@
     <dimen name="dim_tay_bg_btn_cancel_radius_dp">20dp</dimen>
     <dimen name="dim_tay_dp_sp_text">10sp</dimen>
 
+    <dimen name="dim_tay_dp_bg_radius_spinner">20dp</dimen>
+
+
+    <!-- resources UiTayTimePicker -->
+
+    <dimen name="dim_tay_tp_bg_radius">20dp</dimen>
+
 </resources>

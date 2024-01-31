@@ -1,37 +1,18 @@
 package com.gb.vale.uitaylibrary.utils
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
+import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.net.Uri
-import android.view.View
-import android.os.Handler
-import android.os.Looper
-import android.provider.Settings
-import android.util.DisplayMetrics
-import android.util.Log
-import android.view.Window
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.gb.vale.uitaylibrary.R
-import com.gb.vale.uitaylibrary.date.UiTayDatePickerDialog
+import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner
 import com.gb.vale.uitaylibrary.date.UiTayModelDatePicker
+import com.gb.vale.uitaylibrary.date.uiTayDatePickerBasic
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.math.pow
 
 
 @SuppressLint("SimpleDateFormat")
@@ -57,7 +38,7 @@ fun String.uiTayFormatCalendar(format : String = "dd/MM/yyy"):Calendar{
 @SuppressLint("SimpleDateFormat")
 fun uiTayGetRangeDaysDate(start : String,end : String,format: String = "dd/MM/yyy"):Long {
     try {
-        val dateFormat = SimpleDateFormat("dd/MM/yyy")
+        val dateFormat = SimpleDateFormat(format)
         var dateInit: Date? = null
         var dateEnd: Date? = null
         dateFormat.parse(start)?.let { dateInit = it}
@@ -120,11 +101,53 @@ fun String.uiTayFormatTwelveHour():String{
 }
 
 
-fun AppCompatActivity.showUiTayDatePicker(onSuccessDate: ((Pair<Date,String>) -> Unit)? = null){
-    val pd = UiTayDatePickerDialog.newInstance(
-    )
-    pd.show(supportFragmentManager, UiTayDatePickerDialog::class.java.name)
+fun AppCompatActivity.showUiTayDatePickerSpinner(uiModelDP:UiTayModelDatePicker=UiTayModelDatePicker(),
+                                             onSuccessDate: ((Pair<Date,String>) -> Unit)? = null){
+    val pd = UiTayDatePickerSpinner.newInstance(uiModelDP)
+    pd.show(supportFragmentManager, UiTayDatePickerSpinner::class.java.name)
     pd.uiTayClickDatePicker={
         onSuccessDate?.invoke(it)
     }
+}
+
+
+fun AppCompatActivity.showUiTayDatePicker(uiModelDP:UiTayModelDatePicker=UiTayModelDatePicker(),
+                                      onSuccessDate: ((Pair<Date,String>) -> Unit)? = null){
+    uiTayDatePickerBasic(uiModelDP) {onSuccessDate?.invoke(it)}
+}
+
+
+fun Context.showUiTayHour(actionTime: ((String) -> Unit)? = null){
+    val c = Calendar.getInstance()
+    val hour = c.get(Calendar.HOUR_OF_DAY)
+    val minutes = c.get(Calendar.MINUTE)
+    val timePickerDialog = TimePickerDialog(
+        this, R.style.UITayTimePickerBasic,
+        { _, hourOfDay, minute ->
+            actionTime?.invoke("$hourOfDay:$minute:00")
+        },
+        hour,
+        minutes,
+        false
+    )
+
+    timePickerDialog.show()
+}
+
+
+fun Context.showUiTayHourSpinner(actionTime: ((String) -> Unit)? = null){
+    val c = Calendar.getInstance()
+    val hour = c.get(Calendar.HOUR_OF_DAY)
+    val minutes = c.get(Calendar.MINUTE)
+    val timePickerDialog = TimePickerDialog(
+        this, R.style.UITayTimePickerSpinner,
+        { _, hourOfDay, minute ->
+            actionTime?.invoke("$hourOfDay:$minute:00")
+        },
+        hour,
+        minutes,
+        false
+    )
+
+    timePickerDialog.show()
 }

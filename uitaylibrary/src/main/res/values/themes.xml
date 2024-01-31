@@ -85,7 +85,7 @@
     <style name="EditStyleGray" parent="Theme.AppCompat.Light">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColor">@color/tay_edit_two_text_enable</item>
-        <item name="android:textColorHint">@color/tay_edit_two_hint_text_enable</item>
+        <item name="android:textColorHint">@color/tay_edit_two_hint_enable</item>
     </style>
 
     <style name="UITayStyleList" parent="android:Widget">
@@ -100,6 +100,7 @@
         <attr name="uiTayIconStartTb" format="reference" />
         <attr name="uiTayIconEndTb" format="reference" />
         <attr name="uiTayTbIndicator" format="boolean" />
+        <attr name="uiTayTbIconColorDefault" format="boolean" />
         <attr name="uiTayTbProgress" format="integer" />
         <attr name="uiTayTbMaxProgress" format="integer" />
         <attr name="uiTayStyleTbIcon" format="enum" >
@@ -114,11 +115,16 @@
     <declare-styleable name="UITaySnackBar">
         <attr name="uiTaySBText" format="string" />
         <attr name="uiTaySBDuration" format="integer" />
+        <attr name="android:background"/>
+        <attr name="android:textColor"/>
     </declare-styleable>
 
     <declare-styleable name="UiTayInfo">
         <attr name="uiTayTextInformation" format="string" />
         <attr name="uiTayIconInformation" format="reference" />
+        <attr name="uiTayStyleInfoEnable" format="boolean" />
+        <attr name="android:background"/>
+        <attr name="android:textColor"/>
         <attr name="uiTayStyleInfo" format="enum" >
             <enum name="UI_TAY_INFO" value="0"/>
             <enum name="UI_TAY_ERROR" value="1"/>
@@ -129,6 +135,52 @@
     <style name="UITayDatePicker" parent="@android:style/Widget.DatePicker">
         <item name="android:calendarViewShown">false</item>
         <item name="android:datePickerMode">spinner</item>
+    </style>
+
+
+    <style name="UITayDatePickerBasic" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/tay_dp_header_background</item>
+        <item name="android:windowBackground">@color/tay_dp_background</item>
+        <item name="android:colorControlActivated">@color/tay_dp_selected</item>
+        <item name="android:textColorPrimary">@color/tay_dp_unselected</item>
+        <item name="android:textColorSecondary">@color/tay_dp_text_header</item>
+    </style>
+
+    <style name="UITayTimePickerBasic" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/tay_dp_header_background</item>
+        <item name="android:windowBackground">@color/tay_tp_b_background</item>
+        <item name="android:colorControlActivated">@color/tay_tp_b_selected</item>
+        <item name="android:textColorPrimary">@color/tay_tp_b_unselected</item>
+        <item name="android:textColorSecondary">@color/tay_tp_b_text_header</item>
+    </style>
+
+
+    <style name="UITayTimePickerSpinner"
+        parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:dialogTheme">@style/UiTayDialogTimeTheme</item>
+        <item name="android:timePickerStyle">@style/UiTayTimePicker</item>
+        <item name="android:windowBackground">@drawable/bg_time_picker_spinner</item>
+        <item name="android:colorControlActivated">@color/tay_tp_selected</item>
+        <item name="android:textColorPrimary">@color/tay_tp_selected</item>
+        <item name="android:textColorSecondary">@color/tay_tp_unselected</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/UiTayTimePickerButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/UiTayTimePickerButtonStyle</item>
+
+    </style>
+
+
+    <style name="UiTayTimePickerButtonStyle" parent="android:Widget.Material.Button.Borderless">
+        <item name="android:textColor">@color/tay_tp_btn</item>
+    </style>
+
+    <style name="UiTayDialogTimeTheme"
+        parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:timePickerStyle">@style/UiTayTimePicker</item>
+    </style>
+
+    <style name="UiTayTimePicker"
+        parent="@android:style/Widget.Material.Light.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
     </style>
 
 </resources>

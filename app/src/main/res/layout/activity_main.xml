@@ -21,4 +21,15 @@
         android:layout_height="wrap_content"/>
 
 
+    <com.gb.vale.uitaylibrary.extra.UiTayInfo
+        android:layout_width="match_parent"
+        app:uiTayStyleInfoEnable="false"
+        android:textColor="@color/black"
+        app:uiTayTextInformation="vfv fdm vmdfv dfmv mdf vfdmv fdm"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

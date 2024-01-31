@@ -1,6 +1,8 @@
 package com.gb.vale.uitaylibrary.extra
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
+import com.gb.vale.uitaylibrary.utils.uiTayDrawableStroke
 import com.gb.vale.uitaylibrary.utils.uiTayGone
 import com.gb.vale.uitaylibrary.utils.uiTayHandler
 import com.gb.vale.uitaylibrary.utils.uiTayVisible
@@ -26,6 +29,7 @@ class UITaySnackBar @JvmOverloads constructor(
     private var constraintSet = ConstraintSet()
     private var uiTayDuration = 2000L
     private var uiTayText = UI_TAY_EMPTY
+    private var uiTayTextColor = 0
 
     var uiTaySBText: String = UI_TAY_EMPTY
         set(value) {
@@ -38,6 +42,19 @@ class UITaySnackBar @JvmOverloads constructor(
         set(value) {
             field = value
             uiTayDuration = (value * 1000).toLong()
+        }
+
+    var uiTaySbBackground: Drawable =  this.context.uiTayDrawableStroke(R.color.tay_snack_bar_bg_stroke,
+        R.color.tay_snack_bar_bg_stroke,R.dimen.dim_tay_snack_bar_radius)
+        set(value) {
+            field = value
+            this.background = value
+        }
+
+    var uiTaySbTextColor: Int = Color.WHITE
+        set(value) {
+            field = value
+            textSBar.setTextColor(value)
         }
 
     init {
@@ -59,10 +76,7 @@ class UITaySnackBar @JvmOverloads constructor(
             TypedValue.COMPLEX_UNIT_PX,
             this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_snack_sp_text).toFloat()
         )
-        textSBar.setTextColor(ContextCompat.getColor(this.context,R.color.tay_snack_bar_text))
         textSBar.typeface = typeface
-        this.uiTayBgBorderStroke(R.color.tay_snack_bar_bg_stroke,
-            R.color.tay_snack_bar_bg_stroke ,radius = R.dimen.dim_tay_snack_bar_radius)
         this.setPadding(getUiTayPadding(),getUiTayPadding(),getUiTayPadding(),getUiTayPadding())
         textSBar.layoutParams = layoutText
         this.addView(textSBar)
@@ -78,6 +92,11 @@ class UITaySnackBar @JvmOverloads constructor(
                     ?: context.getString(R.string.tay_ui_script)
 
             uiTaySBDuration = it.getInt(R.styleable.UITaySnackBar_uiTaySBDuration, 2)
+
+            uiTaySbBackground = it.getDrawable(R.styleable.UITaySnackBar_android_background)?:
+                    this.context.uiTayDrawableStroke(R.color.tay_snack_bar_bg_stroke,
+                        R.color.tay_snack_bar_bg_stroke,R.dimen.dim_tay_snack_bar_radius)
+            uiTaySbTextColor = it.getColor(R.styleable.UITaySnackBar_android_textColor,Color.WHITE)
 
         }
         attributeSet.recycle()

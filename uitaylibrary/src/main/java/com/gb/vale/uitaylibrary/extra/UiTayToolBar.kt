@@ -33,6 +33,7 @@ class UiTayToolBar @JvmOverloads constructor(
     private var constraintSet = ConstraintSet()
     private var maxProgress = 0
     private var currentProgress = 0
+    private var uiTayIconColorDefault= true
 
     var uiTayTextTb: String = UI_TAY_EMPTY
         set(value) {
@@ -95,6 +96,12 @@ class UiTayToolBar @JvmOverloads constructor(
             progressStep.uiTayVisibility(value)
         }
 
+    var uiTayTbIconColorDefault: Boolean = true
+        set(value) {
+            field = value
+            uiTayIconColorDefault = value
+        }
+
 
     private var uiTayTbProgress: Int = 0
         set(value) {
@@ -119,6 +126,7 @@ class UiTayToolBar @JvmOverloads constructor(
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UiTayToolBar)
         attributeSet.let {
+            uiTayTbIconColorDefault = it.getBoolean(R.styleable.UiTayToolBar_uiTayTbIconColorDefault, true)
             uiTayTextTb = it.getString(R.styleable.UiTayToolBar_uiTayTextTb)
                 ?: this.context.resources.getString(R.string.tay_ui_text_title_toolbar)
             uiTayIconStartTb =
@@ -142,14 +150,14 @@ class UiTayToolBar @JvmOverloads constructor(
         this.uiTayBgBorder(
             R.color.tay_toolbar_solid ,R.dimen.dim_tay_0
         )
-        imgTbStart.setColorFilter(
+       if (uiTayIconColorDefault) imgTbStart.setColorFilter(
             ContextCompat.getColor(
                 context,
                 R.color.tay_toolbar_icon_start
             ),
             PorterDuff.Mode.SRC_IN
         )
-        imgTbEnd.setColorFilter(
+       if (uiTayIconColorDefault) imgTbEnd.setColorFilter(
             ContextCompat.getColor(
                 context,
                  R.color.tay_toolbar_icon_end

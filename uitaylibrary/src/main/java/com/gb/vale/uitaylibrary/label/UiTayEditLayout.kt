@@ -173,10 +173,10 @@ class UiTayEditLayout @JvmOverloads constructor(
         ediText.setOnFocusChangeListener { _, isFocused ->
             if (isFocused)setEditActive() else setEditDefault()
             this.defaultHintTextColor = ColorStateList.valueOf(ContextCompat.getColor(context,
-                if (ediText.text.toString().isNotEmpty()  || isFocused )R.color.tay_edit_two_hint_l_active else R.color.tay_edit_two_hint_l_enable))
+                if (ediText.text.toString().isNotEmpty()  || isFocused )R.color.tay_edit_two_hint_l_active else R.color.tay_edit_two_hint_enable))
         }
         this.defaultHintTextColor = ColorStateList.valueOf(ContextCompat.getColor(context,
-            if (ediText.text.toString().isNotEmpty())R.color.tay_edit_two_hint_l_active else R.color.tay_edit_two_hint_l_enable))
+            if (ediText.text.toString().isNotEmpty())R.color.tay_edit_two_hint_l_active else R.color.tay_edit_two_hint_enable))
     }
 
 
@@ -240,7 +240,7 @@ class UiTayEditLayout @JvmOverloads constructor(
     fun setEditDefault(){
         editText?.typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
         ediText.setTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_text_enable))
-        ediText.setHintTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_hint_text_enable))
+        ediText.setHintTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_hint_enable))
         this.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context,R.color.tay_edit_two_eyes_enable)))
 
 
@@ -250,7 +250,7 @@ class UiTayEditLayout @JvmOverloads constructor(
         editText?.typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
         ediText.setTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_text_disable))
         ediText.setHintTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_hint_text_disable))
-        this.defaultHintTextColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.tay_edit_two_hint_l_enable))
+        this.defaultHintTextColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.tay_edit_two_hint_enable))
         this.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context,R.color.tay_edit_two_eyes_disable)))
 
 

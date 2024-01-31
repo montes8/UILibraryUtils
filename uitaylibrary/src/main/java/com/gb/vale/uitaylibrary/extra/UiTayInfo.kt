@@ -1,6 +1,7 @@
 package com.gb.vale.uitaylibrary.extra
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.util.AttributeSet
@@ -15,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
+import com.gb.vale.uitaylibrary.utils.uiTayDrawableStroke
 
 class UiTayInfo @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
@@ -26,6 +28,7 @@ class UiTayInfo @JvmOverloads constructor(
     private var textInfo = TextView(this.context)
     private var constraintSet = ConstraintSet()
     private var uiTayInfoStyleCurrent = UITayStyleInfo.UI_TAY_INFO
+    private var uiTayStyleEnable = true
 
     var uiTayTextInformation: String = UI_TAY_EMPTY
         set(value) {
@@ -52,8 +55,29 @@ class UiTayInfo @JvmOverloads constructor(
     var uiTayStyleInfo: UITayStyleInfo = UITayStyleInfo.UI_TAY_INFO
         set(value) {
             field = value
-            uiTayInfoStyleCurrent = value
-            configStyle()
+            if (uiTayStyleEnable){
+                uiTayInfoStyleCurrent = value
+                configStyle()
+            }
+        }
+
+    var uiTayStyleInfoEnable: Boolean = true
+        set(value) {
+            field = value
+            uiTayStyleEnable = value
+        }
+
+    var uiTayBackgroundInfo: Drawable = this.context.uiTayDrawableStroke(
+        R.color.tay_info_bg_stroke,R.color.tay_info_bar_bg_solid,R.dimen.dim_tay_info_radius)
+        set(value) {
+            field = value
+           if (!uiTayStyleEnable) this.background = value
+        }
+
+    var uiTayTextColorInfo: Int = this.context.resources.getColor(R.color.tay_info_text, null)
+        set(value) {
+            field = value
+            if (!uiTayStyleEnable) textInfo.setTextColor(value)
         }
 
     private fun configStyle() {
@@ -111,6 +135,14 @@ class UiTayInfo @JvmOverloads constructor(
             uiTayIconInformation =
                 it.getDrawable(R.styleable.UiTayInfo_uiTayIconInformation)
                     ?: ContextCompat.getDrawable(this.context, R.drawable.ui_tay_ic_info)
+            uiTayStyleInfoEnable =
+                it.getBoolean(R.styleable.UiTayInfo_uiTayStyleInfoEnable, true)
+
+            uiTayBackgroundInfo = it.getDrawable(R.styleable.UiTayInfo_android_background)?:
+                    this.context.uiTayDrawableStroke(
+                        R.color.tay_info_bg_stroke,R.color.tay_info_bar_bg_solid,R.dimen.dim_tay_info_radius)
+            uiTayTextColorInfo = it.getColor(R.styleable.UiTayInfo_android_textColor,
+                this.context.resources.getColor(R.color.tay_info_text, null))
 
             uiTayStyleInfo =
                 UITayStyleInfo.values()[it.getInt(R.styleable.UiTayInfo_uiTayStyleInfo, 0)]
