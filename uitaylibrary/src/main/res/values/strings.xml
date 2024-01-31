@@ -13,4 +13,9 @@
     <string name="tay_ui_script">--------</string>
     <string name="tay_ui_authentication_error">Error de autenticación %1$s</string>
     <string name="tay_ui_put_finger_to_continue">Coloque su huella para continuar.</string>
+
+
+
+    <string name="tay_ui_dp_accept">Aceptar</string>
+    <string name="tay_ui_dp_calcel">Cancelar</string>
 </resources>

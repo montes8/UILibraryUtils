@@ -125,4 +125,10 @@
         </attr>
     </declare-styleable>
 
+
+    <style name="UITayDatePicker" parent="@android:style/Widget.DatePicker">
+        <item name="android:calendarViewShown">false</item>
+        <item name="android:datePickerMode">spinner</item>
+    </style>
+
 </resources>

@@ -10,6 +10,7 @@
     <dimen name="dim_tay_20">20dp</dimen>
     <dimen name="dim_tay_2">24dp</dimen>
     <dimen name="dim_tay_28">28dp</dimen>
+    <dimen name="dim_tay_48">48dp</dimen>
     <dimen name="dim_tay_52">52dp</dimen>
 
 
@@ -71,4 +72,15 @@
 
     <dimen name="dim_tay_info_radius">16dp</dimen>
     <dimen name="dim_tay_info_sp_text">12sp</dimen>
+
+
+    <!-- resources UiTayDatePicker -->
+
+
+    <dimen name="dim_tay_bg_radius_dp">20dp</dimen>
+    <dimen name="dim_tay_dp_height">40dp</dimen>
+    <dimen name="dim_tay_bg_btn_accept_radius_dp">20dp</dimen>
+    <dimen name="dim_tay_bg_btn_cancel_radius_dp">20dp</dimen>
+    <dimen name="dim_tay_dp_sp_text">10sp</dimen>
+
 </resources>
