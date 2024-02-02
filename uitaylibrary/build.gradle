@@ -45,24 +45,12 @@ dependencies {
 
 afterEvaluate{
     publishing{
-
-        repositories {
-            maven {
-                name = "uitaylibrary"
-                url = uri("https://maven.pkg.github.com/montes8/TayLibrary")
-                credentials {
-                    username = "montes8"
-                    password = "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"
-                }
-            }
-        }
-
         publications{
             release(MavenPublication){
                 from components.release
                 groupId='com.github.montes8'
                 artifactId = 'uitaylibrary'
-                version = '1.1'
+                version = '1.0'
             }
         }
     }
