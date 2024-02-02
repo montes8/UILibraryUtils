@@ -135,3 +135,6 @@ fun EditText.validateCharacterLettersNumbers(){
 
     this.filters = arrayOf(letterFilter)
 }
+
+
+fun String.uiTayRemoveSpaces(): String = replace("\\s".toRegex(), "")

@@ -1,5 +1,6 @@
 package com.gb.vale.uitaylibrary.utils
 
+import android.app.NotificationManager
 import android.content.Context
 import android.net.wifi.WifiManager
 import java.math.BigInteger
@@ -70,3 +71,11 @@ fun String.uiTayValidateCardNumber(): Boolean {
 
     return sum % 10 == 0
 }
+
+
+fun Context.uiTayClearNotifications() {
+    val notificationManager =
+        this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    notificationManager.cancelAll()
+}
+

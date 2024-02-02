@@ -1,15 +1,74 @@
 package com.gb.vale.uitaylibrary.animation
 
 import android.animation.Animator
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import android.view.animation.TranslateAnimation
 import com.gb.vale.uitaylibrary.utils.uiTayGone
 import com.gb.vale.uitaylibrary.utils.uiTayHandler
 import com.gb.vale.uitaylibrary.utils.uiTayVisible
 
+
+/**Appearance animation from alpha 0 to its original color*/
+fun View.fadeZeroToOne(duration:Long = 1300) {
+    val fadeOut = AlphaAnimation(
+        0f,
+        1f
+    )
+    fadeOut.interpolator = AccelerateInterpolator()
+    fadeOut.startOffset = 500
+    fadeOut.duration = duration
+    uiTayHandler(duration) {  this.uiTayVisible()}
+    this.animation = fadeOut
+}
+
+/**Disappearance animation from original color to alphs 0*/
+fun View.fadeOneToZero(duration:Long = 1300) {
+    val fadeOut = AlphaAnimation(
+        1f,
+        0f
+    )
+    fadeOut.interpolator = AccelerateInterpolator()
+    fadeOut.startOffset = 500
+    fadeOut.duration = duration
+    uiTayHandler(duration) {  this.uiTayGone()}
+
+    this.animation = fadeOut
+}
+
+/**rebound successive effect animation*/
+fun View.uiTayDoBounce(duration : Long = 250,distanceRebound : Float = -15.0f) {
+
+    val mAnimation = TranslateAnimation(0f, 0f, 0f, distanceRebound)
+    mAnimation.duration = duration
+    mAnimation.repeatCount = -1
+    mAnimation.repeatMode = Animation.REVERSE
+    mAnimation.interpolator = LinearInterpolator()
+    this.startAnimation(mAnimation)
+}
+
+/**rebound effect animation*/
+fun View.uiTayDoBounceAnimation(duration : Long = 1000) {
+    val animator = ObjectAnimator.ofFloat(
+        this,
+        "translationY",
+        this.measuredHeight.toFloat(),
+        -30f,
+        10f,
+        0f
+    )
+    val animator2 = ObjectAnimator.ofFloat(this, "alpha", 0f, 1f, 1f, 1f)
+    animator.duration = duration
+    animator.start()
+    animator2.duration = duration
+    animator2.start()
+}
 
 /** The view disappears with an animation that contracts from top to bottom*/
 fun View.uiTayScaleUpView(duration: Int = 500){
