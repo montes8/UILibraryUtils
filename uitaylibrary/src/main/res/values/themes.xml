@@ -183,4 +183,19 @@
         <item name="android:timePickerMode">spinner</item>
     </style>
 
+
+    <style name="UiTayDialogLayoutStyle" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="colorPrimary">@color/ui_tay_dl_transparent</item>
+        <item name="colorPrimaryDark">@color/ui_tay_dl_transparent</item>
+        <item name="colorAccent">@color/ui_tay_dl_transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:statusBarColor">@color/ui_tay_dl_transparent</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowBackground">@color/ui_tay_dl_transparent</item>
+    </style>
+
 </resources>

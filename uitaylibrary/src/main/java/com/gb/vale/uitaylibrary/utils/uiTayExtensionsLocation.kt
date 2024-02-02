@@ -1,0 +1,48 @@
+package com.gb.vale.uitaylibrary.utils
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import com.gb.vale.uitaylibrary.R
+
+
+@SuppressLint("QueryPermissionsNeeded")
+fun AppCompatActivity.validateMapIntent(latitude: Double, longitude: Double) {
+    val packageManager = this.packageManager
+    val geoMaps = Uri.parse("google.navigation:q=${latitude},${longitude}")
+    val geoWaz = Uri.parse("waze://?ll=${latitude}, ${longitude}&navigate=yes")
+    val intentWaz = Intent(Intent.ACTION_VIEW, geoWaz)
+    intentWaz.setPackage(this.getString(R.string.ui_tay_waze_package))
+    val intentMap = Intent(Intent.ACTION_VIEW, geoMaps)
+    intentMap.setPackage(this.getString(R.string.ui_tay_maps_package))
+    try {
+        if (intentMap.resolveActivity(packageManager) != null) {
+            val chooserIntent =
+                Intent.createChooser(intentMap, this.getString(R.string.ui_tay_start_navigation))
+            if (intentWaz.resolveActivity(packageManager) != null) {
+                val arr = arrayOfNulls<Intent>(1)
+                arr[0] = intentWaz
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arr)
+                this.startActivity(chooserIntent)
+            } else {
+                this.startActivity(chooserIntent)
+            }
+        } else {
+            this.uiTaySendUriMap(
+                this.getString(R.string.ui_tay_no_maps),
+                Uri.parse(this.getString(R.string.ui_tay_maps_store))
+            )
+        }
+    } catch (e: Exception) {
+        this.uiTaySendUriMap(
+            this.getString(R.string.ui_tay_no_maps),
+            Uri.parse(this.getString(R.string.ui_tay_maps_store))
+        )
+    }
+}
+
+private fun AppCompatActivity.uiTaySendUriMap(messageToast: String, uri: Uri) {
+    this.uiTayShowToast(messageToast)
+    this.startActivity(Intent(Intent.ACTION_VIEW, uri))
+}

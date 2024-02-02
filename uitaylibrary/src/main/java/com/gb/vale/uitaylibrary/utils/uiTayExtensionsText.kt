@@ -2,17 +2,21 @@ package com.gb.vale.uitaylibrary.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.InputFilter
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.UnderlineSpan
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.manager.style.CustomTypefaceSpan
+import java.text.NumberFormat
 import java.util.regex.Pattern
 
 fun TextView.uiTaySetColouredSpanClick(
@@ -96,4 +100,38 @@ fun String.validatePhoneFormat() : Boolean{
     }else{
         false
     }
+}
+
+fun TextView.line(value :String){
+    val myText = SpannableString(value)
+    myText.setSpan(UnderlineSpan(), 0, myText.length, 0)
+    this.text = myText
+}
+
+fun String.formatDecimal(): String {
+    return try {
+        val formatParse = NumberFormat.getInstance()
+        formatParse.maximumFractionDigits = 2
+        formatParse.minimumFractionDigits = 2
+        formatParse.format(this.toDouble())
+
+    } catch (e: Exception) {
+        "0.00"
+    }
+}
+
+fun EditText.validateCharacterLettersNumbers(){
+    val letterFilter = InputFilter { source, start, end, _, _, _ ->
+        var filtered = ""
+        for (i in start until end) {
+            val character = source[i]
+            if (!Character.isWhitespace(character) && Character.isLetter(character) || Character.isDigit(character)) {
+                filtered += character
+            }
+        }
+
+        filtered
+    }
+
+    this.filters = arrayOf(letterFilter)
 }

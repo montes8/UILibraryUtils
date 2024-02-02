@@ -3,6 +3,7 @@ package com.gb.vale.uitaylibrary.utils
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
+import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner
@@ -15,14 +16,24 @@ import java.util.Date
 import java.util.Locale
 
 
-@SuppressLint("SimpleDateFormat")
-fun Date.uiTayFormatString(format : String = "dd/MM/yyy"):String{
-    val dateFormat = SimpleDateFormat(format)
-    return dateFormat.format(this)
-
+fun Long.coverterLongToString(format : String = "dd/MM/yyyy"):String{
+    return DateFormat.format(format, Date(this)).toString()
+}
+fun Long.coverterLongToDate():Date{
+    return Date(this)
 }
 
-fun String.uiTayFormatCalendar(format : String = "dd/MM/yyy"):Calendar{
+@SuppressLint("SimpleDateFormat")
+fun String.getFormatDateStrint(formatInit:String = "dd/MM/yy",formatEnd:String = "MMMM yyyy"):String{
+    val formatCurrent = SimpleDateFormat(formatInit)
+    val dateCurrent = formatCurrent.parse(this)
+    val formatUpdate = SimpleDateFormat(formatEnd)
+    return dateCurrent?.let { formatUpdate.format(it) }?:""
+}
+
+
+
+fun String.uiTayStringToCalendar(format : String = "dd/MM/yyy"):Calendar{
     val cal = Calendar.getInstance()
     val sdf = SimpleDateFormat(format, Locale.getDefault())
     return try {
@@ -34,6 +45,72 @@ fun String.uiTayFormatCalendar(format : String = "dd/MM/yyy"):Calendar{
     }
 
 }
+
+fun String.uiTayStringToDate(format : String = "dd/MM/yyy"):Date{
+    val sdf = SimpleDateFormat(format, Locale.getDefault())
+    return try {
+         sdf.parse(this)?:Date()
+    } catch (e: ParseException) {
+        e.printStackTrace()
+        Date()
+    }
+}
+
+fun Date.uiTayDateToCalendar(format : String = "dd/MM/yyy"):Calendar{
+    val cal = Calendar.getInstance()
+    return try {
+        cal.time = this
+        cal
+    } catch (e: ParseException) {
+        e.printStackTrace()
+        Calendar.getInstance()
+    }
+
+}
+
+fun Date.uiTayDateToString(format : String = "dd/MM/yyy"):String{
+    return try {
+        val sdf = SimpleDateFormat(format, Locale.getDefault())
+        sdf.format(this)
+    } catch (e: ParseException) {
+        e.printStackTrace()
+        UI_TAY_EMPTY
+    }
+}
+
+
+fun Calendar.uiTayCalendarToString(format : String = "dd/MM/yyy"):String{
+    val sdf = SimpleDateFormat(format, Locale.getDefault())
+    return try {
+        sdf.format(this.time)
+    } catch (e: ParseException) {
+        e.printStackTrace()
+        UI_TAY_EMPTY
+    }
+}
+
+fun Calendar.uiTayCalendarToDate():Date{
+    return try {
+        this.time
+    } catch (e: ParseException) {
+       Date()
+    }
+}
+
+
+fun uiTayGetInitEndMonths(calendar : Calendar?=null,formatCurrent: String = "dd/MM/yyyy"): Pair<String,String> {
+    val calendarInit = calendar?:Calendar.getInstance()
+    val calendarEnd = calendar?:Calendar.getInstance()
+    val format = SimpleDateFormat(formatCurrent, Locale.getDefault())
+    val dateMax = calendarEnd.getActualMaximum(Calendar.DAY_OF_MONTH)
+    calendarEnd.set(Calendar.DAY_OF_MONTH,dateMax)
+    calendarInit.add(Calendar.DATE, 1)
+    val dateStar = format.format(calendarInit.time)
+    val dateEnd = format.format(calendarEnd.time)
+    return Pair(dateStar,dateEnd)
+}
+
+
 
 @SuppressLint("SimpleDateFormat")
 fun uiTayGetRangeDaysDate(start : String,end : String,format: String = "dd/MM/yyy"):Long {
@@ -54,18 +131,6 @@ fun uiTayGetRangeDaysDate(start : String,end : String,format: String = "dd/MM/yy
     }
 }
 
-fun uiTayGetInitEndMonths(calendar : Calendar?=null,formatCurrent: String = "dd/MM/yyyy"): Pair<String,String> {
-    val calendarInit = calendar?:Calendar.getInstance()
-    val calendarEnd = calendar?:Calendar.getInstance()
-    val format = SimpleDateFormat(formatCurrent, Locale.getDefault())
-    val dateMax = calendarEnd.getActualMaximum(Calendar.DAY_OF_MONTH)
-    calendarEnd.set(Calendar.DAY_OF_MONTH,dateMax)
-    calendarInit.add(Calendar.DATE, 1)
-    val dateStar = format.format(calendarInit.time)
-    val dateEnd = format.format(calendarEnd.time)
-    return Pair(dateStar,dateEnd)
-}
-
 
 fun uiTayGetListMonthsFilter(range:Int = 3,formatCurrent : String = "MMMM yyyy"): List<String> {
     val calendar = Calendar.getInstance()
@@ -78,15 +143,6 @@ fun uiTayGetListMonthsFilter(range:Int = 3,formatCurrent : String = "MMMM yyyy")
     }
     return monthsName
 }
-
-@SuppressLint("SimpleDateFormat")
-fun String.getFormatDateStrint(formatInit:String = "dd/MM/yy",formatEnd:String = "MMMM yyyy"):String{
-    val formatCurrent = SimpleDateFormat(formatInit)
-    val dateCurrent = formatCurrent.parse(this)
-    val formatUpdate = SimpleDateFormat(formatEnd)
-    return dateCurrent?.let { formatUpdate.format(it) }?:""
-}
-
 
 @SuppressLint("SimpleDateFormat")
 fun String.uiTayFormatTwelveHour():String{

@@ -22,7 +22,7 @@ import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.FORMAT_DATE_UI_TAY_DEFAULT
 import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.UI_TAY_TYPE_DP_FULL
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
-import com.gb.vale.uitaylibrary.utils.uiTayFormatString
+import com.gb.vale.uitaylibrary.utils.uiTayDateToString
 import kotlinx.parcelize.Parcelize
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -114,7 +114,7 @@ class UiTayDatePickerSpinner : DialogFragment() {
             uiTayClickDatePicker.invoke(
                 Pair(
                     selectedDate,
-                    selectedDate.uiTayFormatString(uiModelDP.format)
+                    selectedDate.uiTayDateToString(uiModelDP.format)
                 )
             )
             dismiss()

@@ -37,22 +37,22 @@ fun ConstraintLayout.uiTayListSpinner(
         linear.uiTayBgBorderStroke(
             R.color.tay_edit_list_bg_content_stroke,
             R.color.tay_edit_list_bg_content_solid,
-            R.dimen.dim_tay_bg_edit_basic_list_radius
+            R.dimen.dim_tay_bg_ui_tay_list_radius
         )
         paramLinear.setMargins(
-            0, if (positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_margin_top_bottom) else 0,
+            0, if (positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_ui_tay_list_margin_top_bottom) else 0,
             0,
-            if (!positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_margin_top_bottom) else 0,
+            if (!positionBottom) this.resources.getDimensionPixelSize(R.dimen.dim_ui_tay_list_margin_top_bottom) else 0,
         )
         linear.setPadding(
             2,
-            this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_padding_top_bottom),
+            this.resources.getDimensionPixelSize(R.dimen.dim_ui_tay_list_padding_top_bottom),
             2,
-            this.resources.getDimensionPixelSize(R.dimen.dim_tay_bg_edit_list_padding_top_bottom)
+            this.resources.getDimensionPixelSize(R.dimen.dim_ui_tay_list_padding_top_bottom)
         )
         val paramRv = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         paramLinear.matchConstraintMaxHeight =
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_bg_edit_basic_list_max_height)
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_max_height)
         rvList.layoutParams = paramRv
         linear.layoutParams = paramLinear
         rvList.setPadding(0, 0, 0, 0)

@@ -60,7 +60,7 @@ class UiTayListAdapter(var onClickOption: ((Int) -> Unit)? = null) :
             dataBinding.typeface = typeface
             dataBinding.setTextColor(colorText())
             dataBinding.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                dataBinding.context.resources.getDimensionPixelSize( R.dimen.dim_tay_sp_text).toFloat())
+                dataBinding.context.resources.getDimensionPixelSize( R.dimen.dim_tay_sp_text_16).toFloat())
             val layoutCtn = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
             dataBinding.setPadding(dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_20),

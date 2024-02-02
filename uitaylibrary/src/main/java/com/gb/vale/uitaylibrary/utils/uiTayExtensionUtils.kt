@@ -1,0 +1,136 @@
+package com.gb.vale.uitaylibrary.utils
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.Uri
+import android.provider.Settings
+import android.util.DisplayMetrics
+import android.view.Window
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import com.gb.vale.uitaylibrary.R
+import com.gb.vale.uitaylibrary.model.UITayBaseGaneric
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import org.json.JSONObject
+import kotlin.math.pow
+import kotlin.math.sqrt
+
+
+@SuppressLint("QueryPermissionsNeeded")
+fun Context.uiTayOpenPdfUrl(url: String?,messageError:String = this.getString(R.string.tay_ui_error_pdf_link)) {
+    url?.let {
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            this.uiTayShowToast(messageError)
+            return
+        }
+        val newUrl = "https://docs.google.com/viewer?url=$url"
+        val webPage = Uri.parse(newUrl)
+        val intent = Intent(Intent.ACTION_VIEW, webPage)
+        if (intent.resolveActivity((this ?: return).packageManager) != null) {
+            this.startActivity(intent)
+        }
+    }
+}
+
+fun Context.uiTaycopy(text : String, message:String = getString(R.string.tay_ui_text_message_copy)){
+    val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("label", text)
+    clipboard.setPrimaryClip(clip)
+    this.uiTayShowToast(message)
+}
+
+fun Context.uiTayOpenUrl(url : String){
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    this.startActivity(intent)
+}
+
+fun uiTayFullScreen(window : Window){
+    window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+}
+fun Activity.uiTayCheckIsTablet(): Boolean {
+
+    val metrics = DisplayMetrics()
+
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+        val display = this.display
+        display?.getRealMetrics(metrics)
+    } else {
+        @Suppress("DEPRECATION")
+        val display = this.windowManager.defaultDisplay
+        @Suppress("DEPRECATION")
+        display.getMetrics(metrics)
+    }
+
+    var isTablet = false
+    val widthInches: Float = metrics.widthPixels / metrics.xdpi
+    val heightInches: Float = metrics.heightPixels / metrics.ydpi
+    val diagonalInches =
+        sqrt(
+            widthInches.toDouble().pow(2.0) + heightInches.toDouble().pow(2.0)
+        )
+    if (diagonalInches >= 7.0) {
+        isTablet = true
+    }
+
+    return isTablet
+}
+
+fun Activity.uiTayHideKeyboard() {
+    val inputMethodManager: InputMethodManager =
+        this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+}
+
+fun Context.uiTayShowToast(value : String){
+    Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
+}
+fun Context.uiTayShowToast(value : Int){
+    Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
+}
+
+
+
+fun uiTayPixelsToSp(context: Context,px: Float) = px / context.resources.displayMetrics.scaledDensity
+
+@SuppressLint("MissingPermission")
+fun Context?.uiTayIsConnected(): Boolean {
+    return this?.let {
+        val cm = it.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.getNetworkCapabilities(cm.activeNetwork)
+            ?.hasCapability((NetworkCapabilities.NET_CAPABILITY_INTERNET)) ?: false
+    } ?: false
+}
+
+fun Context?.uiTayIsAirplaneModeActive(): Boolean {
+    return this?.let {
+        return Settings.Global.getInt(it.contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
+    } ?: false
+
+}
+
+@SuppressLint("MissingPermission")
+fun callPhoneIntent(context: Context,number : String) {
+    val intent = Intent(Intent.ACTION_CALL)
+    intent.data = Uri.parse("tel:$number")
+    context.startActivity(intent)
+}
+
+
+inline fun <reified T>uiTayJsonToObjet(json: String): T {
+    val jsonData = Gson()
+    return jsonData.fromJson(json,object : TypeToken<T>(){}.type)
+}
+
+fun <T> T.uiTayObjetToJson(): String {
+    val jsonData = Gson()
+    return jsonData.toJson(this)
+}

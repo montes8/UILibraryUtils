@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <color name="black">#000000</color>
+     <color name="ui_tay_black">#000000</color>
      <color name="ui_tay_white">#FFFFFF</color>
 
     <color name="ui_tay_gray">#B0BEC5</color>
@@ -175,5 +175,10 @@
     <color name="tay_tp_btn">#E91E63</color><!--btn text color-->
     <color name="tay_tp_unselected">#FF80AB</color><!--item text color unselected-->
     <color name="tay_tp_selected">#E91E63</color><!--item text color selected-->
+
+    <!-- resources UiTayDialogLayout-->
+
+    <color name="ui_tay_dl_transparent">#00000000</color>
+    <color name="ui_tay_dialog_transparent">#00000000</color>
 
 </resources>

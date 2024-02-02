@@ -1,30 +1,22 @@
 package com.gb.vale.uitaylibrary.utils
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.net.Uri
-import android.view.View
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.util.DisplayMetrics
-import android.view.Window
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import android.view.View
+import android.view.WindowInsetsController
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.gb.vale.uitaylibrary.R
-import java.text.NumberFormat
-import kotlin.math.pow
-import kotlin.math.sqrt
 
 
 fun View.uiTayVisible(){
@@ -46,7 +38,6 @@ fun View.uiTayInVisibility(value:Boolean){
     if (value)this.uiTayVisible() else this.uiTayInvisible()
 }
 
-
 fun uiTayHandler(
     time: Long = 200,
     func: (() -> Unit)? = null
@@ -56,8 +47,11 @@ fun uiTayHandler(
     }, time)
 }
 
-fun uiTayTryCatch( func: (() -> Unit)? = null){
-    try {  func?.invoke() }catch (e: Exception){e.printStackTrace()}
+fun uiTayTryCatch(catch: ((String) -> Unit)? = null, func: (() -> Unit)? = null){
+    try {  func?.invoke() }catch (e: Exception){
+        e.printStackTrace()
+        catch?.invoke(e.message?: UI_TAY_ERROR)
+    }
 }
 fun View.setOnClickUiTayDelay(time: Long = 700, onClick: (View) -> Unit) {
     this.setOnClickListener {
@@ -72,8 +66,6 @@ fun Int.toPxUiTay(context: Context): Int {
     val densityFactor = metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT
     return (this * densityFactor).toInt()
 }
-
-
 
 fun View.uiTayBgBorder(color : Int =
                             R.color.tay_color_general, radius : Int){
@@ -136,9 +128,7 @@ fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.tay_color_general,color
     this.background = this.context.uiTayDrawableStroke(colorStroke,colorSolid,radius,withStroke)
 }
 
-fun uiTayFullScreen(window : Window){
-    window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-}
+
 
 fun View.uiTayBgRadiusCustom(color : Int =
                             R.color.ui_tay_white, radiusTop : Int,
@@ -160,87 +150,42 @@ fun Context.uiTayDrawableRadius(color : Int =
 
 fun Context.converterDimen(value : Int) = this.resources.getDimension(value)
 
-fun Context.uiTayShowToast(value : String){
-    Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
-}
 
-fun Context.uiTaycopy(text : String,message:String = getString(R.string.tay_ui_text_message_copy)){
-    val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip = ClipData.newPlainText("label", text)
-    clipboard.setPrimaryClip(clip)
-    this.uiTayShowToast(message)
-}
-
-fun Context.uiTayOpenUrl(url : String){
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-    this.startActivity(intent)
-}
-
-
-fun uiTayPixelsToSp(context: Context,px: Float) = px / context.resources.displayMetrics.scaledDensity
-
-@SuppressLint("MissingPermission")
-fun Context?.uiTayIsConnected(): Boolean {
-    return this?.let {
-        val cm = it.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.getNetworkCapabilities(cm.activeNetwork)
-            ?.hasCapability((NetworkCapabilities.NET_CAPABILITY_INTERNET)) ?: false
-    } ?: false
-}
-
-fun Context?.uiTayIsAirplaneModeActive(): Boolean {
-    return this?.let {
-        return Settings.Global.getInt(it.contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
-    } ?: false
-
-}
-
-
-fun Activity.uiTayCheckIsTablet(): Boolean {
-
-    val metrics = DisplayMetrics()
-
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-        val display = this.display
-        display?.getRealMetrics(metrics)
-    } else {
-        @Suppress("DEPRECATION")
-        val display = this.windowManager.defaultDisplay
-        @Suppress("DEPRECATION")
-        display.getMetrics(metrics)
+fun AppCompatActivity.uiTaySetTopBarColor(color: Any) {
+    var bgColor = 0
+    when (color) {
+        is Int -> {
+            bgColor = ContextCompat.getColor(this, color)
+        }
+        is String -> {
+            bgColor = Color.parseColor(color)
+        }
     }
-
-    var isTablet = false
-    val widthInches: Float = metrics.widthPixels / metrics.xdpi
-    val heightInches: Float = metrics.heightPixels / metrics.ydpi
-    val diagonalInches =
-        sqrt(
-            widthInches.toDouble().pow(2.0) + heightInches.toDouble().pow(2.0)
-        )
-    if (diagonalInches >= 7.0) {
-        isTablet = true
-    }
-
-    return isTablet
+    this.window.statusBarColor = bgColor
+    this.uiTaySetTopBarTextColor(bgColor)
 }
 
-fun Activity.uiTayHideKeyboard() {
-    val inputMethodManager: InputMethodManager =
-        this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+fun AppCompatActivity.uiTaySetTopBarTextColor(color : Int){
+    val window = window
+    val decorView = window.decorView
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        decorView.windowInsetsController?.let {
+            val wic: WindowInsetsController = it
+            if (ColorUtils.calculateLuminance(color)> 0.5){
+                wic.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS)
+            }
+        }
+
+    } else  this.window.decorView.systemUiVisibility =
+        if (ColorUtils.calculateLuminance(color)> 0.5) View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR else 0
 }
 
-
-fun String.formatDecimal(): String {
-    return try {
-        val formatParse = NumberFormat.getInstance()
-        formatParse.maximumFractionDigits = 2
-        formatParse.minimumFractionDigits = 2
-        formatParse.format(this.toDouble())
-
-    } catch (e: Exception) {
-        "0.00"
+fun ViewPager2.uiTayRemoveOverScroll() {
+    apply {
+        (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
     }
 }
+
+
 
 
