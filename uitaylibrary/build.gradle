@@ -52,7 +52,7 @@ afterEvaluate{
                 url = uri("https://maven.pkg.github.com/montes8/TayLibrary")
                 credentials {
                     username = "montes8"
-                    password = "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"
+                    password = "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"
                 }
             }
         }
