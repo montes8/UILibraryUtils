@@ -103,4 +103,9 @@
     <dimen name="dim_tay_otp_bg_radius">10dp</dimen><!--radius background otp content-->
     <dimen name="dim_tay_otp_sp_text">16sp</dimen><!--size text otp_edit-->
 
+
+    <!-- resources UiTayRatingBar-->
+
+    <dimen name="dim_tay_rb_size">32dp</dimen><!--size icon-->
+
 </resources>

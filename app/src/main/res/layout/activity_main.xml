@@ -8,14 +8,17 @@
 
 
 
-<com.gb.vale.uitaylibrary.label.UiTayOtpCode
+<com.gb.vale.uitaylibrary.extra.UiTayRatingBar
     android:id="@+id/btnTest"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:uiTayOtpEnable="false"
     android:layout_width="match_parent"
+    app:uiTayRbNumStarts="5"
+    app:uiTayRbEnableSelected="true"
+    app:uiTayRbDimenSize="@dimen/dim_tay_48"
+    app:uiTayRbNumRangeSelected="2"
     android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

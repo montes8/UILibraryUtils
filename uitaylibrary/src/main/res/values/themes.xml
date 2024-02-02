@@ -210,4 +210,15 @@
         <attr name="uiTayOtpContentDescription" format="string" />
     </declare-styleable>
 
+
+    <declare-styleable name="UiTayRatingBar">
+        <attr name="uiTayRbNumStarts" format="integer" />
+        <attr name="uiTayRbNumRangeSelected" format="integer" />
+        <attr name="uiTayRbIconSelected" format="reference" />
+        <attr name="uiTayRbIconUnselected" format="reference" />
+        <attr name="uiTayRbDimenSize" format="dimension" />
+        <attr name="uiTayRbEnableSelected" format="boolean" />
+
+    </declare-styleable>
+
 </resources>
