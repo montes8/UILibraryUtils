@@ -7,9 +7,9 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 
 class UiTayCircleTextView(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
-    var strokeWidth = 0f
-    var strokeColor = 0
-    var solidColo = 0
+    private var strokeWidth = 0f
+    private var strokeColor = 0
+    private var solidColo = 0
 
     override fun draw(canvas: Canvas?) {
         val circlePaint = Paint()

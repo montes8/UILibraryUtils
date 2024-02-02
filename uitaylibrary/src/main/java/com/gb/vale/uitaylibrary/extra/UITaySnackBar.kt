@@ -27,7 +27,6 @@ class UITaySnackBar @JvmOverloads constructor(
     private var constraintSet = ConstraintSet()
     private var uiTayDuration = 2000L
     private var uiTayText = UI_TAY_EMPTY
-    private var uiTayTextColor = 0
 
     var uiTaySBText: String = UI_TAY_EMPTY
         set(value) {

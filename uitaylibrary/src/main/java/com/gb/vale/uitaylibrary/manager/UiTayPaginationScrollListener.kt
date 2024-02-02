@@ -3,7 +3,7 @@ package com.gb.vale.uitaylibrary.manager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class UiTayPaginationScrollListener(var layoutManager: LinearLayoutManager,var sizeItem : Int= 10) :
+abstract class UiTayPaginationScrollListener(private var layoutManager: LinearLayoutManager, private var sizeItem : Int= 10) :
     RecyclerView.OnScrollListener(){
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)

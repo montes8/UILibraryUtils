@@ -3,22 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
-
-
-<com.gb.vale.uitaylibrary.extra.UiTayRatingBar
-    android:id="@+id/btnTest"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_width="match_parent"
-    app:uiTayRbNumStarts="5"
-    app:uiTayRbEnableSelected="true"
-    app:uiTayRbDimenSize="@dimen/dim_tay_48"
-    app:uiTayRbNumRangeSelected="2"
-    android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

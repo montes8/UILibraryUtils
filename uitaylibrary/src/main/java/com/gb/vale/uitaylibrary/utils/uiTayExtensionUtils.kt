@@ -17,12 +17,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import com.gb.vale.uitaylibrary.R
-import com.gb.vale.uitaylibrary.model.UITayBaseGaneric
-import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import org.json.JSONObject
 import kotlin.math.pow
 import kotlin.math.sqrt
 
