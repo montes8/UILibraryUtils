@@ -3,12 +3,14 @@ package com.gb.vale.uitaylibrary.utils
 import android.app.NotificationManager
 import android.content.Context
 import android.net.wifi.WifiManager
+import android.text.InputFilter
 import java.math.BigInteger
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.UnknownHostException
 import java.nio.ByteOrder
 import java.util.Collections
+import java.util.regex.Pattern
 
 fun uiTayGetMobilIPAddress(): String {
     try {
@@ -79,3 +81,30 @@ fun Context.uiTayClearNotifications() {
     notificationManager.cancelAll()
 }
 
+
+
+val pattern: Pattern =
+    Pattern.compile("[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz]")
+
+val patternNumberAndLetter: Pattern =
+    Pattern.compile("[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789]")
+
+
+val patternNumber: Pattern =
+    Pattern.compile("[0123456789]")
+
+val uiTayFilterSpaces = InputFilter { source, _, _, _, _, _ ->
+    source.toString().filterNot { it.isWhitespace() }
+}
+
+val uiTayFilterOnlyLetter = InputFilter { source, _, _, _, _, _ ->
+    source.toString().filter { pattern.matcher(it.toString()).matches() }
+}
+
+val uiTayFilterOnlyLetterAndNumber = InputFilter { source, _, _, _, _, _ ->
+    source.toString().filter { patternNumberAndLetter.matcher(it.toString()).matches() }
+}
+
+val uiTayFilterOnlyNumbers = InputFilter { source, _, _, _, _, _ ->
+    source.toString().filter { patternNumber.matcher(it.toString()).matches() }
+}

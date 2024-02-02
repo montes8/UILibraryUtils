@@ -168,7 +168,7 @@ class UITayButton @JvmOverloads constructor(
 
     private fun configButton() {
         button.id = View.generateViewId()
-        val typeface = ResourcesCompat.getFont(context,R.font.montserrat_bold)
+        val typeface = ResourcesCompat.getFont(context,R.font.ui_tay_montserrat_bold)
         val layoutParamBtn = LayoutParams(LayoutParams.WRAP_CONTENT
             ,sizeHeight())
         button.setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeText().toFloat())

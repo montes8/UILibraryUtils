@@ -230,7 +230,7 @@ class UiTayEditLayout @JvmOverloads constructor(
 
 
     fun setEditActive(){
-        editText?.typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        editText?.typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         ediText.setTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_text_active))
         ediText.setHintTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_hint_text_active))
         this.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context,R.color.tay_edit_two_eyes_active)))
@@ -238,7 +238,7 @@ class UiTayEditLayout @JvmOverloads constructor(
     }
 
     fun setEditDefault(){
-        editText?.typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        editText?.typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         ediText.setTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_text_enable))
         ediText.setHintTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_hint_enable))
         this.setEndIconTintList(ColorStateList.valueOf(ContextCompat.getColor(context,R.color.tay_edit_two_eyes_enable)))
@@ -247,7 +247,7 @@ class UiTayEditLayout @JvmOverloads constructor(
     }
 
     fun setEditDisable(){
-        editText?.typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        editText?.typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         ediText.setTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_text_disable))
         ediText.setHintTextColor(ContextCompat.getColor(context, R.color.tay_edit_two_hint_text_disable))
         this.defaultHintTextColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.tay_edit_two_hint_enable))
@@ -258,7 +258,7 @@ class UiTayEditLayout @JvmOverloads constructor(
     private fun createEditLayout(editText: TextInputEditText) {
         val padding16 = context.resources.getDimensionPixelSize(R.dimen.dim_tay_16)
         if (!editText.isInEditMode)
-            editText.typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+            editText.typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         editText.ellipsize = TextUtils.TruncateAt.END
         with(editText) {
             setPadding(padding16, this.context.resources.getDimensionPixelOffset(

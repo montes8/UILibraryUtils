@@ -27,7 +27,7 @@ fun TextView.uiTaySetColouredSpanClick(
     block: () -> Unit
 ) {
     movementMethod = LinkMovementMethod.getInstance()
-    val fontBold = ResourcesCompat.getFont(this.context, R.font.montserrat_bold)
+    val fontBold = ResourcesCompat.getFont(this.context, R.font.ui_tay_montserrat_bold)
     val spannableString = SpannableString(text)
     val start = text.indexOf(word)
     val end = text.indexOf(word) + word.length
@@ -65,7 +65,7 @@ fun Context.uiTaySetSpanCustom(
     text: String,
     word: String
 ):SpannableString {
-    val fontBold = ResourcesCompat.getFont(this, R.font.montserrat_bold)
+    val fontBold = ResourcesCompat.getFont(this, R.font.ui_tay_montserrat_bold)
     val spannableString = SpannableString(text)
     val start = text.indexOf(word)
     val end = text.indexOf(word) + word.length

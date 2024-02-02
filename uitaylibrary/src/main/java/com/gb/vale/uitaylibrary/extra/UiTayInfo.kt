@@ -1,7 +1,6 @@
 package com.gb.vale.uitaylibrary.extra
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.util.AttributeSet
@@ -176,7 +175,7 @@ class UiTayInfo @JvmOverloads constructor(
             )
         )
 
-        val typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         textInfo.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
             this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_info_sp_text).toFloat()

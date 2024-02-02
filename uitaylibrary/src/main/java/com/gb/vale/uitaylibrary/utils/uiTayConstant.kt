@@ -1,6 +1,7 @@
 package com.gb.vale.uitaylibrary.utils
 
 const val UI_TAY_EMPTY = ""
+const val UI_TAY_DESCRIPTION_DEFAULT_EDIT = "0123456"
 const val UI_TAY_ERROR = "Ocurrio un error"
 
 const val UI_TAY_DIALOG_TITLE = "Cerrar sesión"

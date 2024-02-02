@@ -9,11 +9,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
-import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayDrawableStroke
 import com.gb.vale.uitaylibrary.utils.uiTayGone
 import com.gb.vale.uitaylibrary.utils.uiTayHandler
@@ -67,7 +65,7 @@ class UITaySnackBar @JvmOverloads constructor(
 
     private fun configView() {
         textSBar.id = View.generateViewId()
-        val typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         val layoutText = LayoutParams(
             LayoutParams.MATCH_PARENT,
             LayoutParams.WRAP_CONTENT

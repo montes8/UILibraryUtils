@@ -6,12 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.animation.fadeOneToZero
-import com.gb.vale.uitaylibrary.animation.fadeZeroToOne
-import com.gb.vale.uitaylibrary.animation.uiTayDoBounce
-import com.gb.vale.uitaylibrary.animation.uiTayDoBounceAnimation
-import com.gb.vale.uitaylibrary.utils.ModelTest
-import com.gb.vale.uitaylibrary.utils.uiTayJsonToObjet
-import com.gb.vale.uitaylibrary.utils.uiTayObjetToJson
+import com.gb.vale.uitaylibrary.label.UiTayOtpCode
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,10 +14,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var btn = findViewById<View>(R.id.btnTest)
-        btn.fadeOneToZero()
-        btn.setOnClickListener {
-
+        var btn = findViewById<UiTayOtpCode>(R.id.btnTest)
+        btn.uiTayOtpChangeListener = {
+            Log.d("otptay",it.first.toString())
+            Log.d("otptay",it.second.toString())
         }
 
     }

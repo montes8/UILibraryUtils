@@ -97,4 +97,10 @@
 
     <dimen name="dim_tay_tp_bg_radius">20dp</dimen><!--background radius content-->
 
+    <!-- resources UiTayOtpCode-->
+    <dimen name="dim_tay_otp_width">44dp</dimen><!--size width edit-->
+    <dimen name="dim_tay_otp_height">52dp</dimen><!--size height edit-->
+    <dimen name="dim_tay_otp_bg_radius">10dp</dimen><!--radius background otp content-->
+    <dimen name="dim_tay_otp_sp_text">16sp</dimen><!--size text otp_edit-->
+
 </resources>

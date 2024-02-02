@@ -14,9 +14,11 @@ import android.util.DisplayMetrics
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.model.UITayBaseGaneric
+import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -88,6 +90,11 @@ fun Activity.uiTayHideKeyboard() {
     val inputMethodManager: InputMethodManager =
         this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+}
+
+fun EditText.uiTayHideKeyboard(){
+    val im: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    im.hideSoftInputFromWindow(this.windowToken,0)
 }
 
 fun Context.uiTayShowToast(value : String){

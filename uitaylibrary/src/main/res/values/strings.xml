@@ -45,4 +45,8 @@
     <string name="ui_tay_no_maps">No tienes Google Maps instalado</string>
     <string name="ui_tay_maps_package">com.google.android.apps.maps</string>
     <string name="ui_tay_waze_package">com.waze</string>
+
+    <!-- resources UiTayOtpCode -->
+
+    <string name="ui_tay_otp_default_hint">000000</string>
 </resources>

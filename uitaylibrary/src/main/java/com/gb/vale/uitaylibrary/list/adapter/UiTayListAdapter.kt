@@ -56,7 +56,7 @@ class UiTayListAdapter(var onClickOption: ((Int) -> Unit)? = null) :
         }
 
         private fun configView() : ConstraintLayout.LayoutParams {
-            val typeface = ResourcesCompat.getFont(dataBinding.context,R.font.montserrat_medium)
+            val typeface = ResourcesCompat.getFont(dataBinding.context,R.font.ui_tay_montserrat_medium)
             dataBinding.typeface = typeface
             dataBinding.setTextColor(colorText())
             dataBinding.setTextSize(TypedValue.COMPLEX_UNIT_PX,

@@ -63,7 +63,7 @@
         <item name="errorIconTint">@color/tay_edit_two_error_info</item>
         <item name="boxStrokeErrorColor">@color/tay_edit_two_error_info</item>
         <item name="errorTextColor">@color/tay_edit_two_error_info</item>
-        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:fontFamily">@font/ui_tay_montserrat_medium</item>
         <item name="boxBackgroundColor">@drawable/ui_tay_bg_selector_edit_layout</item>
         <item name="colorControlNormal">@color/ui_tay_white</item>
         <item name="boxCornerRadiusTopStart">@dimen/dim_tay_edit_two_bg_radius</item>
@@ -79,11 +79,11 @@
 
     <style name="HintText" parent="@android:style/TextAppearance">
         <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:fontFamily">@font/ui_tay_montserrat_medium</item>
     </style>
 
     <style name="EditStyleGray" parent="Theme.AppCompat.Light">
-        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:fontFamily">@font/ui_tay_montserrat_medium</item>
         <item name="android:textColor">@color/tay_edit_two_text_enable</item>
         <item name="android:textColorHint">@color/tay_edit_two_hint_enable</item>
     </style>
@@ -197,5 +197,17 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowBackground">@color/ui_tay_dl_transparent</item>
     </style>
+
+    <declare-styleable name="UiTayOtpCode">
+        <attr name="uiTayOtpText" format="string" />
+        <attr name="uiTayOtpHint" format="string" />
+        <attr name="uiTayOtpError" format="boolean" />
+        <attr name="uiTayOtpEnable" format="boolean" />
+        <attr name="uiTayOtpFocusable" format="boolean" />
+        <attr name="uiTayOtpCursorVisible" format="boolean" />
+        <attr name="uiTayOtpSize" format="integer" />
+        <attr name="android:inputType" />
+        <attr name="uiTayOtpContentDescription" format="string" />
+    </declare-styleable>
 
 </resources>

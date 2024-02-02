@@ -25,10 +25,8 @@ import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.list.uiTayListSpinner
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
-import com.gb.vale.uitaylibrary.utils.uiTayBgBorder
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
-import com.google.android.material.textfield.TextInputLayout
 
 class UiTayEditBasic @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
@@ -357,7 +355,7 @@ class UiTayEditBasic @JvmOverloads constructor(
 
     private fun configView() {
         editLabel.id = View.generateViewId()
-        val typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         val layout = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         val layoutParamsEdit = LayoutParams(
             LayoutParams.MATCH_PARENT,
@@ -382,8 +380,8 @@ class UiTayEditBasic @JvmOverloads constructor(
     private fun configText() {
         val layoutText = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         val layoutTextM = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        val typeface = ResourcesCompat.getFont(context, R.font.montserrat_semi_bold)
-        val typefaceMessage = ResourcesCompat.getFont(context, R.font.montserrat_semi_bold)
+        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_semi_bold)
+        val typefaceMessage = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_semi_bold)
         textLabel.id = View.generateViewId()
         iconLabel.id = View.generateViewId()
         iconLabelStar.id = View.generateViewId()
@@ -550,7 +548,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     fun setTypeFaceTay() {
-        val typeface = ResourcesCompat.getFont(context, R.font.montserrat_medium)
+        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         editLabel.typeface = typeface
     }
 

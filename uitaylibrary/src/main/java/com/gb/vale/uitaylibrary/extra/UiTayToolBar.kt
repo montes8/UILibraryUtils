@@ -189,7 +189,7 @@ class UiTayToolBar @JvmOverloads constructor(
             LayoutParams.MATCH_PARENT,
             LayoutParams.WRAP_CONTENT
         )
-        val typeface = ResourcesCompat.getFont(context, R.font.montserrat_semi_bold)
+        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_semi_bold)
         val layoutText = LayoutParams(
             this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_0),
             LayoutParams.WRAP_CONTENT
