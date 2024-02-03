@@ -4,7 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url 'https://jitpack.io' }
-       // maven { url 'https://maven.google.com'}
+        maven { url 'https://maven.google.com'}
     }
 
 }
@@ -14,12 +14,12 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        //maven { url 'https://maven.google.com'}
+        maven { url 'https://maven.google.com'}
     }
 }
 
 
 rootProject.name = "TayLibrary"
 include(":app")
-include(":uitaylibrary")
+//include(":uitaylibrary")
 
