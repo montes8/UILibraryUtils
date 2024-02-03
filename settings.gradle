@@ -3,7 +3,12 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://jitpack.io'
+            credentials {
+                username = "montes8"
+                password = "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"
+            }
+        }
         maven { url 'https://maven.google.com'}
     }
 
@@ -13,7 +18,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://jitpack.io'
+            credentials {
+                username = "montes8"
+                password = "TOEKN"
+            }
+        }
         maven { url 'https://maven.google.com'}
     }
 }
