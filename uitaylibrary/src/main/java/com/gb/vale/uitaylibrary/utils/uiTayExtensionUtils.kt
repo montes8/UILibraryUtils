@@ -33,7 +33,7 @@ fun Context.uiTayOpenPdfUrl(url: String?,messageError:String = this.getString(R.
         val newUrl = "https://docs.google.com/viewer?url=$url"
         val webPage = Uri.parse(newUrl)
         val intent = Intent(Intent.ACTION_VIEW, webPage)
-        if (intent.resolveActivity((this ?: return).packageManager) != null) {
+        if (intent.resolveActivity(this.packageManager) != null) {
             this.startActivity(intent)
         }
     }

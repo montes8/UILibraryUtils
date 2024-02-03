@@ -59,7 +59,7 @@ fun String.uiTayStringToDate(format : String = "dd/MM/yyy"):Date{
     }
 }
 
-fun Date.uiTayDateToCalendar(format : String = "dd/MM/yyy"):Calendar{
+fun Date.uiTayDateToCalendar():Calendar{
     val cal = Calendar.getInstance()
     return try {
         cal.time = this
