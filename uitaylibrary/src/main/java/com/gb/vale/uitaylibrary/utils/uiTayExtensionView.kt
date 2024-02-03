@@ -6,6 +6,7 @@ import com.gb.vale.uitaylibrary.dialog.UiTayDialog
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayout
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayoutBlock
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModel
+import com.gb.vale.uitaylibrary.dialog.UiTayDialogModelCustom
 
 fun AppCompatActivity.showUiTayDialogLayout(
     layout: Int,
@@ -24,12 +25,13 @@ fun AppCompatActivity.showUiTayDialog(
     subTitle: String = UI_TAY_DIALOG_SUB_TITLE,
     buttonText: String = UI_TAY_DIALOG_ACCEPT, buttonCancelText: String = UI_TAY_DIALOG_CANCEL,
     btnCancel: Boolean = false, isCancel: Boolean = true,
+    styleCustom : UiTayDialogModelCustom = UiTayDialogModelCustom(),
     func: ((action: Boolean) -> Unit)? = null,
 ) {
     val model = UiTayDialogModel(
         image= image, title= title, subTitle= subTitle,
         buttonText=buttonText, buttonCancelText =buttonCancelText,
-         btnCancel=  btnCancel, isCancel = isCancel
+         btnCancel=  btnCancel, isCancel = isCancel,styleCustom = styleCustom
     )
     val dialog = UiTayDialog.newInstance(model)
     dialog.dialog?.setCancelable(model.isCancel)
