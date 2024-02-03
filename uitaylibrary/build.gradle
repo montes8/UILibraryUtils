@@ -6,8 +6,6 @@ plugins {
 }
 
 android {
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
     namespace 'com.gb.vale.uitaylibrary'
     compileSdk 33
 
@@ -52,7 +50,7 @@ afterEvaluate{
                 from components.release
                 groupId='com.github.montes8'
                 artifactId = 'uitaylibrary'
-                version = '0.1'
+                version = '1.0'
             }
         }
     }
