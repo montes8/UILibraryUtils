@@ -5,6 +5,7 @@ import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.R
@@ -58,7 +59,7 @@ class UiTayListAdapter(var onClickOption: ((Int) -> Unit)? = null) :
         private fun configView() : ConstraintLayout.LayoutParams {
             val typeface = ResourcesCompat.getFont(dataBinding.context,R.font.ui_tay_montserrat_medium)
             dataBinding.typeface = typeface
-            dataBinding.setTextColor(colorText())
+            dataBinding.setTextColor(ContextCompat.getColor(dataBinding.context,colorText()))
             dataBinding.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 dataBinding.context.resources.getDimensionPixelSize( R.dimen.dim_tay_sp_text_16).toFloat())
             val layoutCtn = ConstraintLayout.LayoutParams(

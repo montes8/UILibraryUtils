@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -22,7 +23,7 @@ class UiTayRatingBar @JvmOverloads constructor(
         ContextCompat.getDrawable(context, R.drawable.ui_tay_start_unselected)
     var onRatingBarSelectedListener: (Int) -> Unit = {}
     private var startSize: Int = context.resources.getDimensionPixelSize(R.dimen.dim_tay_rb_size)
-    private val images = arrayListOf<AppCompatImageView>()
+    private val images = arrayListOf<ImageView>()
     private var uiTayRbEnableSelected = false
 
     private var rateSelected: Int = -1
