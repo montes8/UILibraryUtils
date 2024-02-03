@@ -2,9 +2,6 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TayLibrary" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/tay_color_general</item>
-        <item name="colorAccent">@color/tay_color_general</item>
-        <item name="colorControlActivated">@color/tay_color_general</item>
     </style>
 
     <style name="Theme.TayLibrary" parent="Base.Theme.TayLibrary" />

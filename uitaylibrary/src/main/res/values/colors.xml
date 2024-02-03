@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
      <color name="ui_tay_black">#000000</color>
      <color name="ui_tay_white">#FFFFFF</color>
 
     <color name="ui_tay_gray">#B0BEC5</color>
 
     <color name="tay_color_general">#E91E63</color>
+
     <color name="ui_tay_transparent">@android:color/transparent</color>
     <color name="ui_tay_white_transparent">#CBFFFFFF</color>
 

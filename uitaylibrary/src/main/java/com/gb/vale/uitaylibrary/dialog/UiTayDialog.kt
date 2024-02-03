@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
@@ -301,16 +302,16 @@ data class UiTayDialogModelCustom(
     val imageClose: Int = R.drawable.ui_tay_ic_close,
     val contentRadius: Int = R.dimen.dim_tay_20,
     val uiTayPaddingContentHorizontal: Int = R.dimen.dim_tay_48,
-    val contentColorStroke: Int = R.color.ui_tay_white,
-    val contentColorSolid: Int = R.color.ui_tay_white,
-    val titleColor: Int = R.color.ui_tay_black,
-    val subTitleColor: Int = R.color.ui_tay_black,
-    val buttonTextAcceptColor: Int = R.color.ui_tay_white,
-    val buttonCancelTextColor: Int = R.color.tay_color_general,
-    val btnAcceptStrokeColor: Int = R.color.tay_color_general,
-    val btnAcceptSolidColor: Int = R.color.tay_color_general,
-    val btnCancelStrokeColor: Int = R.color.tay_color_general,
-    val btnCancelSolidColor: Int = R.color.ui_tay_white,
+    @ColorRes val contentColorStroke: Int = R.color.ui_tay_white,
+    @ColorRes val contentColorSolid: Int = R.color.ui_tay_white,
+    @ColorRes val titleColor: Int = R.color.ui_tay_black,
+    @ColorRes val subTitleColor: Int = R.color.ui_tay_black,
+    @ColorRes val buttonTextAcceptColor: Int = R.color.ui_tay_white,
+    @ColorRes val buttonCancelTextColor: Int = R.color.tay_color_general,
+    @ColorRes val btnAcceptStrokeColor: Int = R.color.tay_color_general,
+    @ColorRes val btnAcceptSolidColor: Int = R.color.tay_color_general,
+    @ColorRes val btnCancelStrokeColor: Int = R.color.tay_color_general,
+    @ColorRes val btnCancelSolidColor: Int = R.color.ui_tay_white,
     val btnRadius: Int = R.dimen.dim_tay_28,
     val titleFont: Int = R.font.ui_tay_montserrat_semi_bold,
     val subTitleFont: Int = R.font.ui_tay_montserrat_medium,
