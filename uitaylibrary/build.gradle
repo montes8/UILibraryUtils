@@ -49,8 +49,8 @@ afterEvaluate{
             release(MavenPublication){
                 from components.release
                 groupId='com.github.montes8'
-                artifactId = 'ui-tay-library'
-                version = '1.0'
+                artifactId = 'uitaylibrary'
+                version = '1.2'
             }
         }
     }
