@@ -52,7 +52,7 @@ afterEvaluate{
                 from components.release
                 groupId='com.github.montes8'
                 artifactId = 'uitaylibrary'
-                version = '1.0'
+                version = '0.1'
             }
         }
     }
