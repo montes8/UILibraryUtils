@@ -227,6 +227,21 @@ fun Context.showUiTayHour(actionTime: ((String) -> Unit)? = null){
     timePickerDialog.show()
 }
 
+fun millisecondToDate(t: Long): String {
+    var i = t
+    i /= 1000 /*from   ww w .  j  a v  a  2  s .co  m*/
+    var minute = i / 60
+    val hour = minute / 60
+    val second = i % 60
+    minute %= 60
+    return if (hour <= 0) String.format(
+        Locale.getDefault(), "%02d:%02d", minute,
+        second
+    ) else String.format(
+        Locale.getDefault(), "%02d:%02d:%02d",
+        hour, minute, second
+    )
+}
 
 fun Context.showUiTayHourSpinner(actionTime: ((String) -> Unit)? = null){
     val c = Calendar.getInstance()
