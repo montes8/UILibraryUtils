@@ -2,6 +2,7 @@ package com.gb.vale.uitaylibrary.label
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputType
@@ -192,11 +193,12 @@ class UiTayEditBasic @JvmOverloads constructor(
             if (uiTayBasicPass){
                 visibilityIconEnd = value != null
                 value?.let {
+                    uiTayIconPassActive = it
                     iconLabel.uiTayVisibility(true)
                     setUIIconDrawable(
                         it, iconLabel
                     )
-                    uiTayIconPassActive = it
+
                 } ?: iconLabel.uiTayVisibility(false)
             }
         }
@@ -209,6 +211,15 @@ class UiTayEditBasic @JvmOverloads constructor(
                     uiTayIconPassInactive = it
                 }
             }
+        }
+
+    var uiTayColorPassEnable: Boolean =  false
+        set(value) {
+            field = value
+            if (uiTayBasicPass){
+                iconLabel.setColorFilter(
+                    ContextCompat.getColor(context, R.color.tay_edit_eyes_pass),PorterDuff.Mode.SRC_IN
+                )  }
         }
 
     private fun setUIIconDrawable(icon: Drawable, view: ImageView) {
@@ -287,6 +298,7 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayPasswordEnabled = it.getBoolean(R.styleable.UiTayEditBasic_uiTayPasswordEnabled, false)
             uiTayIconPasswordActive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordActive)?:uiTayIconPassActive
             uiTayIconPasswordInactive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordInactive)?:uiTayIconPassInactive
+            uiTayColorPassEnable =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorPassEnable, false)
         }
         attributeSet.recycle()
     }

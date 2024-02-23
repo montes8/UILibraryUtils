@@ -32,6 +32,7 @@
         <attr name="uiTayPasswordEnabled" format="boolean" />
         <attr name="uiTayIconPasswordActive" format="reference" />
         <attr name="uiTayIconPasswordInactive" format="reference" />
+        <attr name="uiTayColorPassEnable" format="boolean" />
     </declare-styleable>
 
 
