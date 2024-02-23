@@ -11,7 +11,7 @@ class UiTayDialogLayout(
     private val layout: Int,
     private var block: UiTayDialogLayoutBlock = null) :
     DialogFragment() {
-    private lateinit var uiTayView: View
+    lateinit var uiTayView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
