@@ -410,11 +410,11 @@ class UiTayEditBasic @JvmOverloads constructor(
         )
         val layoutIcon = LayoutParams(sizeIcon(), sizeIcon())
         layoutIcon.setMargins(
-            0, 0, this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_20), 0
+            0, 0, this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end), 0
         )
         val layoutIconStart = LayoutParams(sizeIcon(), sizeIcon())
         layoutIconStart.setMargins(
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_20), 0, 0, 0
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end), 0, 0, 0
         )
         iconLabel.layoutParams = layoutIcon
         iconLabelStar.layoutParams = layoutIconStart

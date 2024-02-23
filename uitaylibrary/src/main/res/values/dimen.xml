@@ -33,6 +33,7 @@
 
     <!-- resources edit basic-->
 
+    <dimen name="dim_tay_edit_basic_padding_start_end">16dp</dimen><!--margin above the edit to the title-->
     <dimen name="dim_tay_edit_basic_padding_top_button">12dp</dimen><!--margin above the edit to the title-->
     <dimen name="dim_tay_edit_basic_icon">24dp</dimen><!--margin above the edit to the title-->
     <dimen name="dim_tay_bg_edit_basic_radius">28dp</dimen><!--icon size-->
