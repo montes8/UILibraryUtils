@@ -285,7 +285,7 @@ class UiTayEditBasic @JvmOverloads constructor(
                 it.getBoolean(R.styleable.UiTayEditBasic_uiTayVisibilityInfo, false)
             uiTayListBottom = it.getBoolean(R.styleable.UiTayEditBasic_uiTayListBottom, true)
             uiTayPasswordEnabled = it.getBoolean(R.styleable.UiTayEditBasic_uiTayPasswordEnabled, false)
-            uiTayIconPasswordActive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayLabelIconEditStart)?:uiTayIconPassActive
+            uiTayIconPasswordActive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordActive)?:uiTayIconPassActive
             uiTayIconPasswordInactive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordInactive)?:uiTayIconPassInactive
         }
         attributeSet.recycle()
