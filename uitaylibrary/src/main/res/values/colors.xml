@@ -64,6 +64,8 @@
     <color name="tay_edit_icon_active">#C2185B</color><!--active icon color-->
     <color name="tay_edit_text_info_active">#C2185B</color><!--active info color-->
 
+    <color name="tay_title_color_spannable">#C2185B</color><!--active edit color-->
+
     <color name="tay_edit_eyes_pass">#E91E63</color><!--active password type icon color-->
 
     <color name="tay_edit_error_info">#FF1744</color><!--state error color-->

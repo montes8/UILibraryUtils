@@ -27,6 +27,8 @@ import com.gb.vale.uitaylibrary.list.uiTayListSpinner
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
+import com.gb.vale.uitaylibrary.utils.uiTaySetColouredSpan
+import com.gb.vale.uitaylibrary.utils.uiTaySetColouredSpanClick
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
 class UiTayEditBasic @JvmOverloads constructor(
@@ -52,6 +54,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     private var ctnList: LinearLayout? = null
     private var uiTayBasicPass = false
     private var uiTayChecked = false
+    private var uiTayTextNewColor = "*"
     private var uiTayIconPassActive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
     private var uiTayIconPassInactive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
 
@@ -222,6 +225,21 @@ class UiTayEditBasic @JvmOverloads constructor(
                 )  }
         }
 
+    var uiTayTextColor : String = uiTayTextNewColor
+        set(value) {
+            field = value
+            uiTayTextNewColor = value
+        }
+    var uiTayAsterisk: Boolean =  false
+        set(value) {
+            field = value
+            if (value){
+                val textNew = "${textLabel.text}$uiTayTextNewColor"
+                textLabel.text = textNew
+                textLabel.uiTaySetColouredSpan(uiTayTextNewColor, R.color.tay_title_color_spannable)
+             }
+        }
+
     private fun setUIIconDrawable(icon: Drawable, view: ImageView) {
         view.setImageDrawable(icon)
     }
@@ -299,6 +317,8 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayIconPasswordActive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordActive)?:uiTayIconPassActive
             uiTayIconPasswordInactive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordInactive)?:uiTayIconPassInactive
             uiTayColorPassEnable =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorPassEnable, false)
+            uiTayTextColor = it.getString(R.styleable.UiTayEditBasic_uiTayTextColor) ?: uiTayTextNewColor
+            uiTayAsterisk =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayAsterisk, false)
         }
         attributeSet.recycle()
     }

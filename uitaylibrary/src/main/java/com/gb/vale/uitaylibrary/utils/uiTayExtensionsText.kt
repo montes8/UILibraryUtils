@@ -3,11 +3,13 @@ package com.gb.vale.uitaylibrary.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.InputFilter
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.EditText
@@ -54,18 +56,34 @@ fun TextView.uiTaySetColouredSpanClick(
 
 }
 
+fun TextView.uiTaySetColouredSpan(
+    word: String,
+    color: Int = R.color.tay_color_general
+) {
+    val spannableString = SpannableString(text)
+    val start = text.indexOf(word)
+    val end = text.indexOf(word) + word.length
+    try {
+        spannableString.setSpan(ForegroundColorSpan(ContextCompat.getColor(this.context,color)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        text = spannableString
+    } catch (e: IndexOutOfBoundsException) {
+        println("'$word' was not not found in TextView text")
+    }
+
+}
+
 fun TextView.uiTaySetSpanCustom(
     text: String,
-    word: String
+    word: String,typeFont : Int = R.font.ui_tay_montserrat_bold
 ) {
-    this.text = this.context.uiTaySetSpanCustom(text,word)
+    this.text = this.context.uiTaySetSpanCustom(text,word,typeFont)
 }
 
 fun Context.uiTaySetSpanCustom(
     text: String,
-    word: String
+    word: String, typeFont : Int = R.font.ui_tay_montserrat_bold
 ):SpannableString {
-    val fontBold = ResourcesCompat.getFont(this, R.font.ui_tay_montserrat_bold)
+    val fontBold = ResourcesCompat.getFont(this, typeFont)
     val spannableString = SpannableString(text)
     val start = text.indexOf(word)
     val end = text.indexOf(word) + word.length
@@ -76,6 +94,8 @@ fun Context.uiTaySetSpanCustom(
         SpannableString(UI_TAY_EMPTY)
     }
 }
+
+
 
 fun String.validateEmail() : Boolean{
     val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
