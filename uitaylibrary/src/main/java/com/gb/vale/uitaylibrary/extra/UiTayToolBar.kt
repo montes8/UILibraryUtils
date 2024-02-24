@@ -203,8 +203,8 @@ class UiTayToolBar @JvmOverloads constructor(
         textToolBar.setPadding(
             this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_start_end),
             this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_top_bottom),
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_top_bottom),
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_start_end)
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_start_end),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_top_bottom)
         )
         textToolBar.layoutParams = layoutText
         this.addView(textToolBar)
