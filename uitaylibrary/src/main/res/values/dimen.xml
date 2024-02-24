@@ -49,6 +49,9 @@
     <dimen name="dim_ui_tay_list_max_height">220dp</dimen><!--max height listing-->
     <dimen name="dim_ui_tay_list_padding_top_bottom">18dp</dimen><!--padding top and bottom listing-->
     <dimen name="dim_ui_tay_list_margin_top_bottom">12dp</dimen><!--margin top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_padding_top_bottom">12dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_padding_star_end">20dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_text_size">16sp</dimen><!--padding top and bottom listing-->
 
 
 
