@@ -112,6 +112,11 @@
             <enum name="UI_TAY_ICON_END" value="2"/>
             <enum name="UI_TAY_ICON_TWO" value="3"/>
         </attr>
+        <attr name="uiTayStyleGravityTb" format="enum" >
+            <enum name="TB_CENTER" value="0"/>
+            <enum name="TB_STAR" value="1"/>
+            <enum name="TB_END" value="2"/>
+        </attr>
     </declare-styleable>
 
 

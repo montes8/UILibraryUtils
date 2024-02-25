@@ -33,7 +33,8 @@ class UiTayToolBar @JvmOverloads constructor(
     private var constraintSet = ConstraintSet()
     private var maxProgress = 0
     private var currentProgress = 0
-    private var uiTayIconColorDefault= true
+    private var uiTayIconColorDefault = true
+    private var uiTayGravityTb = UITayStyleGravityTb.TB_CENTER
 
     var uiTayTextTb: String = UI_TAY_EMPTY
         set(value) {
@@ -47,6 +48,13 @@ class UiTayToolBar @JvmOverloads constructor(
         set(value) {
             field = value
             configStyleIcon(value)
+        }
+
+
+    var uiTayStyleGravityTb : UITayStyleGravityTb = UITayStyleGravityTb.TB_CENTER
+        set(value) {
+            field = value
+            uiTayGravityTb = value
         }
 
     private fun configStyleIcon(style: UITayStyleTbIcon) {
@@ -126,17 +134,24 @@ class UiTayToolBar @JvmOverloads constructor(
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UiTayToolBar)
         attributeSet.let {
-            uiTayTbIconColorDefault = it.getBoolean(R.styleable.UiTayToolBar_uiTayTbIconColorDefault, true)
+            uiTayStyleGravityTb = UITayStyleGravityTb.values()[it.getInt(
+                R.styleable.UiTayToolBar_uiTayStyleGravityTb,
+                0
+            )]
+            uiTayTbIconColorDefault =
+                it.getBoolean(R.styleable.UiTayToolBar_uiTayTbIconColorDefault, true)
             uiTayTextTb = it.getString(R.styleable.UiTayToolBar_uiTayTextTb)
                 ?: this.context.resources.getString(R.string.tay_ui_text_title_toolbar)
             uiTayIconStartTb =
-                it.getDrawable(R.styleable.UiTayToolBar_uiTayIconStartTb) ?: ContextCompat.getDrawable(
-                    this.context, R.drawable.ui_tay_ic_back
-                )
+                it.getDrawable(R.styleable.UiTayToolBar_uiTayIconStartTb)
+                    ?: ContextCompat.getDrawable(
+                        this.context, R.drawable.ui_tay_ic_back
+                    )
             uiTayIconEndTb =
-                it.getDrawable(R.styleable.UiTayToolBar_uiTayIconEndTb) ?: ContextCompat.getDrawable(
-                    this.context, R.drawable.ui_tay_ic_menu
-                )
+                it.getDrawable(R.styleable.UiTayToolBar_uiTayIconEndTb)
+                    ?: ContextCompat.getDrawable(
+                        this.context, R.drawable.ui_tay_ic_menu
+                    )
             uiTayStyleTbIcon =
                 UITayStyleTbIcon.values()[it.getInt(R.styleable.UiTayToolBar_uiTayStyleTbIcon, 1)]
             uiTayTbIndicator = it.getBoolean(R.styleable.UiTayToolBar_uiTayTbIndicator, false)
@@ -148,28 +163,29 @@ class UiTayToolBar @JvmOverloads constructor(
 
     private fun configStyleInit() {
         this.uiTayBgBorder(
-            R.color.tay_toolbar_solid ,R.dimen.dim_tay_0
+            R.color.tay_toolbar_solid, R.dimen.dim_tay_0
         )
-       if (uiTayIconColorDefault) imgTbStart.setColorFilter(
+        if (uiTayIconColorDefault) imgTbStart.setColorFilter(
             ContextCompat.getColor(
                 context,
                 R.color.tay_toolbar_icon_start
             ),
             PorterDuff.Mode.SRC_IN
         )
-       if (uiTayIconColorDefault) imgTbEnd.setColorFilter(
+        if (uiTayIconColorDefault) imgTbEnd.setColorFilter(
             ContextCompat.getColor(
                 context,
-                 R.color.tay_toolbar_icon_end
+                R.color.tay_toolbar_icon_end
             ),
             PorterDuff.Mode.SRC_IN
         )
         textToolBar.setTextColor(
             this.context.resources.getColor(
-                    R.color.tay_toolbar_text, null
+                R.color.tay_toolbar_text, null
             )
         )
     }
+
     fun setOnClickTayBackListener(time: Long = 700, listener: UiTayBackListener) {
         imgTbStart.setOnClickUiTayDelay(time) {
             listener.onClick(this)
@@ -198,7 +214,7 @@ class UiTayToolBar @JvmOverloads constructor(
             TypedValue.COMPLEX_UNIT_PX,
             this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_toolbar_sp_text).toFloat()
         )
-        textToolBar.gravity = Gravity.CENTER
+        textToolBar.gravity = configGravity()
         textToolBar.typeface = typeface
         textToolBar.setPadding(
             this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_toolbar_padding_start_end),
@@ -213,6 +229,11 @@ class UiTayToolBar @JvmOverloads constructor(
         configProgress()
         this.layoutParams = layoutParam
         configStyleInit()
+    }
+    private fun configGravity()=when(uiTayGravityTb){
+        UITayStyleGravityTb.TB_CENTER -> Gravity.CENTER
+            UITayStyleGravityTb.TB_STAR -> Gravity.START
+            else -> Gravity.END
     }
 
     private fun configIconStart() {
@@ -359,7 +380,7 @@ class UiTayToolBar @JvmOverloads constructor(
     }
 
 
-    fun setUpdateStyle(bg : Drawable,iconStart : Int,iconEnd : Int,textColor : Int){
+    fun setUpdateStyle(bg: Drawable, iconStart: Int, iconEnd: Int, textColor: Int) {
         this.background = bg
         imgTbStart.setColorFilter(
             ContextCompat.getColor(
@@ -377,7 +398,7 @@ class UiTayToolBar @JvmOverloads constructor(
         )
         textToolBar.setTextColor(
             this.context.resources.getColor(
-                textColor,null
+                textColor, null
             )
         )
     }
@@ -396,4 +417,10 @@ enum class UITayStyleTbIcon(var code: Int) {
     UI_TAY_ICON_START(1),
     UI_TAY_ICON_END(2),
     UI_TAY_ICON_TWO(3)
+}
+
+enum class UITayStyleGravityTb(var code: Int) {
+    TB_CENTER(0),
+    TB_STAR(1),
+    TB_END(2)
 }

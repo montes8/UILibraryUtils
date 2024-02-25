@@ -27,7 +27,7 @@ fun Long.uiTayFormatLongToDate():Date{
 
 /** convert a date to a text in stable date format*/
 @SuppressLint("SimpleDateFormat")
-fun String.uiTayFormatDateStrint(formatInit:String = "dd/MM/yy", formatEnd:String = "MMMM yyyy"):String{
+fun String.uiTayFormatDateStrint(formatInit:String = "dd/MM/yyyy", formatEnd:String = "MMMM yyyy"):String{
     val formatCurrent = SimpleDateFormat(formatInit)
     val dateCurrent = formatCurrent.parse(this)
     val formatUpdate = SimpleDateFormat(formatEnd)
@@ -36,7 +36,7 @@ fun String.uiTayFormatDateStrint(formatInit:String = "dd/MM/yy", formatEnd:Strin
 
 
 /** convert a string to a calendar*/
-fun String.uiTayStringToCalendar(format : String = "dd/MM/yyy"):Calendar{
+fun String.uiTayStringToCalendar(format : String = "dd/MM/yyyy"):Calendar{
     val cal = Calendar.getInstance()
     val sdf = SimpleDateFormat(format, Locale.getDefault())
     return try {
@@ -49,7 +49,7 @@ fun String.uiTayStringToCalendar(format : String = "dd/MM/yyy"):Calendar{
 
 }
 
-fun String.uiTayStringToDate(format : String = "dd/MM/yyy"):Date{
+fun String.uiTayStringToDate(format : String = "dd/MM/yyyy"):Date{
     val sdf = SimpleDateFormat(format, Locale.getDefault())
     return try {
          sdf.parse(this)?:Date()
@@ -71,7 +71,7 @@ fun Date.uiTayDateToCalendar():Calendar{
 
 }
 
-fun Date.uiTayDateToString(format : String = "dd/MM/yyy"):String{
+fun Date.uiTayDateToString(format : String = "dd/MM/yyyy"):String{
     return try {
         val sdf = SimpleDateFormat(format, Locale.getDefault())
         sdf.format(this)
@@ -82,7 +82,7 @@ fun Date.uiTayDateToString(format : String = "dd/MM/yyy"):String{
 }
 
 
-fun Calendar.uiTayCalendarToString(format : String = "dd/MM/yyy"):String{
+fun Calendar.uiTayCalendarToString(format : String = "dd/MM/yyyy"):String{
     val sdf = SimpleDateFormat(format, Locale.getDefault())
     return try {
         sdf.format(this.time)
@@ -115,7 +115,7 @@ fun uiTayGetInitEndMonths(calendar : Calendar?=null,formatCurrent: String = "dd/
 
 /**calculate the days between two dates*/
 @SuppressLint("SimpleDateFormat")
-fun uiTayGetRangeDaysDate(start : String,end : String,format: String = "dd/MM/yyy"):Long {
+fun uiTayGetRangeDaysDate(start : String,end : String,format: String = "dd/MM/yyyy"):Long {
     try {
         val dateFormat = SimpleDateFormat(format)
         var dateInit: Date? = null
