@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowInsetsController
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import androidx.appcompat.app.AppCompatActivity
@@ -191,6 +192,23 @@ fun View.uiTaySetLayoutParams(width: Int? = null, height: Int? = null) {
     val layoutParams = layoutParams
     layoutParams.height = height ?: resources.getDimensionPixelSize(R.dimen.dim_tay_0)
     layoutParams.width = width ?: resources.getDimensionPixelSize(R.dimen.dim_tay_0)
+}
+
+fun View.uiTayMargins(
+    left: Int? = null,
+    top: Int? = null,
+    right: Int? = null,
+    bottom: Int? = null
+) {
+    val lp = layoutParams as? ViewGroup.MarginLayoutParams ?: return
+    lp.setMargins(
+        left ?: lp.leftMargin,
+        top ?: lp.topMargin,
+        right ?: lp.rightMargin,
+        bottom ?: lp.bottomMargin
+    )
+
+    layoutParams = lp
 }
 
 
