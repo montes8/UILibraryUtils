@@ -35,7 +35,7 @@
         <attr name="uiTayColorPassEnable" format="boolean" />
         <attr name="uiTayTextColor" format="string" />
         <attr name="uiTayAsterisk" format="boolean" />
-        <attr name="uiTayCopyPage" format="boolean" />
+        <attr name="uiTayCopyPaste" format="boolean" />
     </declare-styleable>
 
 
@@ -55,7 +55,7 @@
             <attr name="uiTayLListBottom" format="boolean" />
             <attr name="android:inputType" />
             <attr name="android:imeOptions" />
-            <attr name="uiTayLCopyPage" format="boolean" />
+            <attr name="uiTayLCopyPaste" format="boolean" />
         </declare-styleable>
 
 

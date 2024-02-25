@@ -41,12 +41,12 @@ class UiTayEditLayout @JvmOverloads constructor(
     private var positionSelectedLayout = -1
     private var ctnLayoutList: LinearLayout? = null
     private var typeBottomLayout = true
-    private var uiTayEnableCopyPage = false
+    private var uiTayEnableCopyPaste = false
 
-    var uiTayLCopyPage : Boolean = true
+    var uiTayLCopyPaste : Boolean = true
         set(value) {
             field = value
-            uiTayEnableCopyPage = value
+            uiTayEnableCopyPaste = value
         }
 
 
@@ -206,7 +206,7 @@ class UiTayEditLayout @JvmOverloads constructor(
     }
 
     private fun setUpView(){
-        if (!uiTayEnableCopyPage){
+        if (!uiTayEnableCopyPaste){
             ediText.customSelectionActionModeCallback = object : android.view.ActionMode.Callback {
                 override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
                     return false
@@ -259,7 +259,7 @@ class UiTayEditLayout @JvmOverloads constructor(
             uiTayLHint = it.getString(R.styleable.UiTayEditLayout_uiTayLHint) ?: context.getString(R.string.tay_ui_text_hint_edit_two)
             uiTayLEnable = it.getBoolean(R.styleable.UiTayEditLayout_uiTayLEnabled, true)
             uiTayLListBottom = it.getBoolean(R.styleable.UiTayEditLayout_uiTayLListBottom, true)
-            uiTayLCopyPage =  it.getBoolean(R.styleable.UiTayEditLayout_uiTayLCopyPage, true)
+            uiTayLCopyPaste =  it.getBoolean(R.styleable.UiTayEditLayout_uiTayLCopyPaste, true)
 
         }
         attributeSet.recycle()

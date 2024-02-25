@@ -56,7 +56,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     private var ctnList: LinearLayout? = null
     private var uiTayBasicPass = false
     private var uiTayChecked = false
-    private var uiTayEnableCopyPage = false
+    private var uiTayEnableCopyPaste = false
     private var uiTayTextNewColor = "*"
     private var uiTayIconPassActive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
     private var uiTayIconPassInactive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
@@ -234,10 +234,10 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayTextNewColor = value
         }
 
-    var uiTayCopyPage : Boolean = true
+    var uiTayCopyPaste : Boolean = true
         set(value) {
             field = value
-            uiTayEnableCopyPage = value
+            uiTayEnableCopyPaste = value
         }
 
 
@@ -294,7 +294,7 @@ class UiTayEditBasic @JvmOverloads constructor(
             }
         }
 
-        if (!uiTayEnableCopyPage){
+        if (!uiTayEnableCopyPaste){
             editLabel.customSelectionActionModeCallback = object : android.view.ActionMode.Callback {
                 override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
                     return false
@@ -353,7 +353,7 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayColorPassEnable =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorPassEnable, false)
             uiTayTextColor = it.getString(R.styleable.UiTayEditBasic_uiTayTextColor) ?: uiTayTextNewColor
             uiTayAsterisk =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayAsterisk, false)
-            uiTayCopyPage =  it.getBoolean(R.styleable.UiTayEditBasic_uiTayCopyPage, true)
+            uiTayCopyPaste =  it.getBoolean(R.styleable.UiTayEditBasic_uiTayCopyPaste, true)
         }
         attributeSet.recycle()
     }
