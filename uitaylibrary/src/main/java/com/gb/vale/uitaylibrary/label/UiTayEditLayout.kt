@@ -9,6 +9,8 @@ import android.text.InputType
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
@@ -39,6 +41,14 @@ class UiTayEditLayout @JvmOverloads constructor(
     private var positionSelectedLayout = -1
     private var ctnLayoutList: LinearLayout? = null
     private var typeBottomLayout = true
+    private var uiTayEnableCopyPage = false
+
+    var uiTayLCopyPage : Boolean = true
+        set(value) {
+            field = value
+            uiTayEnableCopyPage = value
+        }
+
 
     var uiTayLHint: String = UI_TAY_EMPTY
         set(value) {
@@ -192,6 +202,32 @@ class UiTayEditLayout @JvmOverloads constructor(
         initV1()
         loadAttributes()
         setImageEndIcon()
+        setUpView()
+    }
+
+    private fun setUpView(){
+        if (!uiTayEnableCopyPage){
+            ediText.customSelectionActionModeCallback = object : android.view.ActionMode.Callback {
+                override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+                    return false
+                }
+
+                override fun onPrepareActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+                    return false
+                }
+
+                override fun onActionItemClicked(
+                    mode: android.view.ActionMode?,
+                    item: MenuItem?
+                ): Boolean {
+                    return false
+                }
+
+                override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+                }
+
+            }
+        }
     }
 
     private fun initV1() {
@@ -223,6 +259,7 @@ class UiTayEditLayout @JvmOverloads constructor(
             uiTayLHint = it.getString(R.styleable.UiTayEditLayout_uiTayLHint) ?: context.getString(R.string.tay_ui_text_hint_edit_two)
             uiTayLEnable = it.getBoolean(R.styleable.UiTayEditLayout_uiTayLEnabled, true)
             uiTayLListBottom = it.getBoolean(R.styleable.UiTayEditLayout_uiTayLListBottom, true)
+            uiTayLCopyPage =  it.getBoolean(R.styleable.UiTayEditLayout_uiTayLCopyPage, true)
 
         }
         attributeSet.recycle()

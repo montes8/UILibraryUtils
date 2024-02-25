@@ -11,6 +11,8 @@ import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -28,8 +30,8 @@ import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTaySetColouredSpan
-import com.gb.vale.uitaylibrary.utils.uiTaySetColouredSpanClick
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
+
 
 class UiTayEditBasic @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
@@ -54,6 +56,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     private var ctnList: LinearLayout? = null
     private var uiTayBasicPass = false
     private var uiTayChecked = false
+    private var uiTayEnableCopyPage = false
     private var uiTayTextNewColor = "*"
     private var uiTayIconPassActive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
     private var uiTayIconPassInactive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
@@ -230,6 +233,14 @@ class UiTayEditBasic @JvmOverloads constructor(
             field = value
             uiTayTextNewColor = value
         }
+
+    var uiTayCopyPage : Boolean = true
+        set(value) {
+            field = value
+            uiTayEnableCopyPage = value
+        }
+
+
     var uiTayAsterisk: Boolean =  false
         set(value) {
             field = value
@@ -282,6 +293,29 @@ class UiTayEditBasic @JvmOverloads constructor(
                 uiTayChecked = !uiTayChecked
             }
         }
+
+        if (!uiTayEnableCopyPage){
+            editLabel.customSelectionActionModeCallback = object : android.view.ActionMode.Callback {
+                override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+                    return false
+                }
+
+                override fun onPrepareActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+                    return false
+                }
+
+                override fun onActionItemClicked(
+                    mode: android.view.ActionMode?,
+                    item: MenuItem?
+                ): Boolean {
+                    return false
+                }
+
+                override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+                }
+
+            }
+        }
     }
 
     private fun loadAttributes() {
@@ -319,6 +353,7 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayColorPassEnable =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorPassEnable, false)
             uiTayTextColor = it.getString(R.styleable.UiTayEditBasic_uiTayTextColor) ?: uiTayTextNewColor
             uiTayAsterisk =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayAsterisk, false)
+            uiTayCopyPage =  it.getBoolean(R.styleable.UiTayEditBasic_uiTayCopyPage, true)
         }
         attributeSet.recycle()
     }
@@ -619,7 +654,12 @@ class UiTayEditBasic @JvmOverloads constructor(
         }
     }
 
+
+
+
+
 }
+
 
 fun interface TayEditBasicKeyCode {
     fun onCodeClick(code : Int)
