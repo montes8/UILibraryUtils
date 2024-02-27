@@ -53,7 +53,26 @@
     <dimen name="dim_ui_tay_list_item_padding_star_end">20dp</dimen><!--padding top and bottom listing-->
     <dimen name="dim_ui_tay_list_item_text_size">16sp</dimen><!--padding top and bottom listing-->
 
+    <!-- resources uiTayListSpinner custom-->
+    <dimen name="dim_ui_tay_list_padding_top_bottom_title_custom">2dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_margin_top_bottom_custom">20dp</dimen><!--margin top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_padding_top_bottom_custom">0dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_padding_star_end_custom">20dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_title_size_custom">12sp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_text_size_custom">12sp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_line_size">1sp</dimen><!--size line height-->
+    <dimen name="dim_ui_tay_list_max_height_custom">220dp</dimen><!--max height listing-->
 
+    <!-- resources uiTayListSpinner Menu-->
+    <dimen name="dim_ui_tay_list_menu_min_height">43dp</dimen>
+    <dimen name="dim_ui_tay_list_menu_min_width">205dp</dimen>
+    <dimen name="dim_tay_bg_ui_tay_list_radius_menu">8dp</dimen><!--listing background radius-->
+    <dimen name="dim_ui_tay_list_padding_top_bottom_menu">8dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_margin_top_bottom_menu">8dp</dimen><!--margin top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_padding_top_bottom_menu">4dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_padding_star_end_menu">8dp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_item_text_size_menu">12sp</dimen><!--padding top and bottom listing-->
+    <dimen name="dim_ui_tay_list_menu_drawable_padding_menu">4dp</dimen><!--padding top and bottom listing-->
 
     <!-- resources edit layout-->
     <dimen name="dim_tay_edit_two_bg_radius">28dp</dimen><!--background radius-->

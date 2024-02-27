@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dim_ui_tay_list_item_padding_star_end_custom"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/uiTayRowTitleListCustom"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@string/tay_ui_script"
+        android:paddingVertical="@dimen/dim_ui_tay_list_padding_top_bottom_title_custom"
+        android:textColor="@color/tay_edit_list_title_custom"
+        android:fontFamily="@font/ui_tay_montserrat_semi_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/uiTayRowSubTitleListCustom"
+        android:layout_width="match_parent"
+        android:textColor="@color/tay_edit_list_text_custom"
+        android:fontFamily="@font/ui_tay_montserrat_medium"
+        app:layout_constraintTop_toBottomOf="@+id/uiTayRowTitleListCustom"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@string/tay_ui_script"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="@color/tay_edit_list_text_custom"
+        android:id="@+id/uiTayRowMessageListCustom"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/ui_tay_montserrat_medium"
+        tools:text="@string/tay_ui_script"
+        app:layout_constraintTop_toBottomOf="@+id/uiTayRowSubTitleListCustom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/lineCustom"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dim_ui_tay_list_margin_top_bottom_custom"
+        android:background="@color/tay_edit_list_line_custom"
+        android:layout_height="@dimen/dim_ui_tay_list_item_line_size"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

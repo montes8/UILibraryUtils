@@ -12,15 +12,19 @@ import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+import com.gb.vale.uitaylibrary.list.adapter.UiTayListCustomAdapter
+import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 
 fun ConstraintLayout.uiTayListSpinner(
     viewTop: View,
-    list: List<String> = ArrayList(), position: Int = -1, positionBottom: Boolean = true,
-    onClickContent: () -> Unit, onClickSelected: (Int) -> Unit
+    list: List<String> = ArrayList(),
+    listCustom: List<UiTayModelCustom> = ArrayList(), position: Int = -1, positionBottom: Boolean = true, itemCustom: Boolean = false
+    , onClickContent: () -> Unit, onClickSelected: (Int) -> Unit
 ): LinearLayout {
     val linear = LinearLayout(this.context)
-    if (list.isNotEmpty()) {
+    if (list.isNotEmpty() || listCustom.isNotEmpty()) {
         val adapter = UiTayListAdapter()
+        val adapterCustom = UiTayListCustomAdapter()
         val rvList = RecyclerView(ContextThemeWrapper(context, R.style.UITayStyleList))
 
 
@@ -30,6 +34,7 @@ fun ConstraintLayout.uiTayListSpinner(
         linear.id = View.generateViewId()
         linear.elevation = 12f
         if (list.size < 4) rvList.isVerticalScrollBarEnabled = true
+        if (listCustom.size < 4) rvList.isVerticalScrollBarEnabled = true
         val paramLinear = LayoutParams(
             this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_0),
             LayoutParams.WRAP_CONTENT
@@ -52,7 +57,9 @@ fun ConstraintLayout.uiTayListSpinner(
         )
         val paramRv = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         paramLinear.matchConstraintMaxHeight =
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_max_height)
+            this.context.resources.getDimensionPixelOffset(if (itemCustom)R.dimen.dim_ui_tay_list_max_height_custom
+            else
+                R.dimen.dim_ui_tay_list_max_height)
         rvList.layoutParams = paramRv
         linear.layoutParams = paramLinear
         rvList.setPadding(0, 0, 0, 0)
@@ -60,16 +67,26 @@ fun ConstraintLayout.uiTayListSpinner(
         linear.addView(rvList)
         val constraintSet = ConstraintSet()
         constraintSet.clone(this)
-        rvList.adapter = adapter
-        adapter.selectedPosition(position)
-        adapter.list = list
+        if (itemCustom){
+            rvList.adapter = adapterCustom
+            adapterCustom.list = listCustom
+            adapterCustom.onClickOption = {
+                onClickSelected.invoke(it)
+                rvList.uiTayVisibility(false)
+                this.removeView(linear)
+            }
+        }else{
+            rvList.adapter = adapter
+            adapter.selectedPosition(position)
+            adapter.list = list
+            adapter.onClickOption = {
+                onClickSelected.invoke(it)
+                rvList.uiTayVisibility(false)
+                this.removeView(linear)
+            }
+        }
         this.setOnClickListener {
             onClickContent.invoke()
-            rvList.uiTayVisibility(false)
-            this.removeView(linear)
-        }
-        adapter.onClickOption = {
-            onClickSelected.invoke(it)
             rvList.uiTayVisibility(false)
             this.removeView(linear)
         }

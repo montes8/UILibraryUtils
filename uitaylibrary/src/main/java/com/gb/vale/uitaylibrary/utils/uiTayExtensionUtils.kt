@@ -6,16 +6,19 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.view.Display
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.gb.vale.uitaylibrary.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -136,4 +139,16 @@ inline fun <reified T>uiTayJsonToObjet(json: String): T {
 fun <T> T.uiTayObjetToJson(): String {
     val jsonData = Gson()
     return jsonData.toJson(this)
+}
+
+infix fun Int.uiTayPercentOf(value: Int): Int {
+    return if (this == 0) 0
+    else ((this.toDouble() / 100) * value).toInt()
+}
+
+@Suppress("deprecation")
+fun Window.getUiSizeContent():Pair<Int,Int>{
+    val metrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    return Pair(metrics.widthPixels,metrics.heightPixels)
 }

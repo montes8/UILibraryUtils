@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import com.gb.vale.uitaylibrary.R
+import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 import com.gb.vale.uitaylibrary.list.uiTayListSpinner
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
@@ -52,14 +53,17 @@ class UiTayEditBasic @JvmOverloads constructor(
     private var typeBottom = true
     private var colorDefaultIconEnd = true
     private var listOption: List<String> = ArrayList()
+    private var listOptionCustom: List<UiTayModelCustom> = ArrayList()
     private var positionSelected = -1
     private var ctnList: LinearLayout? = null
     private var uiTayBasicPass = false
     private var uiTayChecked = false
     private var uiTayEnableCopyPaste = false
     private var uiTayTextNewColor = "*"
-    private var uiTayIconPassActive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
-    private var uiTayIconPassInactive : Drawable? = ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
+    private var uiTayIconPassActive: Drawable? =
+        ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
+    private var uiTayIconPassInactive: Drawable? =
+        ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
 
 
     var uiTayLabelTitle: String = UI_TAY_EMPTY
@@ -193,10 +197,11 @@ class UiTayEditBasic @JvmOverloads constructor(
         }
 
 
-    var uiTayIconPasswordActive: Drawable? =  ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
+    var uiTayIconPasswordActive: Drawable? =
+        ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_active)
         set(value) {
-                field = value
-            if (uiTayBasicPass){
+            field = value
+            if (uiTayBasicPass) {
                 visibilityIconEnd = value != null
                 value?.let {
                     uiTayIconPassActive = it
@@ -209,46 +214,49 @@ class UiTayEditBasic @JvmOverloads constructor(
             }
         }
 
-    var uiTayIconPasswordInactive: Drawable? =  ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
+    var uiTayIconPasswordInactive: Drawable? =
+        ContextCompat.getDrawable(context, R.drawable.ui_tay_ic_eyes_inactive)
         set(value) {
             field = value
-            if (uiTayBasicPass){
+            if (uiTayBasicPass) {
                 value?.let {
                     uiTayIconPassInactive = it
                 }
             }
         }
 
-    var uiTayColorPassEnable: Boolean =  false
+    var uiTayColorPassEnable: Boolean = false
         set(value) {
             field = value
-            if (uiTayBasicPass){
+            if (uiTayBasicPass) {
                 iconLabel.setColorFilter(
-                    ContextCompat.getColor(context, R.color.tay_edit_eyes_pass),PorterDuff.Mode.SRC_IN
-                )  }
+                    ContextCompat.getColor(context, R.color.tay_edit_eyes_pass),
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
         }
 
-    var uiTayTextColor : String = uiTayTextNewColor
+    var uiTayTextColor: String = uiTayTextNewColor
         set(value) {
             field = value
             uiTayTextNewColor = value
         }
 
-    var uiTayCopyPaste : Boolean = true
+    var uiTayCopyPaste: Boolean = true
         set(value) {
             field = value
             uiTayEnableCopyPaste = value
         }
 
 
-    var uiTayAsterisk: Boolean =  false
+    var uiTayAsterisk: Boolean = false
         set(value) {
             field = value
-            if (value){
+            if (value) {
                 val textNew = "${textLabel.text}$uiTayTextNewColor"
                 textLabel.text = textNew
                 textLabel.uiTaySetColouredSpan(uiTayTextNewColor, R.color.tay_title_color_spannable)
-             }
+            }
         }
 
     private fun setUIIconDrawable(icon: Drawable, view: ImageView) {
@@ -279,49 +287,59 @@ class UiTayEditBasic @JvmOverloads constructor(
         }
 
         iconLabel.setOnClickUiTayDelay {
-            if (uiTayBasicPass){
-                if (uiTayChecked){
-                    uiTayIconPassInactive?.let {icon-> setUIIconDrawable(icon,iconLabel)}
+            if (uiTayBasicPass) {
+                if (uiTayChecked) {
+                    uiTayIconPassInactive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
                     editLabel.transformationMethod = HideReturnsTransformationMethod.getInstance()
 
-                }else{
-                    uiTayIconPassActive?.let {icon-> setUIIconDrawable(icon,iconLabel)}
+                } else {
+                    uiTayIconPassActive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
                     editLabel.transformationMethod = PasswordTransformationMethod.getInstance()
 
                 }
-               if(editLabel.text.toString().isNotEmpty()) setSelectionTay(editLabel.text.toString().length)
+                if (editLabel.text.toString()
+                        .isNotEmpty()
+                ) setSelectionTay(editLabel.text.toString().length)
                 uiTayChecked = !uiTayChecked
             }
         }
 
-        if (!uiTayEnableCopyPaste){
-            editLabel.customSelectionActionModeCallback = object : android.view.ActionMode.Callback {
-                override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
-                    return false
-                }
+        if (!uiTayEnableCopyPaste) {
+            editLabel.customSelectionActionModeCallback =
+                object : android.view.ActionMode.Callback {
+                    override fun onCreateActionMode(
+                        mode: android.view.ActionMode?,
+                        menu: Menu?
+                    ): Boolean {
+                        return false
+                    }
 
-                override fun onPrepareActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
-                    return false
-                }
+                    override fun onPrepareActionMode(
+                        mode: android.view.ActionMode?,
+                        menu: Menu?
+                    ): Boolean {
+                        return false
+                    }
 
-                override fun onActionItemClicked(
-                    mode: android.view.ActionMode?,
-                    item: MenuItem?
-                ): Boolean {
-                    return false
-                }
+                    override fun onActionItemClicked(
+                        mode: android.view.ActionMode?,
+                        item: MenuItem?
+                    ): Boolean {
+                        return false
+                    }
 
-                override fun onDestroyActionMode(mode: android.view.ActionMode?) {
-                }
+                    override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+                    }
 
-            }
+                }
         }
     }
 
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UiTayEditBasic)
         attributeSet.let {
-            uiTayTitleVisibility = it.getBoolean(R.styleable.UiTayEditBasic_uiTayTitleVisibility, true)
+            uiTayTitleVisibility =
+                it.getBoolean(R.styleable.UiTayEditBasic_uiTayTitleVisibility, true)
             uiTayColorIconEndDefault =
                 it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorIconEndDefault, true)
             uiTayLabelInputType = it.getInt(
@@ -331,9 +349,11 @@ class UiTayEditBasic @JvmOverloads constructor(
                 R.styleable.UiTayEditBasic_android_imeOptions, EditorInfo.IME_ACTION_DONE
             )
             uiTayLabelIconEditEnd = it.getDrawable(R.styleable.UiTayEditBasic_uiTayLabelIconEditEnd)
-            uiTayLabelIconEditStart = it.getDrawable(R.styleable.UiTayEditBasic_uiTayLabelIconEditStart)
+            uiTayLabelIconEditStart =
+                it.getDrawable(R.styleable.UiTayEditBasic_uiTayLabelIconEditStart)
             uiTayLabelContentDescription =
-                it.getString(R.styleable.UiTayEditBasic_uiTayLabelContentDescription) ?: UI_TAY_EMPTY
+                it.getString(R.styleable.UiTayEditBasic_uiTayLabelContentDescription)
+                    ?: UI_TAY_EMPTY
             uiTayLabelEditMaxLength =
                 it.getInteger(R.styleable.UiTayEditBasic_uiTayLabelEditMaxLength, 40)
             uiTayLabelTitle = it.getString(R.styleable.UiTayEditBasic_uiTayLabelTitle)
@@ -341,26 +361,35 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayLabelEdit = it.getString(R.styleable.UiTayEditBasic_uiTayLabelEdit) ?: UI_TAY_EMPTY
             uiTayLabelHint = it.getString(R.styleable.UiTayEditBasic_uiTayLabelHint)
                 ?: this.context.resources.getString(R.string.tay_ui_text_hint_edit)
-            uiTayLabelFocusable = it.getBoolean(R.styleable.UiTayEditBasic_uiTayLabelFocusable, true)
+            uiTayLabelFocusable =
+                it.getBoolean(R.styleable.UiTayEditBasic_uiTayLabelFocusable, true)
             uiTayLabelEnable = it.getBoolean(R.styleable.UiTayEditBasic_uiTayLabelEnable, true)
-            uiTayErrorMessage = it.getString(R.styleable.UiTayEditBasic_uiTayErrorMessage) ?: UI_TAY_EMPTY
+            uiTayErrorMessage =
+                it.getString(R.styleable.UiTayEditBasic_uiTayErrorMessage) ?: UI_TAY_EMPTY
             uiTayVisibilityInfo =
                 it.getBoolean(R.styleable.UiTayEditBasic_uiTayVisibilityInfo, false)
             uiTayListBottom = it.getBoolean(R.styleable.UiTayEditBasic_uiTayListBottom, true)
-            uiTayPasswordEnabled = it.getBoolean(R.styleable.UiTayEditBasic_uiTayPasswordEnabled, false)
-            uiTayIconPasswordActive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordActive)?:uiTayIconPassActive
-            uiTayIconPasswordInactive = it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordInactive)?:uiTayIconPassInactive
-            uiTayColorPassEnable =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorPassEnable, false)
-            uiTayTextColor = it.getString(R.styleable.UiTayEditBasic_uiTayTextColor) ?: uiTayTextNewColor
-            uiTayAsterisk =   it.getBoolean(R.styleable.UiTayEditBasic_uiTayAsterisk, false)
-            uiTayCopyPaste =  it.getBoolean(R.styleable.UiTayEditBasic_uiTayCopyPaste, true)
+            uiTayPasswordEnabled =
+                it.getBoolean(R.styleable.UiTayEditBasic_uiTayPasswordEnabled, false)
+            uiTayIconPasswordActive =
+                it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordActive)
+                    ?: uiTayIconPassActive
+            uiTayIconPasswordInactive =
+                it.getDrawable(R.styleable.UiTayEditBasic_uiTayIconPasswordInactive)
+                    ?: uiTayIconPassInactive
+            uiTayColorPassEnable =
+                it.getBoolean(R.styleable.UiTayEditBasic_uiTayColorPassEnable, false)
+            uiTayTextColor =
+                it.getString(R.styleable.UiTayEditBasic_uiTayTextColor) ?: uiTayTextNewColor
+            uiTayAsterisk = it.getBoolean(R.styleable.UiTayEditBasic_uiTayAsterisk, false)
+            uiTayCopyPaste = it.getBoolean(R.styleable.UiTayEditBasic_uiTayCopyPaste, true)
         }
         attributeSet.recycle()
     }
 
 
     fun setOnChangeTayEditListener(listener: TayEditBasicChangeListener) {
-        editLabel.addTextChangedListener{
+        editLabel.addTextChangedListener {
             listener.onChange(it.toString())
             if (!visibilityLabelInfo) visibleInfo(false)
         }
@@ -378,15 +407,18 @@ class UiTayEditBasic @JvmOverloads constructor(
         listener: TayEditListCLickListener
     ) {
         editLabel.setOnClickUiTayDelay {
-            if (listOption.isNotEmpty()) {
+            if (listOption.isNotEmpty() || listOptionCustom.isNotEmpty()) {
                 if (ctnList == null) {
                     styleActive()
                     iconLabel.animate().rotation(180f).start()
                     ctnList = viewCtn.uiTayListSpinner(
-                        viewTop,
-                        listOption,
-                        positionSelected,
-                        typeBottom, onClickContent = {
+                        viewTop = viewTop,
+                        list = listOption,
+                        listCustom = listOptionCustom,
+                        position = positionSelected,
+                        positionBottom = typeBottom,
+                        itemCustom = listOptionCustom.isNotEmpty(),
+                        onClickContent = {
                             ctnList = null
                             styleDefault()
                         }
@@ -430,7 +462,8 @@ class UiTayEditBasic @JvmOverloads constructor(
         )
         editLabel.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
-            this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_basic_sp_text).toFloat()
+            this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_basic_sp_text)
+                .toFloat()
         )
         editLabel.gravity = Gravity.CENTER_VERTICAL
         editLabel.typeface = typeface
@@ -457,19 +490,27 @@ class UiTayEditBasic @JvmOverloads constructor(
         textLabelMessage.typeface = typefaceMessage
         textLabel.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
-            this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_title_basic_sp_text).toFloat()
+            this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_title_basic_sp_text)
+                .toFloat()
         )
         textLabelMessage.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
-            this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_error_basic_sp_text).toFloat()
+            this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_error_basic_sp_text)
+                .toFloat()
         )
         val layoutIcon = LayoutParams(sizeIcon(), sizeIcon())
         layoutIcon.setMargins(
-            0, 0, this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end), 0
+            0,
+            0,
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end),
+            0
         )
         val layoutIconStart = LayoutParams(sizeIcon(), sizeIcon())
         layoutIconStart.setMargins(
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end), 0, 0, 0
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end),
+            0,
+            0,
+            0
         )
         iconLabel.layoutParams = layoutIcon
         iconLabelStar.layoutParams = layoutIconStart
@@ -496,8 +537,10 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     private fun styleDefault() {
-         editLabel.uiTayBgBorderStroke(R.color.tay_edit_basic_bg_corner_enable,
-             R.color.tay_edit_basic_bg_solid_enable,R.dimen.dim_tay_bg_edit_basic_radius)
+        editLabel.uiTayBgBorderStroke(
+            R.color.tay_edit_basic_bg_corner_enable,
+            R.color.tay_edit_basic_bg_solid_enable, R.dimen.dim_tay_bg_edit_basic_radius
+        )
         setColorTextAndIcon(
             text = R.color.tay_edit_basic_text_title_enable,
             icon = R.color.tay_edit_icon_enable,
@@ -509,8 +552,9 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     private fun styleActive() {
-        editLabel.uiTayBgBorderStroke(R.color.tay_edit_basic_bg_corner_active,
-            R.color.tay_edit_basic_bg_solid_active,R.dimen.dim_tay_bg_edit_basic_radius
+        editLabel.uiTayBgBorderStroke(
+            R.color.tay_edit_basic_bg_corner_active,
+            R.color.tay_edit_basic_bg_solid_active, R.dimen.dim_tay_bg_edit_basic_radius
         )
         setColorTextAndIcon(
             text = R.color.tay_edit_basic_text_title_active,
@@ -522,8 +566,10 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     private fun styleDisable() {
-        editLabel.uiTayBgBorderStroke(R.color.tay_edit_basic_bg_corner_disable,
-            R.color.tay_edit_basic_bg_solid_disable,R.dimen.dim_tay_bg_edit_basic_radius)
+        editLabel.uiTayBgBorderStroke(
+            R.color.tay_edit_basic_bg_corner_disable,
+            R.color.tay_edit_basic_bg_solid_disable, R.dimen.dim_tay_bg_edit_basic_radius
+        )
         setColorTextAndIcon(
             text = R.color.tay_edit_basic_text_title_disable,
             icon = R.color.tay_edit_icon_disable,
@@ -536,7 +582,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     private fun styleRed() {
         editLabel.uiTayBgBorderStroke(
             R.color.tay_edit_error_info,
-            R.color.tay_edit_error_info_solid,R.dimen.dim_tay_bg_edit_basic_radius
+            R.color.tay_edit_error_info_solid, R.dimen.dim_tay_bg_edit_basic_radius
         )
         setColorTextAndIcon(
             text = R.color.tay_edit_error_info,
@@ -555,10 +601,10 @@ class UiTayEditBasic @JvmOverloads constructor(
         hint: Int = R.color.tay_edit_hint_text_enable
     ) {
         if (colorDefaultIconEnd) iconLabel.setColorFilter(
-            ContextCompat.getColor(context, icon), android.graphics.PorterDuff.Mode.SRC_IN
+            ContextCompat.getColor(context, icon), PorterDuff.Mode.SRC_IN
         )
         if (colorDefaultIconEnd) iconLabelStar.setColorFilter(
-            ContextCompat.getColor(context, icon), android.graphics.PorterDuff.Mode.SRC_IN
+            ContextCompat.getColor(context, icon), PorterDuff.Mode.SRC_IN
         )
         textLabel.setTextColor(this.context.resources.getColor(text, null))
         editLabel.setTextColor(this.context.resources.getColor(edit, null))
@@ -647,6 +693,10 @@ class UiTayEditBasic @JvmOverloads constructor(
         listOption = list
     }
 
+    fun setListOptionCustomDropDawn(list: List<UiTayModelCustom>) {
+        listOptionCustom = list
+    }
+
     fun setOnKeyCodeTayEditBasic(listener: TayEditBasicKeyCode) {
         editLabel.setOnKeyListener { _, keyCode, _ ->
             listener.onCodeClick(keyCode)
@@ -655,14 +705,11 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
 
-
-
-
 }
 
 
 fun interface TayEditBasicKeyCode {
-    fun onCodeClick(code : Int)
+    fun onCodeClick(code: Int)
 }
 
 fun interface TayEditBasicChangeListener {

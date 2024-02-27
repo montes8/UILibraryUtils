@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import com.gb.vale.uitaylibrary.R
+import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 import com.gb.vale.uitaylibrary.list.uiTayListSpinner
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
@@ -38,6 +39,7 @@ class UiTayEditLayout @JvmOverloads constructor(
     private var uiTayLDrawableStart:Drawable? = null
     private var uiTayLDrawableEnd:Drawable? = null
     private var listOptionLayout: List<String> = ArrayList()
+    private var listOptionCustomLayout: List<UiTayModelCustom> = ArrayList()
     private var positionSelectedLayout = -1
     private var ctnLayoutList: LinearLayout? = null
     private var typeBottomLayout = true
@@ -343,6 +345,10 @@ class UiTayEditLayout @JvmOverloads constructor(
         listOptionLayout = list
     }
 
+    fun setListOptionCustomDropDawn(list: List<UiTayModelCustom>) {
+        listOptionCustomLayout = list
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     fun setOnIconClickTayEditListener(listener: TayEditLayoutIconCLickListener) {
         ediText.setOnTouchListener { _, event ->
@@ -365,10 +371,13 @@ class UiTayEditLayout @JvmOverloads constructor(
                 if (ctnLayoutList == null) {
                     setEditActive()
                     ctnLayoutList = viewCtn.uiTayListSpinner(
-                        viewTop,
-                        listOptionLayout,
-                        positionSelectedLayout,
-                        typeBottomLayout, onClickContent = {
+                        viewTop = viewTop,
+                        list = listOptionLayout,
+                        listCustom = listOptionCustomLayout,
+                        position = positionSelectedLayout,
+                        positionBottom = typeBottomLayout,
+                        itemCustom = listOptionCustomLayout.isNotEmpty(),
+                         onClickContent = {
                             ctnLayoutList = null
                             setEditDefault()
                         }

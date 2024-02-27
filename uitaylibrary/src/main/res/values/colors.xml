@@ -79,6 +79,17 @@
     <color name="tay_edit_list_bg_selected">#F06292</color><!--background color of selected item-->
     <color name="tay_edit_list_bg_unselected">#FFFFFF</color><!--background color of unselected item-->
 
+    <!-- resources uiTaySpinner Custom-->
+    <color name="tay_edit_list_title_custom">#F06292</color><!--background color border-->
+    <color name="tay_edit_list_text_custom">#F06292</color><!--background color border-->
+    <color name="tay_edit_list_line_custom">#F06292</color><!--background color border-->
+
+
+    <!-- resources uiTaySpinner Menu-->
+    <color name="tay_edit_list_text_selected_menu">#FFFFFF</color><!--selected text color-->
+    <color name="tay_edit_list_text_unselected_menu">#212121</color><!--unselected text color-->
+    <color name="tay_edit_list_bg_selected_menu">#F06292</color><!--background color of selected item-->
+    <color name="tay_edit_list_bg_unselected_menu">#FFFFFF</color><!--background color of unselected item-->
 
     <!-- resources UiTayEditLayout -->
 

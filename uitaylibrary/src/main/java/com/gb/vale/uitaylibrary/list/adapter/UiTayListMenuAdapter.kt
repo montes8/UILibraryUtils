@@ -5,19 +5,22 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.R
+import com.gb.vale.uitaylibrary.list.model.UiTayMenu
+import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorder
 
-class UiTayListAdapter(var onClickOption: ((Int) -> Unit)? = null) :
-    RecyclerView.Adapter<UiTayListAdapter.UiTayListViewHolder>() {
+class UiTayListMenuAdapter(var onClickOption: ((Int) -> Unit)? = null) :
+    RecyclerView.Adapter<UiTayListMenuAdapter.UiTayListViewHolder>() {
 
     private var positionSelected = -1
-    var list: List<String> = ArrayList()
+    var list: List<UiTayMenu> = ArrayList()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -46,10 +49,19 @@ class UiTayListAdapter(var onClickOption: ((Int) -> Unit)? = null) :
 
 
         @SuppressLint("NotifyDataSetChanged")
-        fun bind(option: String) {
-            dataBinding.text = option
-            dataBinding.gravity = Gravity.CENTER_VERTICAL
+        fun bind(option: UiTayMenu) {
+            dataBinding.text = option.name
             configSelected()
+            if (option.image != 0){
+                dataBinding.setCompoundDrawablesWithIntrinsicBounds( ContextCompat.getDrawable(
+                    dataBinding.context,option.image
+                ),
+                    null, null, null)
+                dataBinding.compoundDrawablePadding = dataBinding.context.resources.
+                getDimensionPixelSize(R.dimen.dim_ui_tay_list_menu_drawable_padding_menu)
+
+            }
+            dataBinding.gravity = Gravity.CENTER_VERTICAL
             dataBinding.layoutParams = configView()
             dataBinding.setOnClickUiTayDelay {
                 positionSelected = adapterPosition
@@ -63,26 +75,26 @@ class UiTayListAdapter(var onClickOption: ((Int) -> Unit)? = null) :
             dataBinding.typeface = typeface
             dataBinding.setTextColor(ContextCompat.getColor(dataBinding.context,colorText()))
             dataBinding.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                dataBinding.context.resources.getDimensionPixelSize( R.dimen.dim_ui_tay_list_item_text_size).toFloat())
+                dataBinding.context.resources.getDimensionPixelSize( R.dimen.dim_ui_tay_list_item_text_size_menu).toFloat())
             val layoutCtn = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
-            dataBinding.setPadding(dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_star_end),
-                dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_top_bottom),
-                dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_star_end),
-                dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_top_bottom))
+            dataBinding.setPadding(dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_star_end_menu),
+                dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_top_bottom_menu),
+                dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_star_end_menu),
+                dataBinding.context.resources.getDimensionPixelOffset(R.dimen.dim_ui_tay_list_item_padding_top_bottom_menu))
             return layoutCtn
         }
         private fun configSelected() {
             dataBinding.uiTayBgBorder(
                 color =
-                if (positionSelected == adapterPosition) R.color.tay_edit_list_bg_selected
-                else R.color.tay_edit_list_bg_unselected,
+                if (positionSelected == adapterPosition) R.color.tay_edit_list_bg_selected_menu
+                else R.color.tay_edit_list_bg_unselected_menu,
                 radius = R.dimen.dim_tay_0)
         }
 
 
-        private fun colorText() = if (positionSelected == adapterPosition) R.color.tay_edit_list_text_selected
-        else R.color.tay_edit_list_text_unselected
+        private fun colorText() = if (positionSelected == adapterPosition) R.color.tay_edit_list_text_selected_menu
+        else R.color.tay_edit_list_text_unselected_menu
 
     }
 }

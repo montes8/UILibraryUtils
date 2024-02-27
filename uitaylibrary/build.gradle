@@ -30,6 +30,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    viewBinding {
+        enabled = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -50,7 +58,7 @@ afterEvaluate{
                 from components.release
                 groupId='com.github.montes8'
                 artifactId = 'tayuilibrary'
-                version = '1.0.8'
+                version = '1.0.9'
             }
         }
     }
