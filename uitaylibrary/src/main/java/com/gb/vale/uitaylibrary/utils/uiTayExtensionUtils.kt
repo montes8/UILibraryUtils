@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
@@ -18,6 +19,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import com.gb.vale.uitaylibrary.R
 import com.google.gson.Gson
@@ -151,4 +153,17 @@ fun Window.getUiSizeContent():Pair<Int,Int>{
     val metrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(metrics)
     return Pair(metrics.widthPixels,metrics.heightPixels)
+}
+
+
+fun AppCompatActivity.uiTayIsVisible(): Boolean {
+    return try {
+        val manager = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        val windowHeightMethod =
+            InputMethodManager::class.java.getMethod("getInputMethodWindowVisibleHeight")
+        val height = windowHeightMethod.invoke(manager) as Int
+        height > 0
+    } catch (e: Exception) {
+        false
+    }
 }
