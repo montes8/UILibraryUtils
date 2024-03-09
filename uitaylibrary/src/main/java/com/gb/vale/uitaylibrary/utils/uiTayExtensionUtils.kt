@@ -2,25 +2,24 @@ package com.gb.vale.uitaylibrary.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.KeyguardManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
-import android.hardware.display.DisplayManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import android.util.DisplayMetrics
-import android.view.Display
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import com.gb.vale.uitaylibrary.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -166,4 +165,9 @@ fun AppCompatActivity.uiTayIsVisible(): Boolean {
     } catch (e: Exception) {
         false
     }
+}
+
+fun uiTayIsDeviceLocked(context: Context): Boolean {
+    val manager =  context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+    return manager.isDeviceSecure
 }
