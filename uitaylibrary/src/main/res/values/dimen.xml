@@ -43,6 +43,9 @@
     <dimen name="dim_tay_edit_error_basic_sp_text">14sp</dimen><!--text_error or info size-->
 
 
+    <!-- resources text html-->
+
+    <dimen name="dim_tay_text_html_sp_text">14sp</dimen><!--text_error or info size-->
     <!-- resources uiTayListSpinner-->
 
     <dimen name="dim_tay_bg_ui_tay_list_radius">20dp</dimen><!--listing background radius-->

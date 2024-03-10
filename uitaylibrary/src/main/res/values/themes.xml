@@ -12,6 +12,16 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="UiTayTextHtml">
+        <attr name="uiTayTextHtml" format="string" />
+        <attr name="uiTayTextNormal" format="string" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="uiTayTextImageSizeWidth" format="integer" />
+        <attr name="uiTayTextImageSizeHeight" format="integer" />
+
+    </declare-styleable>
+
     <declare-styleable name="UiTayEditBasic">
         <attr name="uiTayColorIconEndDefault" format="boolean" />
         <attr name="uiTayLabelTitle" format="string" />

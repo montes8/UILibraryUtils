@@ -8,5 +8,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
+    <com.gb.vale.uitaylibrary.label.UiTayTextHtml
+        android:id="@+id/tayTextHtml"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/tay_color_general"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
