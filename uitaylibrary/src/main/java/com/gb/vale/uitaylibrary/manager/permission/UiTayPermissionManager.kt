@@ -47,9 +47,10 @@ class UiTayPermissionManager(
         resultSinglePermission = activity?.registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { granted ->
-            when {
-                granted -> onGranted()
-                else -> onDeny()
+            if (granted){
+                onGranted()
+            }else{
+                onDeny()
             }
         }
 
@@ -65,7 +66,6 @@ class UiTayPermissionManager(
 
     fun requestPermission(required: String, onGranted: () -> Unit) {
         this.onGranted = onGranted
-        this.permission = required
         resultSinglePermission?.launch(required)
     }
 
@@ -73,4 +73,6 @@ class UiTayPermissionManager(
         this.onGranted = onGranted
         resultMultiplePermissions?.launch(required)
     }
+
+
 }

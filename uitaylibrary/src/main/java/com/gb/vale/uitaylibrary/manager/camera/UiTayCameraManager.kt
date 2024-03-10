@@ -3,11 +3,13 @@ package com.gb.vale.uitaylibrary.manager.camera
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
@@ -23,12 +25,14 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import java.util.ArrayList
 import java.util.Calendar
 
+@Suppress("DEPRECATION")
 class UiTayCameraManager (
     private val context: AppCompatActivity,
     private val namePath: String,
-    private val listener: CameraControllerListener?
+    private val listener: CameraControllerListener?,private val appMultipleCamera: Boolean = true
 ){
 
     private var pictureFileName = UI_TAY_EMPTY
@@ -47,8 +51,8 @@ class UiTayCameraManager (
 
 
     fun doCamera(){
-        permissionManager.requestPermissions(
-            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+       permissionManager.requestPermissions(
+           arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
         ) {
             var pictureFile: File? = null
             try {
@@ -63,7 +67,7 @@ class UiTayCameraManager (
                     context.applicationContext.packageName,
                     pictureFile
                 )
-                chooseCameraOptions(pictureUri)
+                if (appMultipleCamera)chooseCameraOptions(context,pictureUri) else chooseCameraOption(pictureUri)
             }
         }
 
@@ -180,10 +184,29 @@ class UiTayCameraManager (
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    private fun chooseCameraOptions(outputFileUri: Uri) {
+    private fun chooseCameraOption(outputFileUri: Uri) {
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri)
         cameraRequest?.launch(captureIntent)
+    }
+
+    @SuppressLint("QueryPermissionsNeeded")
+    private fun chooseCameraOptions(context: Activity, outputFileUri: Uri, title: String = "seleciona") {
+        val cameraIntents = ArrayList<Intent>()
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val packageManager = context.packageManager
+        val listCam = packageManager.queryIntentActivities(captureIntent, 0)
+        for (res in listCam) {
+            val intent = Intent(captureIntent)
+            intent.component = ComponentName(res.activityInfo.packageName, res.activityInfo.name)
+            intent.setPackage(res.activityInfo.packageName)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri)
+            cameraIntents.add(intent)
+        }
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val chooserIntent = Intent.createChooser(galleryIntent, title)
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toTypedArray<Parcelable>())
+        cameraRequest?.launch(chooserIntent)
     }
 
 

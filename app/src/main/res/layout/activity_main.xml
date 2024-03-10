@@ -8,13 +8,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
-    <com.gb.vale.uitaylibrary.label.UiTayTextHtml
-        android:id="@+id/tayTextHtml"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/tay_color_general"
+    <Button
+        android:id="@+id/btntest"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 

@@ -49,4 +49,8 @@
     <!-- resources UiTayOtpCode -->
 
     <string name="ui_tay_otp_default_hint">000000</string>
+
+
+    <!-- resources UiTayCamera -->
+    <string name="ui_tay_selected_camera">seleciona</string>
 </resources>

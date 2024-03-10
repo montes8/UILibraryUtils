@@ -8,12 +8,14 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -21,6 +23,11 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
+import com.gb.vale.uitaylibrary.utils.scan.MultiFormatReader
+import com.gb.vale.uitaylibrary.utils.scan.RGBLuminanceSource
+import com.gb.vale.uitaylibrary.utils.scan.bitmap.BinaryBitmap
+import com.gb.vale.uitaylibrary.utils.scan.bitmap.HybridBinarizer
+import com.gb.vale.uitaylibrary.utils.scan.exception.NotFoundException
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlin.math.pow
@@ -170,4 +177,23 @@ fun AppCompatActivity.uiTayIsVisible(): Boolean {
 fun uiTayIsDeviceLocked(context: Context): Boolean {
     val manager =  context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
     return manager.isDeviceSecure
+}
+
+fun Bitmap.uiTayWriteCodeQrImage():String{
+    val width = this?.width?:0
+    val height = this?.height?:0
+    val pixels = IntArray(width * height)
+    this?.getPixels(pixels, 0, width, 0, 0, width, height)
+    this?.recycle()
+    val source = RGBLuminanceSource(width, height, pixels)
+    val bBitmap = BinaryBitmap(HybridBinarizer(source))
+    val reader = MultiFormatReader()
+    return try {
+        val result = reader.decode(bBitmap)
+        result.text
+
+    } catch (e: NotFoundException) {
+        Log.e("TAG", "decode exception", e)
+        UI_TAY_EMPTY
+    }
 }
