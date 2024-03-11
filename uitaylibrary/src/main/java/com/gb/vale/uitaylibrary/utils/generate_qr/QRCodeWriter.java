@@ -6,6 +6,7 @@ import com.gb.vale.uitaylibrary.utils.scan.exception.WriterException;
 
 import java.util.Map;
 
+
 public final class QRCodeWriter implements Writer {
 
     private static final int QUIET_ZONE_SIZE = 4;

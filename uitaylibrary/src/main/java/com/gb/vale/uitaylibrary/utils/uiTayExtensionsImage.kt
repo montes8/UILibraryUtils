@@ -65,7 +65,7 @@ fun  Context.uiTaySaveImagen (nameFile : File, img : Bitmap, nameImage : String,
     val fos: FileOutputStream?
     try{
         fos = FileOutputStream(myPath)
-        img.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+        img.compress(Bitmap.CompressFormat.JPEG, 10, fos)
         fos.flush()
         if (toast)this.uiTayShowToast(message)
     }catch (ex : FileNotFoundException){

@@ -20,7 +20,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
@@ -31,7 +30,6 @@ import com.gb.vale.uitaylibrary.utils.scan.MultiFormatReader
 import com.gb.vale.uitaylibrary.utils.scan.RGBLuminanceSource
 import com.gb.vale.uitaylibrary.utils.scan.bitmap.BinaryBitmap
 import com.gb.vale.uitaylibrary.utils.scan.bitmap.HybridBinarizer
-import com.gb.vale.uitaylibrary.utils.scan.enum_scan.BarcodeFormat
 import com.gb.vale.uitaylibrary.utils.scan.exception.NotFoundException
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -105,7 +103,7 @@ fun Activity.uiTayHideKeyboard() {
 }
 
 fun EditText.uiTayHideKeyboard(){
-    val im: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val im: InputMethodManager = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
     im.hideSoftInputFromWindow(this.windowToken,0)
 }
 

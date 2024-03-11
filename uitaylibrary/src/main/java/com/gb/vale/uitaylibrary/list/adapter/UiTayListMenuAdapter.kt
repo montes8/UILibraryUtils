@@ -5,14 +5,12 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.list.model.UiTayMenu
-import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorder
 

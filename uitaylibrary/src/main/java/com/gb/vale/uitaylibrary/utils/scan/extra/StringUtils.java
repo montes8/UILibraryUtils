@@ -49,8 +49,6 @@ public final class StringUtils {
         int sjisCurDoubleBytesWordLength = 0;
         int sjisMaxKatakanaWordLength = 0;
         int sjisMaxDoubleBytesWordLength = 0;
-        //int isoLowChars = 0;
-        //int isoHighChars = 0;
         int isoHighOther = 0;
 
         boolean utf8bom = bytes.length > 3 &&
