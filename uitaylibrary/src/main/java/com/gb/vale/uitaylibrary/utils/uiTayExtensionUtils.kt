@@ -15,7 +15,6 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.provider.Settings
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -25,14 +24,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.BinaryBitmap
-import com.google.zxing.EncodeHintType
-import com.google.zxing.MultiFormatReader
-import com.google.zxing.NotFoundException
-import com.google.zxing.RGBLuminanceSource
-import com.google.zxing.common.HybridBinarizer
-import com.google.zxing.qrcode.QRCodeWriter
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -180,40 +171,4 @@ fun AppCompatActivity.uiTayIsVisible(): Boolean {
 fun uiTayIsDeviceLocked(context: Context): Boolean {
     val manager =  context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
     return manager.isDeviceSecure
-}
-
-fun Bitmap.uiTayWriteCodeQrImage():String{
-    val width = this.width
-    val height = this.height
-    val pixels = IntArray(width * height)
-    this.getPixels(pixels, 0, width, 0, 0, width, height)
-    this.recycle()
-    val source = RGBLuminanceSource(width, height, pixels)
-    val bBitmap = BinaryBitmap(HybridBinarizer(source))
-    val reader = MultiFormatReader()
-    return try {
-        val result = reader.decode(bBitmap)
-        result.text
-
-    } catch (e: NotFoundException) {
-        Log.e("TAG", "decode exception", e)
-        UI_TAY_EMPTY
-    }
-}
-
-fun String.uiTayGenerateQrImage(size : Int = 512):Bitmap?{
-    if (this.isNotEmpty()){
-        val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 }
-        val bits = QRCodeWriter().encode(this, BarcodeFormat.QR_CODE, size, size, hints)
-        return Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
-            for (x in 0 until size) {
-                for (y in 0 until size) {
-                    it.setPixel(x, y, if (bits[x, y]) Color.BLACK else Color.WHITE)
-                }
-            }
-        }
-    }else{
-        return null
-    }
-
 }
