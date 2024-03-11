@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.gb.vale.uitaylibrary.utils.uiTayGenerateQrImage
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val text = findViewById<ImageView>(R.id.btntest)
-        text.setImageBitmap("sdfghjkloiuytfvbnm".uiTayGenerateQrImage())
 
     }
 
