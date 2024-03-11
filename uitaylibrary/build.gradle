@@ -55,10 +55,11 @@ afterEvaluate{
     publishing{
         publications{
             release(MavenPublication){
-                from components.release
+               // from components.release
                 groupId='com.github.montes8'
                 artifactId = 'tayuilibrary'
-                version = '1.0.11'
+                version = '1.0.10'
+                artifact(bundleReleaseAar)
             }
         }
     }
