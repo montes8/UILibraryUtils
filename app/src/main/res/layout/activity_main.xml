@@ -8,13 +8,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
-    <Button
+    <ImageView
+        android:contentDescription="@null"
         android:id="@+id/btntest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

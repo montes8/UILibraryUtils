@@ -9,10 +9,10 @@ import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
-import android.os.Build
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
@@ -20,13 +20,18 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
+import com.gb.vale.uitaylibrary.utils.generate_qr.BarcodeFormatTwo
+import com.gb.vale.uitaylibrary.utils.generate_qr.EncodeHintType
+import com.gb.vale.uitaylibrary.utils.generate_qr.QRCodeWriter
 import com.gb.vale.uitaylibrary.utils.scan.MultiFormatReader
 import com.gb.vale.uitaylibrary.utils.scan.RGBLuminanceSource
 import com.gb.vale.uitaylibrary.utils.scan.bitmap.BinaryBitmap
 import com.gb.vale.uitaylibrary.utils.scan.bitmap.HybridBinarizer
+import com.gb.vale.uitaylibrary.utils.scan.enum_scan.BarcodeFormat
 import com.gb.vale.uitaylibrary.utils.scan.exception.NotFoundException
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -180,11 +185,11 @@ fun uiTayIsDeviceLocked(context: Context): Boolean {
 }
 
 fun Bitmap.uiTayWriteCodeQrImage():String{
-    val width = this?.width?:0
-    val height = this?.height?:0
+    val width = this.width
+    val height = this.height
     val pixels = IntArray(width * height)
-    this?.getPixels(pixels, 0, width, 0, 0, width, height)
-    this?.recycle()
+    this.getPixels(pixels, 0, width, 0, 0, width, height)
+    this.recycle()
     val source = RGBLuminanceSource(width, height, pixels)
     val bBitmap = BinaryBitmap(HybridBinarizer(source))
     val reader = MultiFormatReader()
@@ -196,4 +201,21 @@ fun Bitmap.uiTayWriteCodeQrImage():String{
         Log.e("TAG", "decode exception", e)
         UI_TAY_EMPTY
     }
+}
+
+fun String.uiTayGenerateQrImage(size : Int = 512):Bitmap?{
+    if (this.isNotEmpty()){
+        val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 }
+        val bits = QRCodeWriter().encode(this, BarcodeFormatTwo.QR_CODE, size, size, hints)
+        return Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
+            for (x in 0 until size) {
+                for (y in 0 until size) {
+                    it.setPixel(x, y, if (bits[x, y]) Color.BLACK else Color.WHITE)
+                }
+            }
+        }
+    }else{
+        return null
+    }
+
 }
