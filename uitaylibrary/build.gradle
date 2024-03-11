@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     viewBinding {
@@ -55,11 +55,10 @@ afterEvaluate{
     publishing{
         publications{
             release(MavenPublication){
-               // from components.release
+                from components.release
                 groupId='com.github.montes8'
                 artifactId = 'tayuilibrary'
-                version = '1.0.10'
-                artifact(bundleReleaseAar)
+                version = '1.1.0'
             }
         }
     }
