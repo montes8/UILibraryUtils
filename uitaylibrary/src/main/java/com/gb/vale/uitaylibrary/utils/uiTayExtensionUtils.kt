@@ -23,16 +23,16 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
-import com.gb.vale.uitaylibrary.utils.generate_qr.BarcodeFormatTwo
-import com.gb.vale.uitaylibrary.utils.generate_qr.EncodeHintType
-import com.gb.vale.uitaylibrary.utils.generate_qr.QRCodeWriter
-import com.gb.vale.uitaylibrary.utils.scan.MultiFormatReader
-import com.gb.vale.uitaylibrary.utils.scan.RGBLuminanceSource
-import com.gb.vale.uitaylibrary.utils.scan.bitmap.BinaryBitmap
-import com.gb.vale.uitaylibrary.utils.scan.bitmap.HybridBinarizer
-import com.gb.vale.uitaylibrary.utils.scan.exception.NotFoundException
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.BinaryBitmap
+import com.google.zxing.EncodeHintType
+import com.google.zxing.MultiFormatReader
+import com.google.zxing.NotFoundException
+import com.google.zxing.RGBLuminanceSource
+import com.google.zxing.common.HybridBinarizer
+import com.google.zxing.qrcode.QRCodeWriter
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -204,7 +204,7 @@ fun Bitmap.uiTayWriteCodeQrImage():String{
 fun String.uiTayGenerateQrImage(size : Int = 512):Bitmap?{
     if (this.isNotEmpty()){
         val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 }
-        val bits = QRCodeWriter().encode(this, BarcodeFormatTwo.QR_CODE, size, size, hints)
+        val bits = QRCodeWriter().encode(this, BarcodeFormat.QR_CODE, size, size, hints)
         return Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
             for (x in 0 until size) {
                 for (y in 0 until size) {
