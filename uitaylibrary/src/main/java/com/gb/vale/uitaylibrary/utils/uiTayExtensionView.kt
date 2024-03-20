@@ -1,12 +1,16 @@
 package com.gb.vale.uitaylibrary.utils
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.dialog.UiTayDialog
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayout
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayoutBlock
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModel
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModelCustom
+import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeButton
+import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeHelper
 
 fun AppCompatActivity.showUiTayDialogLayout(
     layout: Int,
@@ -38,5 +42,20 @@ fun AppCompatActivity.showUiTayDialog(
     dialog.isCancelable = model.isCancel
     dialog.func = { func?.invoke(it) }
     dialog.show(this.supportFragmentManager, UiTayDialog::class.java.name)
+}
+
+fun RecyclerView.uiTayAddSwipe(
+    context: Context,
+    buttonWidth: Int = 300,
+    addSwipeButtons: (MutableList<UiTayCardSwipeButton>) -> Unit
+) {
+    object : UiTayCardSwipeHelper(context, this, buttonWidth) {
+        override fun instanceCardSwipe(
+            viewHolder: RecyclerView.ViewHolder,
+            buffer: MutableList<UiTayCardSwipeButton>
+        ) {
+            addSwipeButtons(buffer)
+        }
+    }
 }
 

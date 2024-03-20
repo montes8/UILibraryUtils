@@ -219,4 +219,7 @@
     <color name="ui_tay_otp_text_hin">#B0BEC5</color><!--text color hint-->
 
 
+    <!-- resources swipe-->
+
+    <color name="ui_tay_color_swipe">#FF1744</color><!--text color hint-->
 </resources>
