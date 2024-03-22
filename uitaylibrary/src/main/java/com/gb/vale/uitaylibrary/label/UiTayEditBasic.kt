@@ -33,6 +33,12 @@ import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTaySetColouredSpan
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
+ /*todo implementation search
+  UiTayEditBasic.setOnChangeNeoEditListener{ text->
+    UiTayEditBasic.setOnSearchNeoEditListener(ctnTop,UiTayEditBasic,
+        if (text.isNotEmpty()) filterList(text)}
+     }
+ */
 
 class UiTayEditBasic @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
