@@ -361,6 +361,35 @@ class UiTayEditLayout @JvmOverloads constructor(
         }
     }
 
+    fun setOnSearchTayEditListener(viewCtn: ConstraintLayout,
+                                   viewTop: View,list : List<String>,listener: TayEditListCLickListener) {
+        if (list.isNotEmpty()) {
+            if (ctnLayoutList != null){ removeListSearch(viewCtn) }
+            ctnLayoutList = viewCtn.uiTayListSpinner(
+                viewTop = viewTop,
+                list = listOptionLayout,
+                listCustom = listOptionCustomLayout,
+                position = positionSelectedLayout,
+                positionBottom = typeBottomLayout,
+                itemCustom = listOptionCustomLayout.isNotEmpty()
+                , onClickContent = {
+                    removeListSearch(viewCtn)
+                }
+            ) {
+                listener.onItemClick(it)
+                removeListSearch(viewCtn)
+            }
+
+        }else{
+            if (ctnLayoutList != null){ removeListSearch(viewCtn) }
+        }
+    }
+    private fun removeListSearch(viewCtn: ConstraintLayout){
+        setEditDefault()
+        viewCtn.removeView(ctnLayoutList)
+        ctnLayoutList = null
+    }
+
     fun setOnListClickTayEditListener(
         viewCtn: ConstraintLayout,
         viewTop: View,

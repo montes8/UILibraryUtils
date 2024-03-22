@@ -46,10 +46,10 @@ fun AppCompatActivity.showUiTayDialog(
 
 fun RecyclerView.uiTayAddSwipe(
     context: Context,
-    buttonWidth: Int = 300,
+    buttonWidth: Int = 300, marginStart: Int = 0,
     addSwipeButtons: (MutableList<UiTayCardSwipeButton>) -> Unit
 ) {
-    object : UiTayCardSwipeHelper(context, this, buttonWidth) {
+    object : UiTayCardSwipeHelper(context, this, buttonWidth,marginStart) {
         override fun instanceCardSwipe(
             viewHolder: RecyclerView.ViewHolder,
             buffer: MutableList<UiTayCardSwipeButton>

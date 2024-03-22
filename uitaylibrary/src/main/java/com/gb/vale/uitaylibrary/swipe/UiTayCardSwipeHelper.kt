@@ -17,7 +17,8 @@ import java.util.LinkedList
 abstract class UiTayCardSwipeHelper(
     context: Context,
     private val recyclerView: RecyclerView,
-    private var buttonWidth: Int
+    private var buttonWidth: Int,
+    private var marginStart: Int = 0
 ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private var buttonList: MutableList<UiTayCardSwipeButton> = arrayListOf()
@@ -141,7 +142,7 @@ abstract class UiTayCardSwipeHelper(
                     buffer = buttonBuffer[pos]!!
                 }
                 translationX = dX * buffer.size.toFloat() * buttonWidth.toFloat() / itemView.width
-                drawButton(c, itemView, buffer, pos, translationX)
+                drawButton(c, itemView, buffer, pos, translationX+marginStart)
             }
         }
         super.onChildDraw(
