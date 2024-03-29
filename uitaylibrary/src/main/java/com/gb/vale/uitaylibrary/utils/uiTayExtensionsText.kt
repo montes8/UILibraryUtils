@@ -97,14 +97,14 @@ fun Context.uiTaySetSpanCustom(
 
 
 
-fun String.validateEmail() : Boolean{
+fun String.uiTayValidateEmail() : Boolean{
     val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
     val pattern = Pattern.compile(emailRegex)
     val matcher = pattern.matcher(this)
     return matcher.find()
 }
 
-fun String.validatePhoneFormat() : Boolean{
+fun String.uiTayValidatePhoneFormat() : Boolean{
     return if (this.isNotEmpty()){
         val numberStart = this[0]
         if (numberStart == '9') {
@@ -122,13 +122,13 @@ fun String.validatePhoneFormat() : Boolean{
     }
 }
 
-fun TextView.line(value :String){
+fun TextView.uiTayLine(value :String){
     val myText = SpannableString(value)
     myText.setSpan(UnderlineSpan(), 0, myText.length, 0)
     this.text = myText
 }
 
-fun String.formatDecimal(): String {
+fun String.uiTayFormatDecimal(): String {
     return try {
         val formatParse = NumberFormat.getInstance()
         formatParse.maximumFractionDigits = 2
@@ -140,7 +140,7 @@ fun String.formatDecimal(): String {
     }
 }
 
-fun EditText.validateCharacterLettersNumbers(){
+fun EditText.uiTayValidateCharacterLettersNumbers(){
     val letterFilter = InputFilter { source, start, end, _, _, _ ->
         var filtered = ""
         for (i in start until end) {

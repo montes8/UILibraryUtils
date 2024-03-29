@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Environment
+import android.util.Base64
 import android.util.Log
 import androidx.exifinterface.media.ExifInterface
 import com.gb.vale.uitaylibrary.R
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -118,4 +120,16 @@ fun uiTayRotateImages(imageToOrient: Bitmap, degreesToRotate: Int): Bitmap {
 
     }
     return result
+}
+
+fun String.uiTayBase64toBitmap():Bitmap?{
+    val decodedBytes = Base64.decode(this, Base64.DEFAULT)
+    return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+}
+
+fun Bitmap.bitmapToBase64(): String? {
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+    val b = baos.toByteArray()
+    return Base64.encodeToString(b, Base64.DEFAULT)
 }
