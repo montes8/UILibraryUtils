@@ -97,64 +97,9 @@ fun Context.uiTaySetSpanCustom(
 
 
 
-fun String.uiTayValidateEmail() : Boolean{
-    val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
-    val pattern = Pattern.compile(emailRegex)
-    val matcher = pattern.matcher(this)
-    return matcher.find()
-}
-
-fun String.uiTayValidatePhoneFormat() : Boolean{
-    return if (this.isNotEmpty()){
-        val numberStart = this[0]
-        if (numberStart == '9') {
-            if (this.contains('*')) {
-                false
-            } else {
-                val phoneRegex = "(?=.[0-9]).{9}"
-                val pattern = Pattern.compile(phoneRegex)
-                pattern.matcher(this).matches()
-            }
-        } else
-            false
-    }else{
-        false
-    }
-}
-
 fun TextView.uiTayLine(value :String){
     val myText = SpannableString(value)
     myText.setSpan(UnderlineSpan(), 0, myText.length, 0)
     this.text = myText
 }
 
-fun String.uiTayFormatDecimal(): String {
-    return try {
-        val formatParse = NumberFormat.getInstance()
-        formatParse.maximumFractionDigits = 2
-        formatParse.minimumFractionDigits = 2
-        formatParse.format(this.toDouble())
-
-    } catch (e: Exception) {
-        "0.00"
-    }
-}
-
-fun EditText.uiTayValidateCharacterLettersNumbers(){
-    val letterFilter = InputFilter { source, start, end, _, _, _ ->
-        var filtered = ""
-        for (i in start until end) {
-            val character = source[i]
-            if (!Character.isWhitespace(character) && Character.isLetter(character) || Character.isDigit(character)) {
-                filtered += character
-            }
-        }
-
-        filtered
-    }
-
-    this.filters = arrayOf(letterFilter)
-}
-
-
-fun String.uiTayRemoveSpaces(): String = replace("\\s".toRegex(), "")

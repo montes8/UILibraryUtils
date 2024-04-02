@@ -1,6 +1,8 @@
 package com.gb.vale.uitaylibrary.utils
 
 import android.content.Context
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.R
@@ -11,6 +13,7 @@ import com.gb.vale.uitaylibrary.dialog.UiTayDialogModel
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModelCustom
 import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeButton
 import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeHelper
+import java.util.ArrayList
 
 fun AppCompatActivity.showUiTayDialogLayout(
     layout: Int,
@@ -42,6 +45,20 @@ fun AppCompatActivity.showUiTayDialog(
     dialog.isCancelable = model.isCancel
     dialog.func = { func?.invoke(it) }
     dialog.show(this.supportFragmentManager, UiTayDialog::class.java.name)
+}
+
+fun Context.uiTayDialogList(
+    list: ArrayList<String> = ArrayList(), titleVisibility : Boolean = true,
+    actionClick: ((action: Int) -> Unit)? = null
+) {
+    val builderSingle = AlertDialog.Builder(this)
+    if (titleVisibility)builderSingle.setTitle(getString(R.string.ui_tay_title_dialog_list))
+    val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
+    builderSingle.setAdapter(arrayAdapter) { dialog, which ->
+        actionClick?.invoke(which)
+        dialog.dismiss()
+    }
+    builderSingle.show()
 }
 
 fun RecyclerView.uiTayAddSwipe(

@@ -53,4 +53,9 @@
 
     <!-- resources UiTayCamera -->
     <string name="ui_tay_selected_camera">seleciona</string>
+
+    <!-- resources dialog basic -->
+    <string name="ui_tay_title_dialog_list">Selecione una opción</string>
+
+    text_dialog_selected
 </resources>

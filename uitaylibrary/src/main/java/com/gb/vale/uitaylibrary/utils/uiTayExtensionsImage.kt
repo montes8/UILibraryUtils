@@ -128,8 +128,8 @@ fun String.uiTayBase64toBitmap():Bitmap?{
 }
 
 fun Bitmap.bitmapToBase64(): String? {
-    val baos = ByteArrayOutputStream()
-    this.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-    val b = baos.toByteArray()
+    val image = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.JPEG, 100, image)
+    val b = image.toByteArray()
     return Base64.encodeToString(b, Base64.DEFAULT)
 }

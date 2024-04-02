@@ -114,8 +114,6 @@ fun Context.uiTayShowToast(value : Int){
     Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
 }
 
-
-
 fun uiTayPixelsToSp(context: Context,px: Float) = px / context.resources.displayMetrics.scaledDensity
 
 @SuppressLint("MissingPermission")
@@ -165,7 +163,7 @@ fun Window.getUiSizeContent():Pair<Int,Int>{
 }
 
 
-fun AppCompatActivity.uiTayIsVisible(): Boolean {
+fun AppCompatActivity.uiTayIsSystemKeyboardVisible(): Boolean {
     return try {
         val manager = this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         val windowHeightMethod =
@@ -202,10 +200,10 @@ fun Bitmap.uiTayWriteCodeQrImage():String{
 }
 
 fun String.uiTayGenerateQrImage(size : Int = 512):Bitmap?{
-    if (this.isNotEmpty()){
+    return if (this.isNotEmpty()){
         val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 }
         val bits = QRCodeWriter().encode(this, BarcodeFormat.QR_CODE, size, size, hints)
-        return Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
+        Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
             for (x in 0 until size) {
                 for (y in 0 until size) {
                     it.setPixel(x, y, if (bits[x, y]) Color.BLACK else Color.WHITE)
@@ -213,7 +211,6 @@ fun String.uiTayGenerateQrImage(size : Int = 512):Bitmap?{
             }
         }
     }else{
-        return null
+        null
     }
-
 }
