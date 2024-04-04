@@ -43,7 +43,8 @@
     <View
         android:id="@+id/lineCustom"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dim_ui_tay_list_margin_top_bottom_custom"
+        android:layout_marginTop="@dimen/dim_ui_tay_list_margin_top_line_custom"
+        android:layout_marginBottom="@dimen/dim_tay_14"
         android:background="@color/tay_edit_list_line_custom"
         android:layout_height="@dimen/dim_ui_tay_list_item_line_size"/>
 

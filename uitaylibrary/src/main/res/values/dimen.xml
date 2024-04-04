@@ -58,7 +58,8 @@
 
     <!-- resources uiTayListSpinner custom-->
     <dimen name="dim_ui_tay_list_padding_top_bottom_title_custom">2dp</dimen><!--padding top and bottom listing-->
-    <dimen name="dim_ui_tay_list_margin_top_bottom_custom">20dp</dimen><!--margin top and bottom listing-->
+    <dimen name="dim_ui_tay_list_margin_top_bottom_custom">14dp</dimen><!--margin top and bottom listing-->
+    <dimen name="dim_ui_tay_list_margin_top_line_custom">14dp</dimen><!--margin top and bottom listing-->
     <dimen name="dim_ui_tay_list_item_padding_top_bottom_custom">0dp</dimen><!--padding top and bottom listing-->
     <dimen name="dim_ui_tay_list_item_padding_star_end_custom">20dp</dimen><!--padding top and bottom listing-->
     <dimen name="dim_ui_tay_list_item_title_size_custom">12sp</dimen><!--padding top and bottom listing-->

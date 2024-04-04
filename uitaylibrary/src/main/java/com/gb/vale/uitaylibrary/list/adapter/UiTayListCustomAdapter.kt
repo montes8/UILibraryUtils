@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.databinding.UiTayListCustomBinding
 import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
+import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
 class UiTayListCustomAdapter(var onClickOption: ((Int) -> Unit)? = null) :
@@ -43,6 +44,7 @@ class UiTayListCustomAdapter(var onClickOption: ((Int) -> Unit)? = null) :
             binding.uiTayRowSubTitleListCustom.uiTayVisibility(option.subTitle.isNotEmpty())
             binding.uiTayRowMessageListCustom.uiTayVisibility(option.message.isNotEmpty())
             if (list.size-1 == adapterPosition)binding.lineCustom.visibility = View.GONE
+            binding.root.setOnClickUiTayDelay { onClickOption?.invoke(adapterPosition) }
             binding.uiTayRowTitleListCustom.text = option.title
             binding.uiTayRowSubTitleListCustom.text = option.subTitle
             binding.uiTayRowMessageListCustom.text = option.message
