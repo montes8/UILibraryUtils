@@ -67,6 +67,8 @@
     <dimen name="dim_ui_tay_list_item_line_size">1sp</dimen><!--size line height-->
     <dimen name="dim_ui_tay_list_max_height_custom">220dp</dimen><!--max height listing-->
 
+    <dimen name="dim_ui_tay_img_size_custom">46dp</dimen>
+
     <!-- resources uiTayListSpinner Menu-->
     <dimen name="dim_ui_tay_list_menu_min_height">43dp</dimen>
     <dimen name="dim_ui_tay_list_menu_min_width">205dp</dimen>

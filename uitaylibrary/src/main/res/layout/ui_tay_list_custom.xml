@@ -8,37 +8,63 @@
     android:paddingHorizontal="@dimen/dim_ui_tay_list_item_padding_star_end_custom"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <TextView
-        android:id="@+id/uiTayRowTitleListCustom"
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@string/tay_ui_script"
-        android:paddingVertical="@dimen/dim_ui_tay_list_padding_top_bottom_title_custom"
-        android:textColor="@color/tay_edit_list_title_custom"
-        android:fontFamily="@font/ui_tay_montserrat_semi_bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/uiTayRowSubTitleListCustom"
-        android:layout_width="match_parent"
-        android:textColor="@color/tay_edit_list_text_custom"
-        android:fontFamily="@font/ui_tay_montserrat_medium"
-        app:layout_constraintTop_toBottomOf="@+id/uiTayRowTitleListCustom"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@string/tay_ui_script"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:textColor="@color/tay_edit_list_text_custom"
-        android:id="@+id/uiTayRowMessageListCustom"
-        android:layout_width="match_parent"
-        android:fontFamily="@font/ui_tay_montserrat_medium"
-        tools:text="@string/tay_ui_script"
-        app:layout_constraintTop_toBottomOf="@+id/uiTayRowSubTitleListCustom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="wrap_content"/>
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/uiTayRowImgListCustom"
+            android:layout_width="@dimen/dim_ui_tay_img_size_custom"
+            android:contentDescription="@null"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/dim_tay_16"
+            android:layout_height="@dimen/dim_ui_tay_img_size_custom"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/uiTayRowTitleListCustom"
+                android:layout_width="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@string/tay_ui_script"
+                android:paddingVertical="@dimen/dim_ui_tay_list_padding_top_bottom_title_custom"
+                android:textColor="@color/tay_edit_list_title_custom"
+                android:fontFamily="@font/ui_tay_montserrat_semi_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/uiTayRowSubTitleListCustom"
+                android:layout_width="match_parent"
+                android:textColor="@color/tay_edit_list_text_custom"
+                android:fontFamily="@font/ui_tay_montserrat_medium"
+                app:layout_constraintTop_toBottomOf="@+id/uiTayRowTitleListCustom"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@string/tay_ui_script"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textColor="@color/tay_edit_list_text_custom"
+                android:id="@+id/uiTayRowMessageListCustom"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/ui_tay_montserrat_medium"
+                tools:text="@string/tay_ui_script"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/uiTayRowSubTitleListCustom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
     <View
         android:id="@+id/lineCustom"

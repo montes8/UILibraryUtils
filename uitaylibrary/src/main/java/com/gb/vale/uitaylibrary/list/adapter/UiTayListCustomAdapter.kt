@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.databinding.UiTayListCustomBinding
 import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 import com.gb.vale.uitaylibrary.utils.setOnClickUiTayDelay
+import com.gb.vale.uitaylibrary.utils.uiTayLoadUrl
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
 class UiTayListCustomAdapter(var onClickOption: ((Int) -> Unit)? = null) :
@@ -41,6 +42,13 @@ class UiTayListCustomAdapter(var onClickOption: ((Int) -> Unit)? = null) :
 
         @SuppressLint("NotifyDataSetChanged")
         fun bind(option: UiTayModelCustom) {
+            binding.uiTayRowImgListCustom.uiTayVisibility(option.imageVisibility)
+            if (option.image != 0){
+                binding.uiTayRowImgListCustom.setImageResource(option.image)
+            }
+            if (option.imageUrl.isNotEmpty()){
+                binding.uiTayRowImgListCustom.uiTayLoadUrl(option.imageUrl,option.imageCircle)
+            }
             binding.uiTayRowSubTitleListCustom.uiTayVisibility(option.subTitle.isNotEmpty())
             binding.uiTayRowMessageListCustom.uiTayVisibility(option.message.isNotEmpty())
             if (list.size-1 == adapterPosition)binding.lineCustom.visibility = View.GONE

@@ -8,8 +8,11 @@ import android.net.Uri
 import android.os.Environment
 import android.util.Base64
 import android.util.Log
+import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.gb.vale.uitaylibrary.R
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
@@ -132,4 +135,11 @@ fun Bitmap.bitmapToBase64(): String? {
     this.compress(Bitmap.CompressFormat.JPEG, 100, image)
     val b = image.toByteArray()
     return Base64.encodeToString(b, Base64.DEFAULT)
+}
+
+fun ImageView.uiTayLoadUrl(url:String = UI_TAY_EMPTY, circle : Boolean =false){
+    if (url.isNotEmpty()) {
+        if (circle) Picasso.get().load(url).transform(CropCircleTransformation()).into(this) else
+            Picasso.get().load(url).into(this)
+    }
 }
