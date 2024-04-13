@@ -188,10 +188,10 @@ fun ViewPager2.uiTayRemoveOverScroll() {
 }
 
 
-fun View.uiTaySetLayoutParams(width: Int? = null, height: Int? = null) {
+fun View.uiTaySetWidthAndHeight(width: Int? = null, height: Int? = null) {
     val layoutParams = layoutParams
-    layoutParams.height = height ?: resources.getDimensionPixelSize(R.dimen.dim_tay_0)
-    layoutParams.width = width ?: resources.getDimensionPixelSize(R.dimen.dim_tay_0)
+    layoutParams.height = resources.getDimensionPixelSize(height?: resources.getDimensionPixelSize(R.dimen.dim_tay_0))
+    layoutParams.width = resources.getDimensionPixelSize(width?: resources.getDimensionPixelSize(R.dimen.dim_tay_0))
 }
 
 fun View.uiTayMargins(

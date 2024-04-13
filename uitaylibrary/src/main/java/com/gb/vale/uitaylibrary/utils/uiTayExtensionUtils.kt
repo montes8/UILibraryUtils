@@ -13,6 +13,9 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build.VERSION.SDK_INT
+import android.os.Bundle
+import android.os.Parcelable
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
@@ -213,4 +216,25 @@ fun String.uiTayGenerateQrImage(size : Int = 512):Bitmap?{
     }else{
         null
     }
+}
+
+inline fun <reified T : Parcelable> Intent.uiTayParcelable(key: String): T? = when {
+    SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
+}
+
+@Suppress("DEPRECATION")
+inline fun <reified T : Parcelable> Bundle.uiTayParcelable(key: String): T? = when {
+    SDK_INT >= 33 -> getParcelable(key, T::class.java)
+    else -> getParcelable(key) as? T
+}
+
+
+fun uiTayTwoDigitNumber(number: Long): String {
+    if (number == 0L) {
+        return "00"
+    } else if (number / 10 == 0L) {
+        return "0$number"
+    }
+    return number.toString()
 }

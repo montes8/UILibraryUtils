@@ -128,7 +128,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     var uiTayLabelIconEditEnd: Drawable? = null
         set(value) {
             field = value
-            visibilityIconStart = value != null
+            visibilityIconEnd = value != null
             value?.let {
                 iconLabel.uiTayVisibility(true)
                 setUIIconDrawable(

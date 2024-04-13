@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
 import android.util.Base64
@@ -137,9 +138,13 @@ fun Bitmap.bitmapToBase64(): String? {
     return Base64.encodeToString(b, Base64.DEFAULT)
 }
 
-fun ImageView.uiTayLoadUrl(url:String = UI_TAY_EMPTY, circle : Boolean =false){
+fun ImageView.uiTayLoadUrl(url:String = UI_TAY_EMPTY, circle : Boolean =false,
+                           placeHolder : Drawable = this.context.uiTayDrawableRound(R.color.ui_tay_gray,R.dimen.dim_tay_0)){
     if (url.isNotEmpty()) {
-        if (circle) Picasso.get().load(url).transform(CropCircleTransformation()).into(this) else
-            Picasso.get().load(url).into(this)
+        val picasso = Picasso.get()
+        picasso.setIndicatorsEnabled(false)
+        if (circle)  picasso.load(url).placeholder(placeHolder).error(placeHolder).transform(CropCircleTransformation()).into(this) else
+            picasso.load(url).placeholder(placeHolder).error(placeHolder).into(this)
+
     }
 }

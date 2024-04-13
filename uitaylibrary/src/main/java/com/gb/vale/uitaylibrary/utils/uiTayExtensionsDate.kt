@@ -3,6 +3,9 @@ package com.gb.vale.uitaylibrary.utils
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
+import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.text.format.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import com.gb.vale.uitaylibrary.R
@@ -15,6 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 /** convert a long to a text in stable date format*/
 fun Long.uiTayFormatLongToString(format : String = "dd/MM/yyyy"):String{
@@ -258,6 +262,36 @@ fun Context.showUiTayHourSpinner(actionTime: ((String) -> Unit)? = null){
     )
 
     timePickerDialog.show()
+}
+
+fun uiTayTimePickerCount(time: Long =30000, formatTime: Int = 3,actionUpdate: ((String) -> Unit)? = null,
+                          actionFinish: (() -> Unit)? = null) {
+    Handler(Looper.getMainLooper()).post {
+        val timer = object: CountDownTimer(time, 1000) {
+            @SuppressLint("StringFormatMatches", "DefaultLocale")
+            override fun onTick(millisUntilFinished: Long) {
+                val hour = TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
+                val minute = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished))
+                val second = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+                val timeString :String = when(formatTime){
+                    0->{
+                        "${uiTayTwoDigitNumber(minute)}:${uiTayTwoDigitNumber(second)}"}
+                    1->{ uiTayTwoDigitNumber(second) }
+                    else->{
+                        "${uiTayTwoDigitNumber(hour)}:${uiTayTwoDigitNumber(minute)}:${uiTayTwoDigitNumber(second)}"}
+                }
+
+                actionUpdate?.invoke(timeString)
+            }
+
+            override fun onFinish() {
+                actionFinish?.invoke()
+            }
+        }
+        timer.start()
+    }
 }
 
 @SuppressLint("SimpleDateFormat")

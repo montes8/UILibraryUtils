@@ -57,6 +57,12 @@ class UiTayToolBar @JvmOverloads constructor(
             uiTayGravityTb = value
         }
 
+    var uiTayVisibilityText : Boolean = true
+        set(value) {
+            field = value
+            textToolBar.uiTayInVisibility(value)
+        }
+
     private fun configStyleIcon(style: UITayStyleTbIcon) {
         when (style) {
             UITayStyleTbIcon.UI_TAY_ICON_START -> {
