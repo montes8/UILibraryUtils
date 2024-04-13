@@ -594,7 +594,7 @@ class UiTayEditBasic @JvmOverloads constructor(
         setColorTextAndIcon(
             text = R.color.tay_edit_basic_text_title_active,
             icon = R.color.tay_edit_icon_active,
-            info = R.color.tay_edit_icon_active,
+            info = R.color.tay_edit_text_info_active,
             edit = R.color.tay_edit_basic_text_active,
             hint = R.color.tay_edit_hint_text_active
         )

@@ -1,27 +1,9 @@
 package com.gb.vale.uitaylibrary.utils
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.text.InputFilter
-import android.util.DisplayMetrics
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowInsetsController
-import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.ColorUtils
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.gb.vale.uitaylibrary.R
 import java.text.NumberFormat
 import java.util.regex.Pattern
 

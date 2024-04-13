@@ -75,7 +75,7 @@ fun Activity.uiTayCheckIsTablet(): Boolean {
 
     val metrics = DisplayMetrics()
 
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+    if (SDK_INT >= android.os.Build.VERSION_CODES.R) {
         val display = this.display
         display?.getRealMetrics(metrics)
     } else {

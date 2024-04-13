@@ -2,7 +2,6 @@ package com.gb.vale.uitaylibrary.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.InputFilter
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
@@ -12,14 +11,11 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.manager.style.CustomTypefaceSpan
-import java.text.NumberFormat
-import java.util.regex.Pattern
 
 fun TextView.uiTaySetColouredSpanClick(
     word: String,

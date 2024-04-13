@@ -4,7 +4,7 @@
     <!-- resources General-->
 
     <dimen name="dim_tay_0">0dp</dimen>
-    <dimen name="dim_tay_2">24dp</dimen>
+    <dimen name="dim_tay_2">2dp</dimen>
     <dimen name="dim_tay_4">4dp</dimen>
     <dimen name="dim_tay_8">8dp</dimen>
     <dimen name="dim_tay_12">12dp</dimen>
