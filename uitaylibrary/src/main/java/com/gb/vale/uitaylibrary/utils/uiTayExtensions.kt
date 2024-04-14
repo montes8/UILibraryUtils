@@ -194,6 +194,12 @@ fun View.uiTaySetWidthAndHeight(width: Int? = null, height: Int? = null) {
     layoutParams.width = resources.getDimensionPixelSize(width?: resources.getDimensionPixelSize(R.dimen.dim_tay_0))
 }
 
+fun View.uiTayWidthAndHeightInt(width: Int? = null, height: Int? = null) {
+    val layoutParams = layoutParams
+    layoutParams.height = height?: 0
+    layoutParams.width = width?: 0
+}
+
 fun View.uiTayMargins(
     left: Int? = null,
     top: Int? = null,
