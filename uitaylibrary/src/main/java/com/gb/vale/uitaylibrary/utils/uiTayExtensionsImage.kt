@@ -3,6 +3,7 @@ package com.gb.vale.uitaylibrary.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -12,14 +13,16 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.gb.vale.uitaylibrary.R
+import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import com.squareup.picasso.Transformation
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Calendar
+
 
 fun uiTayReduceBitmapSize(imageFilePath: File): Bitmap {
     val bmOptions = BitmapFactory.Options()
@@ -139,11 +142,19 @@ fun Bitmap.bitmapToBase64(): String? {
 }
 
 fun ImageView.uiTayLoadUrl(url:String = UI_TAY_EMPTY, circle : Boolean =false,
-                           placeHolder : Drawable = this.context.uiTayDrawableRound(R.color.ui_tay_gray,R.dimen.dim_tay_0)){
+                           placeHolder : Drawable = this.context.uiTayDrawableRound(R.color.ui_tay_gray,R.dimen.dim_tay_0),
+                           radius :Float  = 0f,oval: Boolean=false){
     if (url.isNotEmpty()) {
-        val picasso = Picasso.get()
-        picasso.setIndicatorsEnabled(false)
-        if (circle)  picasso.load(url).placeholder(placeHolder).error(placeHolder).transform(CropCircleTransformation()).into(this) else
+
+        val transformation: Transformation = RoundedTransformationBuilder()
+            .borderColor(Color.BLACK)
+            .borderWidthDp(0f)
+            .cornerRadiusDp(radius)
+            .oval(false)
+            .build()
+        val picasso = Picasso.with(this.context)
+        picasso.setIndicatorsEnabled(oval)
+        if (circle)  picasso.load(url).placeholder(placeHolder).error(placeHolder).transform(transformation).into(this) else
             picasso.load(url).placeholder(placeHolder).error(placeHolder).into(this)
 
     }
