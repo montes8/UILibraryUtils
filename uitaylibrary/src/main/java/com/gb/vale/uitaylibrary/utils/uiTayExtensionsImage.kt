@@ -13,9 +13,8 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.gb.vale.uitaylibrary.R
-import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Transformation
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
@@ -142,19 +141,13 @@ fun Bitmap.bitmapToBase64(): String? {
 }
 
 fun ImageView.uiTayLoadUrl(url:String = UI_TAY_EMPTY, circle : Boolean =false,
-                           placeHolder : Drawable = this.context.uiTayDrawableRound(R.color.ui_tay_gray,R.dimen.dim_tay_0),
-                           radius :Float  = 0f,oval: Boolean=false){
+                           placeHolder : Drawable = this.context.uiTayDrawableRound(R.color.ui_tay_gray,R.dimen.dim_tay_0)){
     if (url.isNotEmpty()) {
-
-        val transformation: Transformation = RoundedTransformationBuilder()
-            .borderColor(Color.BLACK)
-            .borderWidthDp(0f)
-            .cornerRadiusDp(radius)
-            .oval(false)
-            .build()
-        val picasso = Picasso.with(this.context)
-        picasso.setIndicatorsEnabled(oval)
-        if (circle)  picasso.load(url).placeholder(placeHolder).error(placeHolder).transform(transformation).into(this) else
+        val picasso = Picasso.get()
+        picasso.setIndicatorsEnabled(false)
+        if (circle)  picasso.load(url).placeholder(placeHolder).error(placeHolder).transform(
+            CropCircleTransformation()
+        ).into(this) else
             picasso.load(url).placeholder(placeHolder).error(placeHolder).into(this)
 
     }
