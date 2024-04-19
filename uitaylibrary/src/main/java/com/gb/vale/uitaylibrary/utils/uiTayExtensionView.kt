@@ -2,6 +2,8 @@ package com.gb.vale.uitaylibrary.utils
 
 import android.content.Context
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayout
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayoutBlock
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModel
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModelCustom
+import com.gb.vale.uitaylibrary.extra.UiTayIndicationGroup
 import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeButton
 import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeHelper
 import java.util.ArrayList
@@ -76,3 +79,16 @@ fun RecyclerView.uiTayAddSwipe(
     }
 }
 
+
+fun Context.uiTayAddRadioButton(radio : UiTayIndicationGroup, id:Int, check : Boolean, sizeDp:Int){
+
+    val rbS = RadioButton(this)
+    rbS.id = id
+    rbS.setButtonDrawable(android.R.color.transparent)
+    val layoutM = RadioGroup.LayoutParams(uiTayDpToPx(sizeDp),uiTayDpToPx(sizeDp))
+    layoutM.setMargins(uiTayDpToPx(sizeDp),0,0,0)
+    rbS.layoutParams = layoutM
+    rbS.isChecked = check
+    radio.addView(rbS)
+
+}

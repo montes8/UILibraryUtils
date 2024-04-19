@@ -8,6 +8,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -238,3 +239,5 @@ fun uiTayTwoDigitNumber(number: Long): String {
     }
     return number.toString()
 }
+
+fun uiTayDpToPx(dp:Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()
