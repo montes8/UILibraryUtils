@@ -6,7 +6,7 @@
     <string name="tay_ui_error_pdf_link">La url es incorrecta</string>
 
     <string name="tay_ui_error_save_image">¡No se ha podido guardar la imagen!</string>
-
+    <string name="tay_ui_error_app_maps">¡No se detecto servicios requeridos!</string>
 
     <!-- resources text btn -->
     <string name="tay_ui_btn_continue">Continuar</string>

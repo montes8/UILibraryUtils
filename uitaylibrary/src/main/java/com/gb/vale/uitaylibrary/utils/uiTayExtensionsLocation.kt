@@ -42,6 +42,19 @@ fun AppCompatActivity.validateMapIntent(latitude: Double, longitude: Double) {
     }
 }
 
+fun AppCompatActivity.uiTayLocationMapIntent(
+    latitude: String,
+    longitude: String
+){
+    uiTayTryCatch(catch = {uiTayShowToast(this.getString(R.string.tay_ui_error_app_maps))}) {
+        val uri = "http://maps.google.com/maps?q=loc:$latitude,$longitude"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        intent.setPackage("com.google.android.apps.maps")
+        this.startActivity(intent)
+    }
+
+}
+
 private fun AppCompatActivity.uiTaySendUriMap(messageToast: String, uri: Uri) {
     this.uiTayShowToast(messageToast)
     this.startActivity(Intent(Intent.ACTION_VIEW, uri))
