@@ -361,18 +361,16 @@ class UiTayEditLayout @JvmOverloads constructor(
         }
     }
 
-    fun setOnSearchTayEditListener(viewCtn: ConstraintLayout,
-                                   viewTop: View,list : List<String>,listener: TayEditListCLickListener) {
+    fun setOnTaySearchNeoEditListener(viewCtn: ConstraintLayout,
+                                      viewTop: View,list : List<String>,listener: TayEditListCLickListener) {
         if (list.isNotEmpty()) {
             if (ctnLayoutList != null){ removeListSearch(viewCtn) }
             ctnLayoutList = viewCtn.uiTayListSpinner(
                 viewTop = viewTop,
-                list = listOptionLayout,
-                listCustom = listOptionCustomLayout,
-                position = positionSelectedLayout,
+                list = list,
+                position =positionSelectedLayout,
                 positionBottom = typeBottomLayout,
-                itemCustom = listOptionCustomLayout.isNotEmpty()
-                , onClickContent = {
+                onClickContent = {
                     removeListSearch(viewCtn)
                 }
             ) {
@@ -389,6 +387,8 @@ class UiTayEditLayout @JvmOverloads constructor(
         viewCtn.removeView(ctnLayoutList)
         ctnLayoutList = null
     }
+
+
 
     fun setOnListClickTayEditListener(
         viewCtn: ConstraintLayout,

@@ -33,13 +33,6 @@ import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTaySetColouredSpan
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
- /*todo implementation search
-  UiTayEditBasic.setOnChangeNeoEditListener{ text->
-    UiTayEditBasic.setOnSearchNeoEditListener(ctnTop,UiTayEditBasic,
-        if (text.isNotEmpty()) filterList(text)}
-     }
- */
-
 class UiTayEditBasic @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
 ) : ConstraintLayout(
@@ -393,6 +386,28 @@ class UiTayEditBasic @JvmOverloads constructor(
         attributeSet.recycle()
     }
 
+    fun setOnTaySearchNeoEditListener(viewCtn: ConstraintLayout,
+                                   viewTop: View,list : List<String>,listener: TayEditListCLickListener) {
+        if (list.isNotEmpty()) {
+            if (ctnList != null){ removeListSearch(viewCtn) }
+            ctnList = viewCtn.uiTayListSpinner(
+                viewTop = viewTop,
+                list = list,
+                position =positionSelected,
+                positionBottom = typeBottom,
+                onClickContent = {
+                    removeListSearch(viewCtn)
+                }
+            ) {
+                listener.onItemClick(it)
+                removeListSearch(viewCtn)
+            }
+
+        }else{
+            if (ctnList != null){ removeListSearch(viewCtn) }
+        }
+    }
+
 
     fun setOnChangeTayEditListener(listener: TayEditBasicChangeListener) {
         editLabel.addTextChangedListener {
@@ -407,29 +422,12 @@ class UiTayEditBasic @JvmOverloads constructor(
         }
     }
 
-    fun setOnSearchTayEditListener(viewCtn: ConstraintLayout,
-                                   viewTop: View,list : List<String>,listener: TayEditListCLickListener) {
-        if (list.isNotEmpty()) {
-            if (ctnList != null){ removeListSearch(viewCtn) }
-            ctnList = viewCtn.uiTayListSpinner(
-                viewTop = viewTop,
-                list = listOption,
-                listCustom = listOptionCustom,
-                position = positionSelected,
-                positionBottom = typeBottom,
-                itemCustom = listOptionCustom.isNotEmpty()
-                , onClickContent = {
-                    removeListSearch(viewCtn)
-                }
-            ) {
-                listener.onItemClick(it)
-                removeListSearch(viewCtn)
-            }
-
-        }else{
-            if (ctnList != null){ removeListSearch(viewCtn) }
+    fun setOnIconStartClickTayEditListener(listener: TayEditBasicIconCLickListener) {
+        iconLabelStar.setOnClickUiTayDelay {
+            listener.onIconClick(it)
         }
     }
+
     private fun removeListSearch(viewCtn: ConstraintLayout){
         styleDefault()
         viewCtn.removeView(ctnList)
@@ -509,8 +507,11 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     private fun sizeIcon() =
-        this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_icon)
+        this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_icon_size_end)
 
+
+    private fun sizeIconStart() =
+        this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_icon_size_start)
 
     private fun configText() {
         val layoutText = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
@@ -533,20 +534,35 @@ class UiTayEditBasic @JvmOverloads constructor(
             this.context.resources.getDimensionPixelSize(R.dimen.dim_tay_edit_error_basic_sp_text)
                 .toFloat()
         )
-        val layoutIcon = LayoutParams(sizeIcon(), sizeIcon())
+        val layoutIcon = LayoutParams(sizeIconStart(), sizeIconStart())
         layoutIcon.setMargins(
             0,
             0,
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_margin_icon_end),
             0
         )
         val layoutIconStart = LayoutParams(sizeIcon(), sizeIcon())
         layoutIconStart.setMargins(
-            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_start_end),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_margin_icon_start),
             0,
             0,
             0
         )
+
+        iconLabel.setPadding(
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_horizontal_end),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_vertical_end),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_horizontal_end),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_vertical_end)
+        )
+
+        iconLabelStar.setPadding(
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_horizontal_start),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_vertical_start),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_horizontal_start),
+            this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_edit_basic_padding_icon_vertical_start)
+        )
+
         iconLabel.layoutParams = layoutIcon
         iconLabelStar.layoutParams = layoutIconStart
         textLabel.layoutParams = layoutText
@@ -560,11 +576,11 @@ class UiTayEditBasic @JvmOverloads constructor(
     private fun setPaddingIcon(start: Boolean, end: Boolean) {
         editLabel.setPadding(
             this.context.resources.getDimensionPixelOffset(
-                if (start) R.dimen.dim_tay_52 else R.dimen.dim_tay_16
+                if (start) R.dimen.dim_tay_edit_basic_padding_horizontal_icon else R.dimen.dim_tay_edit_basic_padding_horizontal
             ), this.context.resources.getDimensionPixelOffset(
                 R.dimen.dim_tay_edit_basic_padding_top_button
             ), this.context.resources.getDimensionPixelOffset(
-                if (end) R.dimen.dim_tay_52 else R.dimen.dim_tay_16
+                if (end) R.dimen.dim_tay_edit_basic_padding_horizontal_icon else R.dimen.dim_tay_edit_basic_padding_horizontal
             ), this.context.resources.getDimensionPixelOffset(
                 R.dimen.dim_tay_edit_basic_padding_top_button
             )

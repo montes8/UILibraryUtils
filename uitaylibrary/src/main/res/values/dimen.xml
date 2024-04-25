@@ -32,12 +32,18 @@
     <dimen name="dim_tay_btn_sp_text">16sp</dimen><!--button text size-->
 
     <!-- resources edit basic-->
-
-    <dimen name="dim_tay_edit_basic_padding_start_end">16dp</dimen><!--margin above the edit to the title-->
-    <dimen name="dim_tay_edit_basic_padding_top_button">12dp</dimen><!--margin above the edit to the title-->
-    <dimen name="dim_tay_edit_basic_icon">24dp</dimen><!--margin above the edit to the title-->
+    <dimen name="dim_tay_edit_basic_padding_icon_vertical_end">8dp</dimen>
+    <dimen name="dim_tay_edit_basic_padding_icon_horizontal_end">8dp</dimen>
+    <dimen name="dim_tay_edit_basic_padding_icon_vertical_start">8dp</dimen>
+    <dimen name="dim_tay_edit_basic_padding_icon_horizontal_start">8dp</dimen>
+    <dimen name="dim_tay_edit_basic_margin_icon_end">8dp</dimen>
+    <dimen name="dim_tay_edit_basic_margin_icon_start">8dp</dimen>
+    <dimen name="dim_tay_edit_basic_padding_top_button">12dp</dimen>
+    <dimen name="dim_tay_edit_basic_icon_size_end">42dp</dimen>
+    <dimen name="dim_tay_edit_basic_icon_size_start">42dp</dimen>
+    <dimen name="dim_tay_edit_basic_padding_horizontal">16dp</dimen>
+    <dimen name="dim_tay_edit_basic_padding_horizontal_icon">52dp</dimen>
     <dimen name="dim_tay_bg_edit_basic_radius">28dp</dimen><!--icon size-->
-
     <dimen name="dim_tay_edit_basic_sp_text">16sp</dimen><!--text size-->
     <dimen name="dim_tay_edit_title_basic_sp_text">14sp</dimen><!--text_title size-->
     <dimen name="dim_tay_edit_error_basic_sp_text">14sp</dimen><!--text_error or info size-->
