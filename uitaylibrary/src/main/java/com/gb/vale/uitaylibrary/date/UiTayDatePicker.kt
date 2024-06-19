@@ -23,6 +23,7 @@ import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.FORMAT_DAT
 import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.UI_TAY_TYPE_DP_FULL
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayDateToString
+import com.gb.vale.uitaylibrary.utils.uiTayParcelable
 import kotlinx.parcelize.Parcelize
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -48,7 +49,7 @@ class UiTayDatePickerSpinner : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        uiModelDP = arguments?.getParcelable(UiTayDatePickerSpinner::class.java.name)
+        uiModelDP = arguments?.uiTayParcelable(UiTayDatePickerSpinner::class.java.name)
             ?: UiTayModelDatePicker()
     }
 

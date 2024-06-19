@@ -112,6 +112,7 @@ fun uiTayGetInitEndMonths(calendar : Calendar?=null,formatCurrent: String = "dd/
     val dateMax = calendarEnd.getActualMaximum(Calendar.DAY_OF_MONTH)
     calendarEnd.set(Calendar.DAY_OF_MONTH,dateMax)
     calendarInit.add(Calendar.DATE, 1)
+
     val dateStar = format.format(calendarInit.time)
     val dateEnd = format.format(calendarEnd.time)
     return Pair(dateStar,dateEnd)
@@ -171,7 +172,7 @@ fun String.uiTayFormatTwelveHour():String{
         val converter = SimpleDateFormat("hh:mm a")
         converter.format(hourCurrent)
     } catch (e: ParseException) {
-        ""
+        UI_TAY_EMPTY
     }
 }
 
@@ -215,21 +216,19 @@ fun AppCompatActivity.uiTayShowDateMultiple(title:String = "Selecione fecha",for
 
 
 fun Context.showUiTayHour(actionTime: ((String) -> Unit)? = null){
-    val c = Calendar.getInstance()
-    val hour = c.get(Calendar.HOUR_OF_DAY)
-    val minutes = c.get(Calendar.MINUTE)
     val timePickerDialog = TimePickerDialog(
         this, R.style.UITayTimePickerBasic,
         { _, hourOfDay, minute ->
             actionTime?.invoke("$hourOfDay:$minute:00")
         },
-        hour,
-        minutes,
+        uiTayGetTimeDate(Calendar.HOUR_OF_DAY),
+        uiTayGetTimeDate(Calendar.MINUTE),
         false
     )
 
     timePickerDialog.show()
 }
+
 
 fun millisecondToDate(t: Long): String {
     var i = t
@@ -248,19 +247,15 @@ fun millisecondToDate(t: Long): String {
 }
 
 fun Context.showUiTayHourSpinner(actionTime: ((String) -> Unit)? = null){
-    val c = Calendar.getInstance()
-    val hour = c.get(Calendar.HOUR_OF_DAY)
-    val minutes = c.get(Calendar.MINUTE)
     val timePickerDialog = TimePickerDialog(
         this, R.style.UITayTimePickerSpinner,
         { _, hourOfDay, minute ->
             actionTime?.invoke("$hourOfDay:$minute:00")
         },
-        hour,
-        minutes,
+        uiTayGetTimeDate(Calendar.HOUR_OF_DAY),
+        uiTayGetTimeDate(Calendar.MINUTE),
         false
     )
-
     timePickerDialog.show()
 }
 
@@ -294,51 +289,25 @@ fun uiTayTimePickerCount(time: Long =30000, formatTime: Int = 3,actionUpdate: ((
     }
 }
 
-@SuppressLint("SimpleDateFormat")
-fun uiTayGetDayOne(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-    return SimpleDateFormat(format).format(c.time)
-}
+/**
+ *+ one Calendar.MONDAY
+ * * one Calendar.TUESDAY
+ * * one Calendar.WEDNESDAY
+ * * one Calendar.THURSDAY
+ * * one Calendar.THURSDAY
+ * * one Calendar.SATURDAY
+ * * one Calendar.SUNDAY
+ * **/
 
 @SuppressLint("SimpleDateFormat")
-fun uiTayGetDayTwo(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
-    return SimpleDateFormat(format).format(c.time)
+fun uiTayGetDayName(day :Int = Calendar.MONDAY,format:String = "EEEE"):String{
+    return SimpleDateFormat(format).format(uiTaySetTimeDate(Calendar.DAY_OF_WEEK, day))
 }
 
-@SuppressLint("SimpleDateFormat")
-fun uiTayGetDayThree(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
-    return SimpleDateFormat(format).format(c.time)
-}
+fun uiTayGetTimeDate(value : Int = Calendar.HOUR_OF_DAY) = Calendar.getInstance().get(value)
 
-@SuppressLint("SimpleDateFormat")
-fun uiTayGetDayFour(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY)
-    return SimpleDateFormat(format).format(c.time)
-}
-
-@SuppressLint("SimpleDateFormat")
-fun uiTayGetDayFive(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
-    return SimpleDateFormat(format).format(c.time)
-}
-
-@SuppressLint("SimpleDateFormat")
-fun uiTayGetDaySix(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
-    return SimpleDateFormat(format).format(c.time)
-}
-
-@SuppressLint("SimpleDateFormat")
-fun uiTayGetDaySeven(format:String = "EEEE"):String{
-    val c : Calendar = Calendar.getInstance()
-    c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-    return  SimpleDateFormat(format).format(c.time)
+fun uiTaySetTimeDate(key : Int = Calendar.DAY_OF_WEEK,value :Int = Calendar.MONDAY,calendar : Calendar? = null ):Date{
+    val c : Calendar = calendar?:Calendar.getInstance()
+    c.set(key, value)
+    return c.time
 }

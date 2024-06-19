@@ -6,18 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/crnaa"
     android:background="@color/tay_color_general"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
 
-   <!-- <com.gb.vale.uitaylibrary.label.UiTayEditLayout
-        android:id="@+id/imgLogo"
-        android:contentDescription="@null"
-        android:layout_width="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content"/>
--->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

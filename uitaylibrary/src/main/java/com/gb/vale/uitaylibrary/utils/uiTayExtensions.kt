@@ -166,6 +166,7 @@ fun AppCompatActivity.uiTaySetTopBarColor(color: Any) {
     this.uiTaySetTopBarTextColor(bgColor)
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.uiTaySetTopBarTextColor(color : Int){
     val window = window
     val decorView = window.decorView

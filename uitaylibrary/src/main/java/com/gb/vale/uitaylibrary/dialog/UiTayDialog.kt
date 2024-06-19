@@ -24,6 +24,7 @@ import com.gb.vale.uitaylibrary.utils.UI_TAY_DIALOG_SUB_TITLE
 import com.gb.vale.uitaylibrary.utils.UI_TAY_DIALOG_TITLE
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayInVisibility
+import com.gb.vale.uitaylibrary.utils.uiTayParcelable
 import com.gb.vale.uitaylibrary.utils.uiTayTryCatch
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 import kotlinx.parcelize.Parcelize
@@ -58,7 +59,7 @@ class UiTayDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        uiTayModelDialog = arguments?.getParcelable(UiTayDialog::class.java.name) ?: UiTayDialogModel()
+        uiTayModelDialog = arguments?.uiTayParcelable(UiTayDialog::class.java.name) ?: UiTayDialogModel()
     }
 
     override fun onStart() {

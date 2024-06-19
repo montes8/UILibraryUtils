@@ -75,15 +75,15 @@ fun View.uiTayScaleUpView(duration: Int = 500){
     uiTayExtendHeightView(height, 0, this,
         duration, object : Animator.AnimatorListener {
             override fun onAnimationStart(animator: Animator) {
-                //not code
+                //not implementation
             }
             override fun onAnimationEnd(animator: Animator) { uiTayGone()}
 
             override fun onAnimationCancel(animator: Animator) {
-                //not code
+                //not implementation
             }
             override fun onAnimationRepeat(animator: Animator) {
-                //not code
+                //not implementation
             }
         }).start()
 
@@ -94,9 +94,9 @@ fun View.uiTaySlideUp(duration: Long = 500,heightInit : Int = 850) {
 
     this@uiTaySlideUp.uiTayVisible()
     val animate = TranslateAnimation(
-        0f,  // fromXDelta
-        0f,  // toXDelta
-        (this.height + heightInit).toFloat(),  // fromYDelta
+        0f,
+        0f,
+        (this.height + heightInit).toFloat(),
         0f) // toYDelta
     animate.duration = duration
     animate.fillAfter = true
@@ -106,20 +106,24 @@ fun View.uiTaySlideUp(duration: Long = 500,heightInit : Int = 850) {
 /**assign a higher height value so that it is completely hidden downwards*/
 fun View.uiTaySlideDown(duration: Long = 500,heightInit : Int = 850) {
     val animate = TranslateAnimation(
-        0f,  // fromXDelta
-        0f,  // toXDelta
-        0f,  // fromYDelta
+        0f,
+        0f,
+        0f,
         (
                 this.height + heightInit).toFloat()
-    ) // toYDelta
+    )
     animate.duration = duration
     animate.fillAfter = true
     animate.setAnimationListener(object : Animation.AnimationListener {
-        override fun onAnimationStart(animation: Animation) {}
+        override fun onAnimationStart(animation: Animation) {
+            //not implementation
+        }
         override fun onAnimationEnd(animation: Animation) {
             this@uiTaySlideDown.uiTayGone()
         }
-        override fun onAnimationRepeat(animation: Animation) {}
+        override fun onAnimationRepeat(animation: Animation) {
+            //not implementation
+        }
     })
 
     this.startAnimation(animate)
