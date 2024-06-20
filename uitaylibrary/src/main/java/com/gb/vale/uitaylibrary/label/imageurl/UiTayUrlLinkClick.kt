@@ -37,8 +37,7 @@ class UiTayUrlLinkClick : LinkMovementMethod() {
                     }
                     if (url.startsWith("https://") || url.startsWith("http://") || url.startsWith("tel:") || url.startsWith(
                             "mailto:"
-                        )
-                    ) {
+                        )) {
                         try {
                             uiClickLinkUrl.invoke(url)
                         } catch (e: Exception) {

@@ -263,7 +263,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
 
-    private fun setUIIconResourceDrawable(icon: Int, view: ImageView) {
+    fun setUIIconResourceDrawable(icon: Int, view: ImageView) {
         view.setImageResource(icon)
     }
 
@@ -276,63 +276,9 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     private fun setUp() {
-        textLabelMessage.uiTayVisibility(visibilityInfo || visibilityLabelInfo)
-        editLabel.setOnFocusChangeListener { _, isFocused ->
-            if (isFocused) {
-                if (!visibilityLabelInfo) styleActive()
-            } else {
-                if (!visibilityLabelInfo) styleDefault()
-            }
-        }
-
-        iconLabel.setOnClickUiTayDelay {
-            if (uiTayBasicPass) {
-                if (uiTayChecked) {
-                    uiTayIconPassInactive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
-                    editLabel.transformationMethod = HideReturnsTransformationMethod.getInstance()
-
-                } else {
-                    uiTayIconPassActive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
-                    editLabel.transformationMethod = PasswordTransformationMethod.getInstance()
-
-                }
-                if (editLabel.text.toString()
-                        .isNotEmpty()
-                ) setSelectionTay(editLabel.text.toString().length)
-                uiTayChecked = !uiTayChecked
-            }
-        }
-
-        if (!uiTayEnableCopyPaste) {
-            editLabel.customSelectionActionModeCallback =
-                object : android.view.ActionMode.Callback {
-                    override fun onCreateActionMode(
-                        mode: android.view.ActionMode?,
-                        menu: Menu?
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onPrepareActionMode(
-                        mode: android.view.ActionMode?,
-                        menu: Menu?
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onActionItemClicked(
-                        mode: android.view.ActionMode?,
-                        item: MenuItem?
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onDestroyActionMode(mode: android.view.ActionMode?) {
-                        //not implementation
-                    }
-
-                }
-        }
+        configInitFocus()
+        configClickIcon()
+        configCopyPaste()
     }
 
     private fun loadAttributes() {
@@ -385,6 +331,70 @@ class UiTayEditBasic @JvmOverloads constructor(
             uiTayCopyPaste = it.getBoolean(R.styleable.UiTayEditBasic_uiTayCopyPaste, true)
         }
         attributeSet.recycle()
+    }
+
+    private fun configInitFocus(){
+        textLabelMessage.uiTayVisibility(visibilityInfo || visibilityLabelInfo)
+        editLabel.setOnFocusChangeListener { _, isFocused ->
+            if (isFocused) {
+                if (!visibilityLabelInfo) styleActive()
+            } else {
+                if (!visibilityLabelInfo) styleDefault()
+            }
+        }
+    }
+
+    private fun configClickIcon(){
+        iconLabel.setOnClickUiTayDelay {
+            if (uiTayBasicPass) {
+                if (uiTayChecked) {
+                    uiTayIconPassInactive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
+                    editLabel.transformationMethod = HideReturnsTransformationMethod.getInstance()
+
+                } else {
+                    uiTayIconPassActive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
+                    editLabel.transformationMethod = PasswordTransformationMethod.getInstance()
+
+                }
+                if (editLabel.text.toString()
+                        .isNotEmpty()
+                ) setSelectionTay(editLabel.text.toString().length)
+                uiTayChecked = !uiTayChecked
+            }
+        }
+    }
+
+    private fun configCopyPaste(){
+        if (!uiTayEnableCopyPaste) {
+            editLabel.customSelectionActionModeCallback =
+                object : android.view.ActionMode.Callback {
+                    override fun onCreateActionMode(
+                        mode: android.view.ActionMode?,
+                        menu: Menu?
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onPrepareActionMode(
+                        mode: android.view.ActionMode?,
+                        menu: Menu?
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onActionItemClicked(
+                        mode: android.view.ActionMode?,
+                        item: MenuItem?
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+                        //not implementation
+                    }
+
+                }
+        }
     }
 
     fun setOnTaySearchNeoEditListener(viewCtn: ConstraintLayout,

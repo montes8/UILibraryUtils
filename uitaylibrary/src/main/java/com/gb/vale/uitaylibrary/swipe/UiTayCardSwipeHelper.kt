@@ -66,7 +66,7 @@ abstract class UiTayCardSwipeHelper(
 
     @Synchronized
     private fun recoverSwipeItem() {
-        while (!removeQueue.isEmpty()) {
+        while (removeQueue.isNotEmpty()) {
             val pos = removeQueue.poll()?.toInt()?:0
             if (pos > -1)
                 recyclerView.adapter?.notifyItemChanged(pos)
@@ -132,8 +132,7 @@ abstract class UiTayCardSwipeHelper(
             swipePosition = pos
             return
         }
-        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            if (dX < 0) {
+        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX < 0) {
                 var buffer: MutableList<UiTayCardSwipeButton>? = arrayListOf()
                 if (!buttonBuffer.containsKey(pos)) {
                     instanceCardSwipe(viewHolder, buffer?:arrayListOf())
@@ -145,7 +144,6 @@ abstract class UiTayCardSwipeHelper(
                     translationX = dX * buffer.size.toFloat() * buttonWidth.toFloat() / itemView.width
                 }
                 drawButton(c, itemView, buffer?:arrayListOf(), pos, translationX+marginStart)
-            }
         }
         super.onChildDraw(
             c,

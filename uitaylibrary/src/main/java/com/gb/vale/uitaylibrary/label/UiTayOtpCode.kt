@@ -173,46 +173,45 @@ class UiTayOtpCode @JvmOverloads constructor(
                     uiTayFilterOnlyNumbers
                 ) else arrayOf(InputFilter.LengthFilter(1), InputFilter.AllCaps(),
                     uiTayFilterSpaces, uiTayFilterOnlyLetterAndNumber)
-
-
                 uiTaySetBackgroundDefault(this)
                 configureEditTextFocusClick(this)
-               this.addTextChangedListener {
-                   uiTaySetBackgroundDefault(this)
-                    if (flagTextEmpty) {
-                        if (it.toString().isNotEmpty()) {
-                            if (value < sizeText) {
-                                if (this.focusSearch(View.FOCUS_RIGHT) != null) {
-                                    this.focusSearch(View.FOCUS_RIGHT).requestFocus()
-                                } else {
-                                    this.setText(UI_TAY_EMPTY)
-                                }
-                            }
-                        } else {
-                            flagTextEmpty = true
-                        }
-                    }
-                   if (flagTextEmpty)uiTayOtpChangeListener(Pair(value == sizeText,getUITextInside(this,value)))
-
-                }
-
-               this.setOnKeyListener { _, keyCode, _ ->
-                    if(keyCode == KeyEvent.KEYCODE_DEL){
-                        if (this.text.isNullOrEmpty() && value > 1) {
-                            val view = this.focusSearch(View.FOCUS_LEFT) as TextInputEditText
-                            view.requestFocus()
-                            uiTaySetBackgroundDefault(this)
-                        }
-                    }
-                    uiTayOtpKeyListener(keyCode)
-                    false
-                }
-
+                configNextItem(this,value)
+                configKeyCode(this,value)
             }
             allEditViewList.add(mText)
             this.addView(mText)
         }
         setViews(allEditViewList)
+    }
+
+    private fun configNextItem(edit :TextInputEditText,value :Int){
+        edit.addTextChangedListener {
+            uiTaySetBackgroundDefault(edit)
+            if (flagTextEmpty && it.toString().isNotEmpty()) {
+                if (value < sizeText) {
+                    if (this.focusSearch(View.FOCUS_RIGHT) != null) {
+                        this.focusSearch(View.FOCUS_RIGHT).requestFocus()
+                    } else {
+                        edit.setText(UI_TAY_EMPTY)
+                    }
+                }
+            } else {
+                flagTextEmpty = true
+            }
+            if (flagTextEmpty)uiTayOtpChangeListener(Pair(value == sizeText,getUITextInside(edit,value)))
+        }
+    }
+
+    private fun configKeyCode(edit :TextInputEditText,value :Int){
+        this.setOnKeyListener { _, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_DEL && edit.text.isNullOrEmpty() && value > 1) {
+                val view = this.focusSearch(View.FOCUS_LEFT) as TextInputEditText
+                view.requestFocus()
+                uiTaySetBackgroundDefault(edit)
+            }
+            uiTayOtpKeyListener(keyCode)
+            false
+        }
     }
 
     private fun configureEditTextFocusClick(editText: TextInputEditText){

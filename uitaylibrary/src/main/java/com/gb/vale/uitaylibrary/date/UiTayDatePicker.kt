@@ -23,7 +23,9 @@ import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.FORMAT_DAT
 import com.gb.vale.uitaylibrary.date.UiTayDatePickerSpinner.Companion.UI_TAY_TYPE_DP_FULL
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayDateToString
+import com.gb.vale.uitaylibrary.utils.uiTayGetTimeDate
 import com.gb.vale.uitaylibrary.utils.uiTayParcelable
+import com.gb.vale.uitaylibrary.utils.uiTaySetListTimeDate
 import kotlinx.parcelize.Parcelize
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -32,8 +34,8 @@ import java.util.Date
 
 typealias UITayClickDatePicker = (Pair<Date, String>) -> Unit
 
+@Suppress("DEPRECATION")
 class UiTayDatePickerSpinner : DialogFragment() {
-
 
     private var uiModelDP: UiTayModelDatePicker = UiTayModelDatePicker()
     private lateinit var selectedDate: Date
@@ -101,14 +103,11 @@ class UiTayDatePickerSpinner : DialogFragment() {
 
 
         uiTayDatePicker.init(
-            uiModelDP.dateSelected.get(Calendar.YEAR), uiModelDP.dateSelected.get(Calendar.MONTH),
-            uiModelDP.dateSelected.get(Calendar.DAY_OF_MONTH)
+            uiTayGetTimeDate(Calendar.YEAR,uiModelDP.dateSelected),
+            uiTayGetTimeDate(Calendar.MONTH,uiModelDP.dateSelected),
+            uiTayGetTimeDate(Calendar.DAY_OF_MONTH,uiModelDP.dateSelected)
         ) { _, year, month, dayOfMonth ->
-            val selected = Calendar.getInstance()
-            selected.set(Calendar.YEAR, year)
-            selected.set(Calendar.MONTH, month)
-            selected.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            selectedDate = selected.time
+            selectedDate = uiTaySetListTimeDate(arrayListOf(year,month,dayOfMonth))
         }
 
         uiTayBtnAccept.setOnClickListener {
@@ -274,18 +273,13 @@ data class UiTayModelDatePicker(
 @SuppressLint("SimpleDateFormat")
 fun Context.uiTayDatePickerBasic(uiModelDP:UiTayModelDatePicker=UiTayModelDatePicker(),
                                  actionDate: ((date: Pair<Date,String>) -> Unit)? = null){
-    val myCalendar: Calendar = Calendar.getInstance()
     val datePickerListener =
         DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
-            myCalendar.set(selectedYear, selectedMonth, selectedDay)
             try {
-                val selected = Calendar.getInstance()
-                selected.set(Calendar.YEAR, selectedYear)
-                selected.set(Calendar.MONTH, selectedMonth)
-                selected.set(Calendar.DAY_OF_MONTH, selectedDay)
                 val sdf = SimpleDateFormat(uiModelDP.format)
-                val date: String = sdf.format(myCalendar.time)
-                actionDate?.invoke(Pair(selected.time,date))
+                val selectedDate = uiTaySetListTimeDate(arrayListOf(selectedYear,selectedMonth,selectedDay))
+                val date: String = sdf.format(selectedDate)
+                actionDate?.invoke(Pair(selectedDate,date))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -295,9 +289,9 @@ fun Context.uiTayDatePickerBasic(uiModelDP:UiTayModelDatePicker=UiTayModelDatePi
     val date = DatePickerDialog(
         this,R.style.UITayDatePickerBasic,
         datePickerListener,
-        uiModelDP.dateSelected.get(Calendar.YEAR),
-        uiModelDP.dateSelected.get(Calendar.MONTH),
-        uiModelDP.dateSelected.get(Calendar.DAY_OF_MONTH)
+        uiTayGetTimeDate(Calendar.YEAR),
+        uiTayGetTimeDate(Calendar.MONTH),
+        uiTayGetTimeDate(Calendar.DAY_OF_MONTH)
     )
     uiModelDP.dateMin?.let { date.datePicker.minDate = it.timeInMillis }
     uiModelDP.dateMax?.let { date.datePicker.maxDate = it.timeInMillis}

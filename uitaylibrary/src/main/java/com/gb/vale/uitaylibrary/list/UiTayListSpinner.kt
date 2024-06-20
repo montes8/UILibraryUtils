@@ -4,16 +4,16 @@ import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.list.adapter.UiTayListAdapter
-import com.gb.vale.uitaylibrary.utils.uiTayVisibility
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
-import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
 import com.gb.vale.uitaylibrary.list.adapter.UiTayListCustomAdapter
 import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
+import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
+import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
 fun ConstraintLayout.uiTayListSpinner(
     viewTop: View,
@@ -26,8 +26,6 @@ fun ConstraintLayout.uiTayListSpinner(
         val adapter = UiTayListAdapter()
         val adapterCustom = UiTayListCustomAdapter()
         val rvList = RecyclerView(ContextThemeWrapper(context, R.style.UITayStyleList))
-
-
         rvList.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
         rvList.id = View.generateViewId()
