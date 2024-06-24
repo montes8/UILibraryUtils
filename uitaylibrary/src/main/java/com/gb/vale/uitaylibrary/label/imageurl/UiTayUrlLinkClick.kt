@@ -7,7 +7,8 @@ import android.text.method.LinkMovementMethod
 import android.text.style.URLSpan
 import android.view.MotionEvent
 import android.widget.TextView
-import android.widget.Toast
+import com.gb.vale.uitaylibrary.utils.uiTayShowToast
+import com.gb.vale.uitaylibrary.utils.uiTayTryCatch
 
 typealias UIClickLinkUrl = (String) -> Unit
 class UiTayUrlLinkClick : LinkMovementMethod() {
@@ -28,36 +29,33 @@ class UiTayUrlLinkClick : LinkMovementMethod() {
             val layout: Layout = widget.layout
             val line: Int = layout.getLineForVertical(y)
             val off: Int = layout.getOffsetForHorizontal(line, x.toFloat())
-            val link = buffer.getSpans(off, off, URLSpan::class.java)
-            if (link.isNotEmpty()) {
-                if (action == MotionEvent.ACTION_UP) {
-                    var url = link[0].url.trim { it <= ' ' }
-                    if (url.startsWith("www")) {
-                        url = "http://$url"
-                    }
-                    if (url.startsWith("https://") || url.startsWith("http://") || url.startsWith("tel:") || url.startsWith(
-                            "mailto:"
-                        )) {
-                        try {
-                            uiClickLinkUrl.invoke(url)
-                        } catch (e: Exception) {
-                            Toast.makeText(widget.context, "url no encontrada", Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
-                } else {
-                    Selection.setSelection(
-                        buffer,
-                        buffer.getSpanStart(link[0]),
-                        buffer.getSpanEnd(link[0])
-                    )
-                }
+            if (buffer.getSpans(off, off, URLSpan::class.java).isNotEmpty()) {
+                configLink(action,off,buffer,widget)
                 return true
             }
         }
         return super.onTouchEvent(widget, buffer, event)
     }
 
+    private fun configLink(action : Int,off : Int,buffer: Spannable,widget: TextView){
+        val link = buffer.getSpans(off, off, URLSpan::class.java)
+        if (action == MotionEvent.ACTION_UP) {
+            var url = link[0].url.trim { it <= ' ' }
+            if (url.startsWith("www")) { url = "http://$url" }
+            if (url.startsWith("https://") || url.startsWith("http://") || url.startsWith("tel:") || url.startsWith(
+                    "mailto:"
+                )) {
+                uiTayTryCatch(catch = { widget.context.uiTayShowToast("url no encontrada")}) {
+                    uiClickLinkUrl.invoke(url)
+                }
+            }
+        } else {
+            Selection.setSelection(buffer,
+                buffer.getSpanStart(link[0]),
+                buffer.getSpanEnd(link[0])
+            )
+        }
+    }
 
     companion object {
         private var sInstance: UiTayUrlLinkClick? = null

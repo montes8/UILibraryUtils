@@ -246,7 +246,7 @@ class UiTayDatePickerSpinner : DialogFragment() {
         const val UI_TAY_TYPE_DP_FULL = 0
         const val UI_TAY_TYPE_DP_MONTH = 1
         const val UI_TAY_TYPE_DP_YEAR = 2
-        const val UI_TAY_TYPE_DP_MONTH_YEAR = 1
+        const val UI_TAY_TYPE_DP_MONTH_YEAR = 3
         const val FORMAT_DATE_UI_TAY_DEFAULT = "dd/MM/yyyy"
 
         fun newInstance(uiTayData: UiTayModelDatePicker = UiTayModelDatePicker()): UiTayDatePickerSpinner =
