@@ -17,19 +17,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Cache SonarQube packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Gradle packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-      - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ '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' }}
           SONAR_TOKEN: ${{ 'squ_382b38aebbc75319e2211257c812a1bbf47b21e3' }}
