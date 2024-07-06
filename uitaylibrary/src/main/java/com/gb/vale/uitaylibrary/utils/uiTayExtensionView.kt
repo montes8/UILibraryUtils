@@ -12,11 +12,9 @@ import com.gb.vale.uitaylibrary.dialog.UiTayDialog
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayout
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogLayoutBlock
 import com.gb.vale.uitaylibrary.dialog.UiTayDialogModel
-import com.gb.vale.uitaylibrary.dialog.UiTayDialogModelCustom
 import com.gb.vale.uitaylibrary.extra.UiTayIndicationGroup
 import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeButton
 import com.gb.vale.uitaylibrary.swipe.UiTayCardSwipeHelper
-import java.util.ArrayList
 
 fun AppCompatActivity.showUiTayDialogLayout(
     layout: Int,
@@ -30,19 +28,8 @@ fun AppCompatActivity.showUiTayDialogLayout(
 }
 
 
-fun AppCompatActivity.showUiTayDialog(
-    image: Int = R.drawable.ui_tay_ic_info, title: String = UI_TAY_DIALOG_TITLE,
-    subTitle: String = UI_TAY_DIALOG_SUB_TITLE,
-    buttonText: String = UI_TAY_DIALOG_ACCEPT, buttonCancelText: String = UI_TAY_DIALOG_CANCEL,
-    btnCancel: Boolean = false, isCancel: Boolean = true,
-    styleCustom : UiTayDialogModelCustom = UiTayDialogModelCustom(),
-    func: ((action: Boolean) -> Unit)? = null,
-) {
-    val model = UiTayDialogModel(
-        image= image, title= title, subTitle= subTitle,
-        buttonText=buttonText, buttonCancelText =buttonCancelText,
-         btnCancel=  btnCancel, isCancel = isCancel,styleCustom = styleCustom
-    )
+fun AppCompatActivity.showUiTayDialog(model : UiTayDialogModel = UiTayDialogModel(),
+    func: ((action: Boolean) -> Unit)? = null,) {
     val dialog = UiTayDialog.newInstance(model)
     dialog.dialog?.setCancelable(model.isCancel)
     dialog.isCancelable = model.isCancel
@@ -67,12 +54,12 @@ fun Context.uiTayDialogList(
 fun RecyclerView.uiTayAddSwipe(
     context: Context,
     buttonWidth: Int = 300, marginStart: Int = 0,
-    addSwipeButtons: (MutableList<UiTayCardSwipeButton>) -> Unit
+    addSwipeButtons: (ArrayList<UiTayCardSwipeButton>) -> Unit
 ) {
     object : UiTayCardSwipeHelper(context, this, buttonWidth,marginStart) {
         override fun instanceCardSwipe(
             viewHolder: RecyclerView.ViewHolder,
-            buffer: MutableList<UiTayCardSwipeButton>
+            buffer: ArrayList<UiTayCardSwipeButton>
         ) {
             addSwipeButtons(buffer)
         }
@@ -81,7 +68,6 @@ fun RecyclerView.uiTayAddSwipe(
 
 
 fun Context.uiTayAddRadioButton(radio : UiTayIndicationGroup, id:Int, check : Boolean, sizeDp:Int){
-
     val rbS = RadioButton(this)
     rbS.id = id
     rbS.setButtonDrawable(android.R.color.transparent)

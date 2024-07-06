@@ -21,16 +21,16 @@ abstract class UiTayCardSwipeHelper(
     private var marginStart: Int = 0
 ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-    private var buttonList: MutableList<UiTayCardSwipeButton> = arrayListOf()
+    private var buttonList: ArrayList<UiTayCardSwipeButton> = arrayListOf()
     private lateinit var gestureDetector: GestureDetector
     private var swipePosition = -1
     private var swipeThreshold = 0.5f
-    private var buttonBuffer: MutableMap<Int, MutableList<UiTayCardSwipeButton>> = hashMapOf()
+    private var buttonBuffer: MutableMap<Int, ArrayList<UiTayCardSwipeButton>> = hashMapOf()
     private var removeQueue: LinkedList<Int> = LinkedList<Int>()
 
     abstract fun instanceCardSwipe(
         viewHolder: RecyclerView.ViewHolder,
-        buffer: MutableList<UiTayCardSwipeButton>
+        buffer: ArrayList<UiTayCardSwipeButton>
     )
 
     private val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
@@ -133,7 +133,7 @@ abstract class UiTayCardSwipeHelper(
             return
         }
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && dX < 0) {
-                var buffer: MutableList<UiTayCardSwipeButton>? = arrayListOf()
+                var buffer: ArrayList<UiTayCardSwipeButton>? = arrayListOf()
                 if (!buttonBuffer.containsKey(pos)) {
                     instanceCardSwipe(viewHolder, buffer?:arrayListOf())
                     buttonBuffer[pos] = buffer?:arrayListOf()
@@ -159,7 +159,7 @@ abstract class UiTayCardSwipeHelper(
     private fun drawButton(
         c: Canvas,
         itemView: View,
-        buffer: MutableList<UiTayCardSwipeButton>,
+        buffer: List<UiTayCardSwipeButton>,
         pos: Int,
         translationX: Float
     ) {

@@ -298,9 +298,8 @@ fun uiTayGetDayName(day :Int = Calendar.MONDAY,format:String = UI_TAY_FORMAT_NAM
     return SimpleDateFormat(format,locale?:Locale.getDefault()).format(uiTaySetTimeDate(Calendar.DAY_OF_WEEK, day))
 }
 
-fun uiTayGetTimeDate(value : Int = Calendar.HOUR_OF_DAY,calendar : Calendar = Calendar.getInstance()) = calendar.get(value)
-
-
+fun uiTayGetTimeDate(value : Int = Calendar.HOUR_OF_DAY,calendar : Calendar = Calendar.getInstance()) =
+    calendar[value]
 
 fun uiTaySetTimeDate(key : Int = Calendar.DAY_OF_WEEK,value :Int = Calendar.MONDAY,calendar : Calendar = Calendar.getInstance()):Date{
     calendar.set(key, value)
