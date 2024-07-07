@@ -404,8 +404,7 @@ class UiTayEditBasic @JvmOverloads constructor(
             ctnList = viewCtn.uiTayListSpinner(
                 viewTop = viewTop,
                 list = list,
-                position =positionSelected,
-                positionBottom = typeBottom,
+                positions = Pair(positionSelected,typeBottom),
                 onClickContent = {
                     removeListSearch(viewCtn)
                 }
@@ -459,8 +458,7 @@ class UiTayEditBasic @JvmOverloads constructor(
                         viewTop = viewTop,
                         list = listOption,
                         listCustom = listOptionCustom,
-                        position = positionSelected,
-                        positionBottom = typeBottom,
+                        positions = Pair(positionSelected,typeBottom),
                         itemCustom = listOptionCustom.isNotEmpty(),
                         onClickContent = {
                             ctnList = null

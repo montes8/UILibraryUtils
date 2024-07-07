@@ -368,9 +368,7 @@ class UiTayEditLayout @JvmOverloads constructor(
             if (ctnLayoutList != null){ removeListSearch(viewCtn) }
             ctnLayoutList = viewCtn.uiTayListSpinner(
                 viewTop = viewTop,
-                list = list,
-                position =positionSelectedLayout,
-                positionBottom = typeBottomLayout,
+                list = list, positions = Pair(positionSelectedLayout,typeBottomLayout),
                 onClickContent = {
                     removeListSearch(viewCtn)
                 }
@@ -404,8 +402,7 @@ class UiTayEditLayout @JvmOverloads constructor(
                         viewTop = viewTop,
                         list = listOptionLayout,
                         listCustom = listOptionCustomLayout,
-                        position = positionSelectedLayout,
-                        positionBottom = typeBottomLayout,
+                        positions = Pair(positionSelectedLayout,typeBottomLayout),
                         itemCustom = listOptionCustomLayout.isNotEmpty(),
                          onClickContent = {
                             ctnLayoutList = null
