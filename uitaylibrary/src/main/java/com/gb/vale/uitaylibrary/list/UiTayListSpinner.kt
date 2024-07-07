@@ -15,10 +15,15 @@ import com.gb.vale.uitaylibrary.list.model.UiTayModelCustom
 import com.gb.vale.uitaylibrary.utils.uiTayBgBorderStroke
 import com.gb.vale.uitaylibrary.utils.uiTayVisibility
 
+
+/**  positions first position selected (Int) , second position Bottom (Boolean)
+ * **/
+
 fun ConstraintLayout.uiTayListSpinner(
     viewTop: View,
     list: List<String> = ArrayList(),
-    listCustom: List<UiTayModelCustom> = ArrayList(), position: Int = -1, positionBottom: Boolean = true, itemCustom: Boolean = false
+    listCustom: List<UiTayModelCustom> = ArrayList(), positions: Pair<Int,Boolean> = Pair(-1,true),
+    itemCustom: Boolean = false
     , onClickContent: () -> Unit, onClickSelected: (Int) -> Unit
 ): LinearLayout {
     val linear = LinearLayout(this.context)
@@ -28,17 +33,17 @@ fun ConstraintLayout.uiTayListSpinner(
         val rvList = RecyclerView(ContextThemeWrapper(context, R.style.UITayStyleList))
         val constraintSet = ConstraintSet()
         constraintSet.clone(this)
-        configRvTSInit(rvList,linear,positionBottom,itemCustom,list.size < 4,listCustom.size < 4)
+        configRvTSInit(rvList,linear,positions.second,itemCustom,list.size < 4,listCustom.size < 4)
 
         rvList.adapter =if (itemCustom) adapterCustom else adapter
-        if (!itemCustom) adapter.selectedPosition(position)
+        if (!itemCustom) adapter.selectedPosition(positions.first)
         if (itemCustom) adapterCustom.list = listCustom else adapter.list = list
         configRvTSAction(adapterCustom,adapter,rvList,linear){ onClickSelected.invoke(it)}
         this.setOnClickListener {
             onClickContent.invoke()
             configCtnTSRemove(rvList,linear)
         }
-        configRvTSPosition(positionBottom,linear,constraintSet,viewTop)
+        configRvTSPosition(positions.second,linear,constraintSet,viewTop)
     }
     return linear
 }

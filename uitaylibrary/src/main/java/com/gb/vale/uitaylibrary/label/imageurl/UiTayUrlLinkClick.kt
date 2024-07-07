@@ -1,55 +1,41 @@
 package com.gb.vale.uitaylibrary.label.imageurl
 
-import android.text.Layout
 import android.text.Selection
 import android.text.Spannable
 import android.text.method.LinkMovementMethod
 import android.text.style.URLSpan
 import android.view.MotionEvent
 import android.widget.TextView
-import android.widget.Toast
+import com.gb.vale.uitaylibrary.utils.uiTayTryCatch
 
 typealias UIClickLinkUrl = (String) -> Unit
 class UiTayUrlLinkClick : LinkMovementMethod() {
+
+    private fun getX(widget: TextView,event: MotionEvent):Int{
+        var x = event.x.toInt()
+        x -= widget.totalPaddingLeft
+        x += widget.scrollX
+        return  x
+    }
+
+    private fun getY(widget: TextView,event: MotionEvent):Int{
+        var y = event.y.toInt()
+        y -= widget.totalPaddingTop
+        y += widget.scrollY
+        return  y
+    }
 
      var uiClickLinkUrl: UIClickLinkUrl = {}
     override fun onTouchEvent(
         widget: TextView,
         buffer: Spannable, event: MotionEvent
     ): Boolean {
-        val action = event.action
-        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_DOWN) {
-            var x = event.x.toInt()
-            var y = event.y.toInt()
-            x -= widget.totalPaddingLeft
-            y -= widget.totalPaddingTop
-            x += widget.scrollX
-            y += widget.scrollY
-            val layout: Layout = widget.layout
-            val line: Int = layout.getLineForVertical(y)
-            val off: Int = layout.getOffsetForHorizontal(line, x.toFloat())
-            val link = buffer.getSpans(off, off, URLSpan::class.java)
+        if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_DOWN) {
+            val off: Int = widget.layout.getOffsetForHorizontal(widget.layout.getLineForVertical(getY(widget,event)), getX(widget,event).toFloat())
+            val link  = buffer.getSpans(off, off, URLSpan::class.java)
             if (link.isNotEmpty()) {
-                if (action == MotionEvent.ACTION_UP) {
-                    var url = link[0].url.trim { it <= ' ' }
-                    if (url.startsWith("www")) {
-                        url = "http://$url"
-                    }
-                    if (url.startsWith("https://") || url.startsWith("http://") || url.startsWith("tel:") || url.startsWith(
-                            "mailto:"
-                        )) {
-                        try {
-                            uiClickLinkUrl.invoke(url)
-                        } catch (e: Exception) {
-                            Toast.makeText(widget.context, "url no encontrada", Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
-                } else {
-                    Selection.setSelection(
-                        buffer,
-                        buffer.getSpanStart(link[0]),
-                        buffer.getSpanEnd(link[0])
+                if (event.action == MotionEvent.ACTION_UP) { configActionUrl(link) } else {
+                    Selection.setSelection(buffer, buffer.getSpanStart(link[0]), buffer.getSpanEnd(link[0])
                     )
                 }
                 return true
@@ -58,6 +44,14 @@ class UiTayUrlLinkClick : LinkMovementMethod() {
         return super.onTouchEvent(widget, buffer, event)
     }
 
+    private fun configActionUrl(link:Array<URLSpan>){
+        var url = link[0].url.trim { it <= ' ' }
+        if (url.startsWith("www")) { url = "http://$url" }
+        if (url.startsWith("https://") || url.startsWith("http://") || url.startsWith("tel:") || url.startsWith(
+                "mailto:")) {
+            uiTayTryCatch { uiClickLinkUrl.invoke(url) }
+        }
+    }
 
     companion object {
         private var sInstance: UiTayUrlLinkClick? = null
