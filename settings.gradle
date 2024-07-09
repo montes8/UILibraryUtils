@@ -5,8 +5,7 @@ pluginManagement {
         gradlePluginPortal()
         maven { url 'https://jitpack.io'
             credentials {
-                username = "montes8"
-                password = "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"
+                username = authToken
             }
         }
         maven { url 'https://maven.google.com'}
@@ -20,8 +19,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://jitpack.io'
             credentials {
-                username = "montes8"
-                password = "TOEKN"
+                username = authToken
             }
         }
         maven { url 'https://maven.google.com'}
