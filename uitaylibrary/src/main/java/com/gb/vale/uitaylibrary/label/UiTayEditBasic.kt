@@ -3,6 +3,7 @@ package com.gb.vale.uitaylibrary.label
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputType
@@ -720,8 +721,7 @@ class UiTayEditBasic @JvmOverloads constructor(
         constraintSet.applyTo(this)
     }
 
-    fun setTypeFaceTay() {
-        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
+    fun setTypeFaceTay(typeface : Typeface? = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)) {
         editLabel.typeface = typeface
     }
 
