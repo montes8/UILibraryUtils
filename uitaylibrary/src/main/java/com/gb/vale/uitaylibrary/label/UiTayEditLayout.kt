@@ -3,6 +3,7 @@ package com.gb.vale.uitaylibrary.label
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputType
@@ -421,6 +422,14 @@ class UiTayEditLayout @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    fun setTypeFaceTay(typeface : Typeface? = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)) {
+        ediText.typeface = typeface
+    }
+
+    fun setFilterTay(inputFilterList : Array<InputFilter>){
+        ediText.filters = inputFilterList
     }
 
     fun setOnFocusTayEditListener(listener: TayEditLayoutFocusListener) {

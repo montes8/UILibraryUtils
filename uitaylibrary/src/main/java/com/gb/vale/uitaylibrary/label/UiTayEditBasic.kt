@@ -749,6 +749,10 @@ class UiTayEditBasic @JvmOverloads constructor(
         editLabel.setSelection(value)
     }
 
+    fun setFilterTay(inputFilterList : Array<InputFilter>){
+        editLabel.filters = inputFilterList
+    }
+
     fun setListOptionDropDawn(list: List<String>) {
         listOption = list
     }
