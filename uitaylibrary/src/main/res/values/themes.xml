@@ -134,6 +134,7 @@
 
     <declare-styleable name="UITaySnackBar">
         <attr name="uiTaySBText" format="string" />
+        <attr name="uiTayIconSB" format="reference" />
         <attr name="uiTaySBDuration" format="integer" />
         <attr name="android:background"/>
         <attr name="android:textColor"/>

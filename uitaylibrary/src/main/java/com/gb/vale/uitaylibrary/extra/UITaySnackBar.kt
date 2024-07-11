@@ -54,6 +54,14 @@ class UITaySnackBar @JvmOverloads constructor(
             textSBar.setTextColor(value)
         }
 
+    var uiTayIconSB: Drawable? = null
+        set(value) {
+            field = value
+            value?.let {
+                uiTayDrawableIcon(it)
+            }
+        }
+
     init {
         loadAttributes()
         configView()
@@ -84,6 +92,8 @@ class UITaySnackBar @JvmOverloads constructor(
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UITaySnackBar)
         attributeSet.let {
+            uiTayIconSB =
+                it.getDrawable(R.styleable.UITaySnackBar_uiTayIconSB)
             uiTaySBText =
                 it.getString(R.styleable.UITaySnackBar_uiTaySBText)
                     ?: context.getString(R.string.tay_ui_script)
@@ -97,6 +107,16 @@ class UITaySnackBar @JvmOverloads constructor(
 
         }
         attributeSet.recycle()
+    }
+
+    private fun uiTayDrawableIcon(tayIconSB: Drawable){
+        textSBar.setCompoundDrawablesWithIntrinsicBounds(
+            tayIconSB,
+            null,
+            null,
+            null
+        )
+        textSBar.compoundDrawablePadding = context.resources.getDimensionPixelOffset(R.dimen.dim_tay_8)
     }
 
     private fun positionView() {

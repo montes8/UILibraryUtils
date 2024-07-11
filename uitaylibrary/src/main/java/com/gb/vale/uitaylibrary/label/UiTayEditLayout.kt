@@ -60,7 +60,6 @@ class UiTayEditLayout @JvmOverloads constructor(
             this.hint = value
         }
 
-
     var uiTayLListBottom: Boolean = true
         set(value) {
             field = value
