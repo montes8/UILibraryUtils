@@ -2,6 +2,7 @@ package com.gb.vale.uitaylibrary.extra
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -85,6 +86,10 @@ class UITaySnackBar @JvmOverloads constructor(
         this.setPadding(getUiTayPadding(),getUiTayPadding(),getUiTayPadding(),getUiTayPadding())
         textSBar.layoutParams = layoutText
         this.addView(textSBar)
+    }
+
+    fun uiTayTypeFace(typeface : Typeface? = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)){
+        textSBar.typeface = typeface
     }
 
     private fun getUiTayPadding() =  this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_16)
