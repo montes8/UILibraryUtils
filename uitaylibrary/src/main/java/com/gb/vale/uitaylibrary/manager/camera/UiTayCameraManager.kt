@@ -25,17 +25,16 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.util.ArrayList
 import java.util.Calendar
 
 @Suppress("DEPRECATION")
 class UiTayCameraManager (
     private val context: AppCompatActivity,
-    private val namePath: String,
+    private val uiTayNameFilePath: String,private val uiTayNamePhoto: String = UI_TAY_EMPTY,
     private val listener: CameraControllerListener?,private val appMultipleCamera: Boolean = true
 ){
 
-    private var pictureFileName = UI_TAY_EMPTY
+    private var pictureFileNamePhone = UI_TAY_EMPTY
     private lateinit var picturePathTemp: String
     private lateinit var pictureNameTemp: String
     private var cameraRequest: ActivityResultLauncher<Intent>? = null
@@ -85,7 +84,7 @@ class UiTayCameraManager (
             val externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
             val storageDir = File(
                 context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                UI_TAY_EMPTY + namePath
+                UI_TAY_EMPTY + uiTayNameFilePath
             )
             if(data == null) {
                 putImageCamera(storageDir, externalFilesDir)
@@ -110,7 +109,7 @@ class UiTayCameraManager (
                             50,
                             out
                         ) }
-                        val path = "$externalFilesDir/$namePath/$pictureFileName.jpg"
+                        val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileNamePhone.jpg"
                         val file = File(path)
                         val imgGallery = BitmapFactory.decodeFile(file.absolutePath)
                         Log.d("onActivityResult",path)
@@ -146,7 +145,7 @@ class UiTayCameraManager (
                 50,
                 out
             ) }
-            val path = "$externalFilesDir/$namePath/$pictureFileName.jpg"
+            val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileName.jpg"
             val file = File(path)
             val imgGallery = BitmapFactory.decodeFile(file.absolutePath)
             listener?.onGetImageCameraCompleted(path, imgGallery)
@@ -171,10 +170,10 @@ class UiTayCameraManager (
 
     private fun createPictureFile(): File {
         val calendar = Calendar.getInstance()
-        pictureFileName = calendar.timeInMillis.toString()
+        pictureFileNamePhone = uiTayNamePhoto.ifEmpty { calendar.timeInMillis.toString() }
         val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val picture = File("$storageDir/$namePath", "$pictureFileName.jpg")
-        val newPath = File("$storageDir/$namePath")
+        val picture = File("$storageDir/$uiTayNameFilePath", "$pictureFileNamePhone.jpg")
+        val newPath = File("$storageDir/$uiTayNameFilePath")
         if(!newPath.exists()) {
             newPath.mkdirs()
         }
