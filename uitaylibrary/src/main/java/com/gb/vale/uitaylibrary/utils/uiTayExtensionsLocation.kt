@@ -8,7 +8,7 @@ import com.gb.vale.uitaylibrary.R
 
 
 @SuppressLint("QueryPermissionsNeeded")
-fun AppCompatActivity.validateMapIntent(latitude: Double, longitude: Double) {
+fun AppCompatActivity.uiTayRouteMapIntent(latitude: Double, longitude: Double) {
     val packageManager = this.packageManager
     val geoMaps = Uri.parse("google.navigation:q=${latitude},${longitude}")
     val geoWaz = Uri.parse("waze://?ll=${latitude}, ${longitude}&navigate=yes")
