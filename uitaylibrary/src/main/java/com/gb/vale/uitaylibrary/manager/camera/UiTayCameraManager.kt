@@ -66,7 +66,7 @@ class UiTayCameraManager (
             if (pictureFile != null) {
                 val pictureUri = FileProvider.getUriForFile(
                     context,
-                    context.applicationContext.packageName,
+                    context.applicationContext.packageName+".provider",
                     pictureFile
                 )
                 if (appMultipleCamera)chooseCameraOptions(context,pictureUri) else chooseCameraOption(pictureUri)
