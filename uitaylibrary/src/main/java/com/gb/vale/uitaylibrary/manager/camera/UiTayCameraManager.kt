@@ -30,13 +30,15 @@ import java.util.Calendar
 @Suppress("DEPRECATION")
 class UiTayCameraManager (
     private val context: AppCompatActivity,
-    private val uiTayNameFilePath: String,private val uiTayNamePhoto: String = UI_TAY_EMPTY,
-    private val listener: CameraControllerListener?,private val appMultipleCamera: Boolean = true
+    private val uiTayNameFilePath: String,
+    private val listener: CameraControllerListener?,
+    private val appMultipleCamera: Boolean = true
 ){
 
     private var pictureFileNamePhone = UI_TAY_EMPTY
     private lateinit var picturePathTemp: String
     private lateinit var pictureNameTemp: String
+    private var uiTayNamePhoto: String = UI_TAY_EMPTY
     private var cameraRequest: ActivityResultLauncher<Intent>? = null
 
     private val permissionManager: UiTayPermissionManager =
@@ -49,7 +51,8 @@ class UiTayCameraManager (
     }
 
 
-    fun doCamera(){
+    fun doCamera(namePhoto : String = UI_TAY_EMPTY){
+        uiTayNamePhoto = namePhoto
        permissionManager.requestPermissions(
            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
         ) {
