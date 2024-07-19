@@ -81,22 +81,17 @@ fun Application.uiTayLoadContact(): List<UiTayContactPhone> {
 }
 
 fun uiTayValidNumberBlocking(list: List<UiTayContactPhone>, numberCall: String): Boolean {
-    var numberBlocking = true
-    val incomingCall = numberCall.filter { it.isDigit() }
+    val incomingCall = numberCall.filter{it.isDigit()}.trim()
     val incomingLengthCall = incomingCall.length
     list.forEach { contact ->
-        val currentNumber = contact.phoneNumber.filter { it.isDigit() }
+        val currentNumber = contact.phoneNumber.filter {it.isDigit()}.trim()
         val currentLengthNumber = currentNumber.length
-        numberBlocking = if (currentLengthNumber >= incomingLengthCall) {
-            currentNumber.substring(
-                currentLengthNumber - incomingLengthCall,
-                currentLengthNumber
-            ) == incomingCall.substring(0, incomingLengthCall)
-        } else {
-            false
+        if (currentLengthNumber >= incomingLengthCall){
+            val numberBlocking = currentNumber.substring(currentLengthNumber - incomingLengthCall,currentLengthNumber) == incomingCall.substring(0,incomingLengthCall)
+            if (numberBlocking) return false
         }
     }
-    return !numberBlocking
+    return true
 }
 
 fun String.uiTayMetaDataImage(): UITayMetaDataImage {
