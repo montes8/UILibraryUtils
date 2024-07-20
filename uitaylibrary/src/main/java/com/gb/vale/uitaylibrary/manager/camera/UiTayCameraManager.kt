@@ -131,7 +131,7 @@ class UiTayCameraManager (
     private fun putImageIntoFolder(data: Intent?, externalFilesDir: String, storageDir: File) {
         try {
             val calendar = Calendar.getInstance()
-            val pictureFileName = calendar.timeInMillis.toString()
+            val pictureFileName = uiTayNamePhoto.ifEmpty { calendar.timeInMillis.toString() }
             val photoFile = File(storageDir.path + "/" + pictureFileName + ".jpg")
             val inputStream: InputStream? = data?.data?.let { context.contentResolver.openInputStream(
                 it
