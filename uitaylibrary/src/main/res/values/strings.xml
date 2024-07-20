@@ -57,5 +57,9 @@
     <!-- resources dialog basic -->
     <string name="ui_tay_title_dialog_list">Selecione una opción</string>
 
-    text_dialog_selected
+
+    <!-- resources dialog basic -->
+    <string name="ui_tay_title_gallery_selected">Selecione una opción</string>
+
+
 </resources>
