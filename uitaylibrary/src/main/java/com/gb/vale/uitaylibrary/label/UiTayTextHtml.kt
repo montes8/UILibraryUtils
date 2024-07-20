@@ -14,6 +14,7 @@ import com.gb.vale.uitaylibrary.label.imageurl.UiTayURLImage
 import com.gb.vale.uitaylibrary.label.imageurl.UiTayUrlLinkClick
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 
+@Suppress("DEPRECATION")
 class UiTayTextHtml@JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet?, defaultStyle: Int = 0
 ) : ConstraintLayout(
@@ -66,7 +67,6 @@ class UiTayTextHtml@JvmOverloads constructor(
             textHtml.setTextColor(value)
         }
 
-
     private fun configTextHtml(text : String){
         val converterTextImg = UiTayURLImage(textHtml, this.context,sizeImageWidth,sizeImageHeight)
         val htmlSpan = Html.fromHtml(text, converterTextImg, null)
@@ -115,7 +115,6 @@ class UiTayTextHtml@JvmOverloads constructor(
 
     }
 
-
     private fun configView() {
         val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
         val layoutText = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
@@ -124,9 +123,6 @@ class UiTayTextHtml@JvmOverloads constructor(
         textHtml.layoutParams = layoutText
         this.addView(textHtml)
     }
-
-
-
 
     private fun positionText() {
         constraintSet.connect(textHtml.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)

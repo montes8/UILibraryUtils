@@ -29,6 +29,7 @@ fun uiTayGetMobilIPAddress(): String {
     return UI_TAY_EMPTY
 }
 
+@Suppress("DEPRECATION")
 fun Context.uiTayWifiIpAddress(): String? {
     val wifiManager =
         this.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager

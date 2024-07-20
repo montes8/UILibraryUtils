@@ -3,6 +3,7 @@ package com.gb.vale.uitaylibrary.label
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputType
@@ -58,7 +59,6 @@ class UiTayEditLayout @JvmOverloads constructor(
             this.isHintEnabled = true
             this.hint = value
         }
-
 
     var uiTayLListBottom: Boolean = true
         set(value) {
@@ -226,6 +226,7 @@ class UiTayEditLayout @JvmOverloads constructor(
                 }
 
                 override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+                    //not implementation
                 }
 
             }
@@ -367,9 +368,7 @@ class UiTayEditLayout @JvmOverloads constructor(
             if (ctnLayoutList != null){ removeListSearch(viewCtn) }
             ctnLayoutList = viewCtn.uiTayListSpinner(
                 viewTop = viewTop,
-                list = list,
-                position =positionSelectedLayout,
-                positionBottom = typeBottomLayout,
+                list = list, positions = Pair(positionSelectedLayout,typeBottomLayout),
                 onClickContent = {
                     removeListSearch(viewCtn)
                 }
@@ -403,8 +402,7 @@ class UiTayEditLayout @JvmOverloads constructor(
                         viewTop = viewTop,
                         list = listOptionLayout,
                         listCustom = listOptionCustomLayout,
-                        position = positionSelectedLayout,
-                        positionBottom = typeBottomLayout,
+                        positions = Pair(positionSelectedLayout,typeBottomLayout),
                         itemCustom = listOptionCustomLayout.isNotEmpty(),
                          onClickContent = {
                             ctnLayoutList = null
@@ -423,6 +421,14 @@ class UiTayEditLayout @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    fun setTypeFaceTay(typeface : Typeface? = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)) {
+        ediText.typeface = typeface
+    }
+
+    fun setFilterTay(inputFilterList : Array<InputFilter>){
+        ediText.filters = inputFilterList
     }
 
     fun setOnFocusTayEditListener(listener: TayEditLayoutFocusListener) {

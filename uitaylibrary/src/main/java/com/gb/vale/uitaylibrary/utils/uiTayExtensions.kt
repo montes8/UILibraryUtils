@@ -35,6 +35,11 @@ fun View.uiTayVisibility(value:Boolean){
    if (value)this.uiTayVisible() else this.uiTayGone()
 }
 
+fun View.uiTayVisibilityDuo(value:Boolean,view :View){
+    this.uiTayInVisibility(value)
+    view.uiTayInVisibility(!value)
+}
+
 fun View.uiTayInVisibility(value:Boolean){
     if (value)this.uiTayVisible() else this.uiTayInvisible()
 }
@@ -166,6 +171,7 @@ fun AppCompatActivity.uiTaySetTopBarColor(color: Any) {
     this.uiTaySetTopBarTextColor(bgColor)
 }
 
+@Suppress("DEPRECATION")
 fun AppCompatActivity.uiTaySetTopBarTextColor(color : Int){
     val window = window
     val decorView = window.decorView

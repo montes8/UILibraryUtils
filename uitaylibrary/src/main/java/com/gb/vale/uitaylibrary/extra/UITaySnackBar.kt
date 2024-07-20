@@ -2,6 +2,7 @@ package com.gb.vale.uitaylibrary.extra
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -54,6 +55,14 @@ class UITaySnackBar @JvmOverloads constructor(
             textSBar.setTextColor(value)
         }
 
+    var uiTayIconSB: Drawable? = null
+        set(value) {
+            field = value
+            value?.let {
+                uiTayDrawableIcon(it)
+            }
+        }
+
     init {
         loadAttributes()
         configView()
@@ -79,11 +88,17 @@ class UITaySnackBar @JvmOverloads constructor(
         this.addView(textSBar)
     }
 
+    fun uiTayTypeFace(typeface : Typeface? = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)){
+        textSBar.typeface = typeface
+    }
+
     private fun getUiTayPadding() =  this.context.resources.getDimensionPixelOffset(R.dimen.dim_tay_16)
 
     private fun loadAttributes() {
         val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.UITaySnackBar)
         attributeSet.let {
+            uiTayIconSB =
+                it.getDrawable(R.styleable.UITaySnackBar_uiTayIconSB)
             uiTaySBText =
                 it.getString(R.styleable.UITaySnackBar_uiTaySBText)
                     ?: context.getString(R.string.tay_ui_script)
@@ -97,6 +112,16 @@ class UITaySnackBar @JvmOverloads constructor(
 
         }
         attributeSet.recycle()
+    }
+
+    private fun uiTayDrawableIcon(tayIconSB: Drawable){
+        textSBar.setCompoundDrawablesWithIntrinsicBounds(
+            tayIconSB,
+            null,
+            null,
+            null
+        )
+        textSBar.compoundDrawablePadding = context.resources.getDimensionPixelOffset(R.dimen.dim_tay_8)
     }
 
     private fun positionView() {

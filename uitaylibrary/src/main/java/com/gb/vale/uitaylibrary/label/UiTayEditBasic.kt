@@ -3,6 +3,7 @@ package com.gb.vale.uitaylibrary.label
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputType
@@ -263,7 +264,7 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
 
-    private fun setUIIconResourceDrawable(icon: Int, view: ImageView) {
+    fun setUIIconResourceDrawable(icon: Int, view: ImageView) {
         view.setImageResource(icon)
     }
 
@@ -276,62 +277,9 @@ class UiTayEditBasic @JvmOverloads constructor(
     }
 
     private fun setUp() {
-        textLabelMessage.uiTayVisibility(visibilityInfo || visibilityLabelInfo)
-        editLabel.setOnFocusChangeListener { _, isFocused ->
-            if (isFocused) {
-                if (!visibilityLabelInfo) styleActive()
-            } else {
-                if (!visibilityLabelInfo) styleDefault()
-            }
-        }
-
-        iconLabel.setOnClickUiTayDelay {
-            if (uiTayBasicPass) {
-                if (uiTayChecked) {
-                    uiTayIconPassInactive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
-                    editLabel.transformationMethod = HideReturnsTransformationMethod.getInstance()
-
-                } else {
-                    uiTayIconPassActive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
-                    editLabel.transformationMethod = PasswordTransformationMethod.getInstance()
-
-                }
-                if (editLabel.text.toString()
-                        .isNotEmpty()
-                ) setSelectionTay(editLabel.text.toString().length)
-                uiTayChecked = !uiTayChecked
-            }
-        }
-
-        if (!uiTayEnableCopyPaste) {
-            editLabel.customSelectionActionModeCallback =
-                object : android.view.ActionMode.Callback {
-                    override fun onCreateActionMode(
-                        mode: android.view.ActionMode?,
-                        menu: Menu?
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onPrepareActionMode(
-                        mode: android.view.ActionMode?,
-                        menu: Menu?
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onActionItemClicked(
-                        mode: android.view.ActionMode?,
-                        item: MenuItem?
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onDestroyActionMode(mode: android.view.ActionMode?) {
-                    }
-
-                }
-        }
+        configInitFocus()
+        configClickIcon()
+        configCopyPaste()
     }
 
     private fun loadAttributes() {
@@ -386,6 +334,70 @@ class UiTayEditBasic @JvmOverloads constructor(
         attributeSet.recycle()
     }
 
+    private fun configInitFocus(){
+        textLabelMessage.uiTayVisibility(visibilityInfo || visibilityLabelInfo)
+        editLabel.setOnFocusChangeListener { _, isFocused ->
+            if (isFocused) {
+                if (!visibilityLabelInfo) styleActive()
+            } else {
+                if (!visibilityLabelInfo) styleDefault()
+            }
+        }
+    }
+
+    private fun configClickIcon(){
+        iconLabel.setOnClickUiTayDelay {
+            if (uiTayBasicPass) {
+                if (uiTayChecked) {
+                    uiTayIconPassInactive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
+                    editLabel.transformationMethod = HideReturnsTransformationMethod.getInstance()
+
+                } else {
+                    uiTayIconPassActive?.let { icon -> setUIIconDrawable(icon, iconLabel) }
+                    editLabel.transformationMethod = PasswordTransformationMethod.getInstance()
+
+                }
+                if (editLabel.text.toString()
+                        .isNotEmpty()
+                ) setSelectionTay(editLabel.text.toString().length)
+                uiTayChecked = !uiTayChecked
+            }
+        }
+    }
+
+    private fun configCopyPaste(){
+        if (!uiTayEnableCopyPaste) {
+            editLabel.customSelectionActionModeCallback =
+                object : android.view.ActionMode.Callback {
+                    override fun onCreateActionMode(
+                        mode: android.view.ActionMode?,
+                        menu: Menu?
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onPrepareActionMode(
+                        mode: android.view.ActionMode?,
+                        menu: Menu?
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onActionItemClicked(
+                        mode: android.view.ActionMode?,
+                        item: MenuItem?
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+                        //not implementation
+                    }
+
+                }
+        }
+    }
+
     fun setOnTaySearchNeoEditListener(viewCtn: ConstraintLayout,
                                    viewTop: View,list : List<String>,listener: TayEditListCLickListener) {
         if (list.isNotEmpty()) {
@@ -393,8 +405,7 @@ class UiTayEditBasic @JvmOverloads constructor(
             ctnList = viewCtn.uiTayListSpinner(
                 viewTop = viewTop,
                 list = list,
-                position =positionSelected,
-                positionBottom = typeBottom,
+                positions = Pair(positionSelected,typeBottom),
                 onClickContent = {
                     removeListSearch(viewCtn)
                 }
@@ -448,8 +459,7 @@ class UiTayEditBasic @JvmOverloads constructor(
                         viewTop = viewTop,
                         list = listOption,
                         listCustom = listOptionCustom,
-                        position = positionSelected,
-                        positionBottom = typeBottom,
+                        positions = Pair(positionSelected,typeBottom),
                         itemCustom = listOptionCustom.isNotEmpty(),
                         onClickContent = {
                             ctnList = null
@@ -711,8 +721,7 @@ class UiTayEditBasic @JvmOverloads constructor(
         constraintSet.applyTo(this)
     }
 
-    fun setTypeFaceTay() {
-        val typeface = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)
+    fun setTypeFaceTay(typeface : Typeface? = ResourcesCompat.getFont(context, R.font.ui_tay_montserrat_medium)) {
         editLabel.typeface = typeface
     }
 
@@ -738,6 +747,10 @@ class UiTayEditBasic @JvmOverloads constructor(
 
     fun setSelectionTay(value: Int) {
         editLabel.setSelection(value)
+    }
+
+    fun setFilterTay(inputFilterList : Array<InputFilter>){
+        editLabel.filters = inputFilterList
     }
 
     fun setListOptionDropDawn(list: List<String>) {

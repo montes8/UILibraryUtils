@@ -72,6 +72,8 @@ fun Context.uiTayOpenUrl(url : String){
 fun uiTayFullScreen(window : Window){
     window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 }
+
+@Suppress("DEPRECATION")
 fun Activity.uiTayCheckIsTablet(): Boolean {
 
     val metrics = DisplayMetrics()
@@ -80,9 +82,7 @@ fun Activity.uiTayCheckIsTablet(): Boolean {
         val display = this.display
         display?.getRealMetrics(metrics)
     } else {
-        @Suppress("DEPRECATION")
         val display = this.windowManager.defaultDisplay
-        @Suppress("DEPRECATION")
         display.getMetrics(metrics)
     }
 

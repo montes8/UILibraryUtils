@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:id="@+id/crnaa"
     android:background="@color/tay_color_general"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
 

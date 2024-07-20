@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.gb.vale.uitaylibrary.R
 import com.gb.vale.uitaylibrary.manager.permission.UiTayPermissionManager
 import com.gb.vale.uitaylibrary.utils.UI_TAY_EMPTY
 import com.gb.vale.uitaylibrary.utils.uiTayReduceBitmapSize
@@ -25,19 +26,21 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.util.ArrayList
 import java.util.Calendar
 
 @Suppress("DEPRECATION")
 class UiTayCameraManager (
     private val context: AppCompatActivity,
-    private val namePath: String,
-    private val listener: CameraControllerListener?,private val appMultipleCamera: Boolean = true
+    private val uiTayNameFilePath: String,
+    private val listener: CameraControllerListener?,
+    private val appMultipleCamera: Boolean = true,
+    private val extensionFile: String = ".jpg"
 ){
 
-    private var pictureFileName = UI_TAY_EMPTY
+    private var pictureFileNamePhone = UI_TAY_EMPTY
     private lateinit var picturePathTemp: String
     private lateinit var pictureNameTemp: String
+    private var uiTayNamePhoto: String = UI_TAY_EMPTY
     private var cameraRequest: ActivityResultLauncher<Intent>? = null
 
     private val permissionManager: UiTayPermissionManager =
@@ -50,7 +53,8 @@ class UiTayCameraManager (
     }
 
 
-    fun doCamera(){
+    fun doCamera(namePhoto : String = UI_TAY_EMPTY){
+        uiTayNamePhoto = namePhoto
        permissionManager.requestPermissions(
            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
         ) {
@@ -64,7 +68,7 @@ class UiTayCameraManager (
             if (pictureFile != null) {
                 val pictureUri = FileProvider.getUriForFile(
                     context,
-                    context.applicationContext.packageName,
+                    context.applicationContext.packageName+".provider",
                     pictureFile
                 )
                 if (appMultipleCamera)chooseCameraOptions(context,pictureUri) else chooseCameraOption(pictureUri)
@@ -85,7 +89,7 @@ class UiTayCameraManager (
             val externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
             val storageDir = File(
                 context.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                UI_TAY_EMPTY + namePath
+                UI_TAY_EMPTY + uiTayNameFilePath
             )
             if(data == null) {
                 putImageCamera(storageDir, externalFilesDir)
@@ -110,7 +114,7 @@ class UiTayCameraManager (
                             50,
                             out
                         ) }
-                        val path = "$externalFilesDir/$namePath/$pictureFileName.jpg"
+                        val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileNamePhone$extensionFile"
                         val file = File(path)
                         val imgGallery = BitmapFactory.decodeFile(file.absolutePath)
                         Log.d("onActivityResult",path)
@@ -129,8 +133,8 @@ class UiTayCameraManager (
     private fun putImageIntoFolder(data: Intent?, externalFilesDir: String, storageDir: File) {
         try {
             val calendar = Calendar.getInstance()
-            val pictureFileName = calendar.timeInMillis.toString()
-            val photoFile = File(storageDir.path + "/" + pictureFileName + ".jpg")
+            val pictureFileName = uiTayNamePhoto.ifEmpty { calendar.timeInMillis.toString() }
+            val photoFile = File(storageDir.path + "/" + pictureFileName + extensionFile)
             val inputStream: InputStream? = data?.data?.let { context.contentResolver.openInputStream(
                 it
             ) }
@@ -146,7 +150,7 @@ class UiTayCameraManager (
                 50,
                 out
             ) }
-            val path = "$externalFilesDir/$namePath/$pictureFileName.jpg"
+            val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileName$extensionFile"
             val file = File(path)
             val imgGallery = BitmapFactory.decodeFile(file.absolutePath)
             listener?.onGetImageCameraCompleted(path, imgGallery)
@@ -171,10 +175,10 @@ class UiTayCameraManager (
 
     private fun createPictureFile(): File {
         val calendar = Calendar.getInstance()
-        pictureFileName = calendar.timeInMillis.toString()
+        pictureFileNamePhone = uiTayNamePhoto.ifEmpty { calendar.timeInMillis.toString() }
         val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val picture = File("$storageDir/$namePath", "$pictureFileName.jpg")
-        val newPath = File("$storageDir/$namePath")
+        val picture = File("$storageDir/$uiTayNameFilePath", "$pictureFileNamePhone$extensionFile")
+        val newPath = File("$storageDir/$uiTayNameFilePath")
         if(!newPath.exists()) {
             newPath.mkdirs()
         }
@@ -191,7 +195,7 @@ class UiTayCameraManager (
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    private fun chooseCameraOptions(context: Activity, outputFileUri: Uri, title: String = "seleciona") {
+    private fun chooseCameraOptions(context: Activity, outputFileUri: Uri) {
         val cameraIntents = ArrayList<Intent>()
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val packageManager = context.packageManager
@@ -204,7 +208,7 @@ class UiTayCameraManager (
             cameraIntents.add(intent)
         }
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        val chooserIntent = Intent.createChooser(galleryIntent, title)
+        val chooserIntent = Intent.createChooser(galleryIntent, context.getString(R.string.ui_tay_title_gallery_selected))
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toTypedArray<Parcelable>())
         cameraRequest?.launch(chooserIntent)
     }
