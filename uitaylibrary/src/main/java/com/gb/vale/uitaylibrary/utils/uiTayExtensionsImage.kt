@@ -61,12 +61,12 @@ fun uiTayImageBitmapPath(path: String): Bitmap? {
     return BitmapFactory.decodeFile(pathUri.absolutePath)
 }
 
-fun Context.uiTayCreatePictureFile(nameFile: String = "imgSave",extensionFile: String = ".jpg"): File {
+fun Context.uiTayCreatePictureFile(nameFile: String = "imgSave"): File {
     val pictureFileName: String
     val calendar = Calendar.getInstance()
     pictureFileName = calendar.timeInMillis.toString()
     val storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    val picture = File("$storageDir/$nameFile", "$pictureFileName$extensionFile")
+    val picture = File("$storageDir/$nameFile", "$pictureFileName.jpg")
     val newPath = File("$storageDir$nameFile")
     if (!newPath.exists()) {
         newPath.mkdirs()
@@ -75,10 +75,10 @@ fun Context.uiTayCreatePictureFile(nameFile: String = "imgSave",extensionFile: S
 }
 
 fun Context.uiTaySaveImg(
-    nameFile: File, img: Bitmap, nameImage: String,extensionFile: String = ".jpg",
+    nameFile: File, img: Bitmap, nameImage: String,
     toast: Boolean = false, message: String = UI_TAY_EMPTY
 ): String {
-    val myPath = File(nameFile, "$nameImage$extensionFile")
+    val myPath = File(nameFile, "$nameImage.jpg")
 
     val fos: FileOutputStream?
     try {
