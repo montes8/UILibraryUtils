@@ -33,8 +33,7 @@ class UiTayCameraManager (
     private val context: AppCompatActivity,
     private val uiTayNameFilePath: String,
     private val listener: CameraControllerListener?,
-    private val appMultipleCamera: Boolean = true,
-    private val extensionFile: String = ".jpg"
+    private val appMultipleCamera: Boolean = true
 ){
 
     private var pictureFileNamePhone = UI_TAY_EMPTY
@@ -114,7 +113,7 @@ class UiTayCameraManager (
                             50,
                             out
                         ) }
-                        val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileNamePhone$extensionFile"
+                        val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileNamePhone.jpg"
                         val file = File(path)
                         val imgGallery = BitmapFactory.decodeFile(file.absolutePath)
                         Log.d("onActivityResult",path)
@@ -134,7 +133,7 @@ class UiTayCameraManager (
         try {
             val calendar = Calendar.getInstance()
             val pictureFileName = uiTayNamePhoto.ifEmpty { calendar.timeInMillis.toString() }
-            val photoFile = File(storageDir.path + "/" + pictureFileName + extensionFile)
+            val photoFile = File(storageDir.path + "/" + pictureFileName + ".jpg")
             val inputStream: InputStream? = data?.data?.let { context.contentResolver.openInputStream(
                 it
             ) }
@@ -150,7 +149,7 @@ class UiTayCameraManager (
                 50,
                 out
             ) }
-            val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileName$extensionFile"
+            val path = "$externalFilesDir/$uiTayNameFilePath/$pictureFileName.jpg"
             val file = File(path)
             val imgGallery = BitmapFactory.decodeFile(file.absolutePath)
             listener?.onGetImageCameraCompleted(path, imgGallery)
@@ -177,7 +176,7 @@ class UiTayCameraManager (
         val calendar = Calendar.getInstance()
         pictureFileNamePhone = uiTayNamePhoto.ifEmpty { calendar.timeInMillis.toString() }
         val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val picture = File("$storageDir/$uiTayNameFilePath", "$pictureFileNamePhone$extensionFile")
+        val picture = File("$storageDir/$uiTayNameFilePath", "$pictureFileNamePhone.jpg")
         val newPath = File("$storageDir/$uiTayNameFilePath")
         if(!newPath.exists()) {
             newPath.mkdirs()
