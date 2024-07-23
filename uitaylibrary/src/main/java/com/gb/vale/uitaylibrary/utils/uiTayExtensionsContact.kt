@@ -7,10 +7,7 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.telecom.Call
 import android.util.Log
-import androidx.exifinterface.media.ExifInterface
-import com.gb.vale.uitaylibrary.model.UITayMetaDataImage
 import com.gb.vale.uitaylibrary.model.UiTayContactPhone
-import java.io.IOException
 
 fun Context.uiTayDialedNumber(
     number: String = UI_TAY_EMPTY, key: String = "tel:",
@@ -81,16 +78,47 @@ fun Application.uiTayLoadContact(): List<UiTayContactPhone> {
 }
 
 fun uiTayValidNumberBlocking(list: List<UiTayContactPhone>, numberCall: String): Boolean {
-    val incomingCall = numberCall.filter{it.isDigit()}.trim()
+    val incomingCall = numberCall.filter { it.isDigit() }.trim()
     val incomingLengthCall = incomingCall.length
     list.forEach { contact ->
-        val currentNumber = contact.phoneNumber.filter {it.isDigit()}.trim()
+        val currentNumber = contact.phoneNumber.filter { it.isDigit() }.trim()
         val currentLengthNumber = currentNumber.length
-        if (currentLengthNumber >= incomingLengthCall){
-            val numberBlocking = currentNumber.substring(currentLengthNumber - incomingLengthCall,currentLengthNumber) == incomingCall.substring(0,incomingLengthCall)
+        if (currentLengthNumber >= incomingLengthCall) {
+            val numberBlocking = currentNumber.substring(
+                currentLengthNumber - incomingLengthCall,
+                currentLengthNumber
+            ) == incomingCall.substring(0, incomingLengthCall)
             if (numberBlocking) return false
         }
     }
     return true
 }
 
+fun Application.uiTayDeleteSMS(all: Boolean = false, utNumber: String = UI_TAY_EMPTY) {
+    this.contentResolver.query(
+        Uri.parse("content://sms/"),
+        arrayOf("_id", "thread_id", "address", "person", "date", "body"),
+        null,
+        null,
+        null
+    )?.let { c ->
+        uiTayTryCatch {
+            while (c.moveToNext()) {
+                val id = c.getInt(0)
+                val address = c.getString(2)
+                  if (all) {
+                     this.contentResolver.delete(
+                        Uri.parse("content://sms/$id"), null, null
+                      )
+                   } else {
+                     if (address == utNumber) {
+                        this.contentResolver.delete(
+                            Uri.parse("content://sms/$id"), null, null
+                        )
+                    } } }
+            c.close()
+        }
+    }
+
+
+}
