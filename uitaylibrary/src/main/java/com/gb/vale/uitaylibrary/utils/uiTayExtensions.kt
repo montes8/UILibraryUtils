@@ -136,13 +136,13 @@ fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.tay_color_general,color
 
 
 
-fun View.uiTayBgRadiusCustom(color : Int =
+fun View.uiTayBgGradientV(color : Int =
                             R.color.ui_tay_white, radiusTop : Int,
                         radiusButton : Int){
-    this.background = this.context.uiTayDrawableRadius(color,radiusTop,radiusButton)
+    this.background = this.context.uiTayDrawableGradientV(color,radiusTop,radiusButton)
 }
 
-fun Context.uiTayDrawableRadius(color : Int =
+fun Context.uiTayDrawableGradientV(color : Int =
                                R.color.ui_tay_white, radiusTop : Int,
                            radiusButton : Int): Drawable {
     val shape = GradientDrawable()
