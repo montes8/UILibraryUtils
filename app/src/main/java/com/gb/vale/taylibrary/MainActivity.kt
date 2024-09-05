@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.gb.vale.uitaylibrary.utils.uiTayBgGradientV
+import com.gb.vale.uitaylibrary.utils.uiTayBgGradient
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var viewColor = findViewById<View>(R.id.viewColor)
-        viewColor.uiTayBgGradientV()
+        viewColor.uiTayBgGradient()
     }
 
 }

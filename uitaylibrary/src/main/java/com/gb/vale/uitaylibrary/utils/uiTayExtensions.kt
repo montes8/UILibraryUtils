@@ -136,20 +136,17 @@ fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.tay_color_general,color
 
 
 
-fun View.uiTayBgGradient(colorTop : Int = R.color.tay_color_gradient_default,
-                          colorBottom : Int = R.color.tay_color_gradient_secondary_default, radius : Int = R.dimen.dim_tay_0,
+fun View.uiTayBgGradient(colorList : ArrayList<Int> = arrayListOf(R.color.tay_color_gradient_default,
+    R.color.tay_color_gradient_secondary_default), radius : Int = R.dimen.dim_tay_0,
                           orientation : GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM){
-    this.background = this.context.uiTayDrawableGradient(colorTop,colorBottom,radius,orientation)
+    this.background = this.context.uiTayDrawableGradient(colorList,radius,orientation)
 }
 
-fun Context.uiTayDrawableGradient(colorTop : Int = R.color.tay_color_gradient_default,
-                                   colorBottom : Int = R.color.tay_color_gradient_secondary_default,  radius : Int = R.dimen.dim_tay_0,
-                                   orientation : GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM): Drawable {
+fun Context.uiTayDrawableGradient(colorList : ArrayList<Int> = arrayListOf(R.color.tay_color_gradient_default,
+    R.color.tay_color_gradient_secondary_default), radius : Int = R.dimen.dim_tay_0,
+                                  orientation : GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM): Drawable {
     val shape = GradientDrawable()
-    shape.colors = intArrayOf(
-        ContextCompat.getColor(this,colorTop),
-        ContextCompat.getColor(this,colorBottom),
-    )
+    shape.colors = this.uiTaySetColor(colorList).toIntArray()
     shape.orientation = orientation
     shape.cornerRadii = floatArrayOf(this.resources.getDimension(radius),
         this.resources.getDimension(radius), this.resources.getDimension(radius),
@@ -159,6 +156,13 @@ fun Context.uiTayDrawableGradient(colorTop : Int = R.color.tay_color_gradient_de
     return shape
 }
 
+fun Context.uiTaySetColor(colorList : ArrayList<Int>) : List<Int>  {
+    val colorGradient : ArrayList<Int>  = ArrayList()
+    colorList.forEach {
+        colorGradient.add(ContextCompat.getColor(this,it))
+    }
+     return colorGradient
+}
 
 fun Context.converterDimen(value : Int) = this.resources.getDimension(value)
 
