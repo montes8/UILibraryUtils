@@ -9,6 +9,9 @@
 
     <color name="tay_color_general">#E91E63</color>
 
+    <color name="tay_color_gradient_default">#E91E63</color>
+    <color name="tay_color_gradient_secondary_default">#F06292</color>
+
     <color name="ui_tay_transparent">@android:color/transparent</color>
     <color name="ui_tay_white_transparent">#CBFFFFFF</color>
 

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/crnaa"
+    android:gravity="center"
     android:background="@color/tay_color_general"
     tools:context="com.gb.vale.taylibrary.MainActivity">
 
 
+    <View
+        android:id="@+id/viewColor"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/dim_tay_20"
+        android:layout_height="@dimen/dim_tay_40"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

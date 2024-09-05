@@ -136,21 +136,23 @@ fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.tay_color_general,color
 
 
 
-fun View.uiTayBgGradientV(color : Int =
-                            R.color.ui_tay_white, radiusTop : Int,
-                        radiusButton : Int){
-    this.background = this.context.uiTayDrawableGradientV(color,radiusTop,radiusButton)
+fun View.uiTayBgGradientV(colorTop : Int = R.color.tay_color_gradient_default,
+                          colorBottom : Int = R.color.tay_color_gradient_secondary_default, radius : Int = 0){
+    this.background = this.context.uiTayDrawableGradientV(colorTop,colorBottom,radius)
 }
 
-fun Context.uiTayDrawableGradientV(color : Int =
-                               R.color.ui_tay_white, radiusTop : Int,
-                           radiusButton : Int): Drawable {
+fun Context.uiTayDrawableGradientV(colorTop : Int = R.color.tay_color_gradient_default,
+                                   colorBottom : Int = R.color.tay_color_gradient_secondary_default,  radius : Int = 0): Drawable {
     val shape = GradientDrawable()
-    shape.setColor(ContextCompat.getColor(this,color))
-    shape.cornerRadii = floatArrayOf(
-        converterDimen(radiusTop), converterDimen(radiusTop), converterDimen(radiusTop),
-        converterDimen(radiusTop), converterDimen(radiusButton),  converterDimen(radiusButton),
-        converterDimen(radiusButton),  converterDimen(radiusButton))
+    shape.colors = intArrayOf(
+        ContextCompat.getColor(this,colorTop),
+        ContextCompat.getColor(this,colorBottom),
+    )
+    shape.cornerRadii = floatArrayOf(this.resources.getDimension(radius),
+        this.resources.getDimension(radius), this.resources.getDimension(radius),
+        this.resources.getDimension(radius), this.resources.getDimension(radius),
+        this.resources.getDimension(radius), this.resources.getDimension(radius),
+        this.resources.getDimension(radius))
     return shape
 }
 
