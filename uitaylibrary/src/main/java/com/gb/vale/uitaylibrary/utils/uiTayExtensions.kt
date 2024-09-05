@@ -120,7 +120,7 @@ fun Context.uiTayDrawableCircleGradient(colorTop : Int = R.color.tay_color_gener
 }
 
 fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.tay_color_general,colorSolid : Int = R.color.ui_tay_white,
-                           radius : Int, withStroke : Int = 2):Drawable{
+                           radius : Int = R.dimen.dim_tay_0, withStroke : Int = 2):Drawable{
     val shape = GradientDrawable()
     shape.setColor(ContextCompat.getColor(this,colorSolid))
     shape.setStroke(withStroke,ContextCompat.getColor(this,colorStroke))
@@ -130,24 +130,27 @@ fun Context.uiTayDrawableStroke(colorStroke : Int = R.color.tay_color_general,co
 
 
 fun View.uiTayBgBorderStroke(colorStroke : Int = R.color.tay_color_general,colorSolid : Int = R.color.ui_tay_white,
-                        radius : Int, withStroke : Int = 2){
+                        radius : Int = R.dimen.dim_tay_0, withStroke : Int = 2){
     this.background = this.context.uiTayDrawableStroke(colorStroke,colorSolid,radius,withStroke)
 }
 
 
 
-fun View.uiTayBgGradientV(colorTop : Int = R.color.tay_color_gradient_default,
-                          colorBottom : Int = R.color.tay_color_gradient_secondary_default, radius : Int = 0){
-    this.background = this.context.uiTayDrawableGradientV(colorTop,colorBottom,radius)
+fun View.uiTayBgGradient(colorTop : Int = R.color.tay_color_gradient_default,
+                          colorBottom : Int = R.color.tay_color_gradient_secondary_default, radius : Int = R.dimen.dim_tay_0,
+                          orientation : GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM){
+    this.background = this.context.uiTayDrawableGradient(colorTop,colorBottom,radius,orientation)
 }
 
-fun Context.uiTayDrawableGradientV(colorTop : Int = R.color.tay_color_gradient_default,
-                                   colorBottom : Int = R.color.tay_color_gradient_secondary_default,  radius : Int = 0): Drawable {
+fun Context.uiTayDrawableGradient(colorTop : Int = R.color.tay_color_gradient_default,
+                                   colorBottom : Int = R.color.tay_color_gradient_secondary_default,  radius : Int = R.dimen.dim_tay_0,
+                                   orientation : GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM): Drawable {
     val shape = GradientDrawable()
     shape.colors = intArrayOf(
         ContextCompat.getColor(this,colorTop),
         ContextCompat.getColor(this,colorBottom),
     )
+    shape.orientation = orientation
     shape.cornerRadii = floatArrayOf(this.resources.getDimension(radius),
         this.resources.getDimension(radius), this.resources.getDimension(radius),
         this.resources.getDimension(radius), this.resources.getDimension(radius),
@@ -155,6 +158,7 @@ fun Context.uiTayDrawableGradientV(colorTop : Int = R.color.tay_color_gradient_d
         this.resources.getDimension(radius))
     return shape
 }
+
 
 fun Context.converterDimen(value : Int) = this.resources.getDimension(value)
 
