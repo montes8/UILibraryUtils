@@ -43,7 +43,7 @@ class UiTayLineProgress(context: Context, attributeSet: AttributeSet) : View(con
         invalidate()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         this.colorList.clear()
         this.drawLines(canvas)

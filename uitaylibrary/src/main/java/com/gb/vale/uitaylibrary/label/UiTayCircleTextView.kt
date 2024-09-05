@@ -11,7 +11,7 @@ class UiTayCircleTextView(context: Context, attrs: AttributeSet?) : AppCompatTex
     private var strokeColor = 0
     private var solidColo = 0
 
-    override fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas) {
         val circlePaint = Paint()
         circlePaint.color = solidColo
         circlePaint.flags = Paint.ANTI_ALIAS_FLAG
@@ -29,11 +29,10 @@ class UiTayCircleTextView(context: Context, attrs: AttributeSet?) : AppCompatTex
         this.height = diameter
         this.width = diameter
 
-        canvas?.drawCircle(diameter / 2f, diameter / 2f, radius.toFloat(), strokePaint)
+        canvas.drawCircle(diameter / 2f, diameter / 2f, radius.toFloat(), strokePaint)
 
-        canvas?.drawCircle(diameter / 2f, diameter / 2f, radius - strokeWidth, circlePaint)
+        canvas.drawCircle(diameter / 2f, diameter / 2f, radius - strokeWidth, circlePaint)
 
-        super.draw(canvas)
         super.draw(canvas)
     }
 }

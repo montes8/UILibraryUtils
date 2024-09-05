@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace 'com.gb.vale.uitaylibrary'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 24
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -59,7 +59,7 @@ afterEvaluate{
                 from components.release
                 groupId='com.github.montes8'
                 artifactId = 'tayuilibrary'
-                version = '1.0.3'
+                version = '1.0.4'
             }
         }
     }
